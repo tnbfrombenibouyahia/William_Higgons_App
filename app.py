@@ -145,3 +145,50 @@ try:
     st.info(f"🕒 Dernière mise à jour automatique des données : `{last_update}`")
 except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
+
+import yfinance as yf
+import plotly.graph_objects as go
+
+# === 🔎 Zoom sur une société ===
+st.markdown("---")
+st.subheader("📊 Analyse individuelle")
+
+selected_ticker = st.selectbox("Sélectionner une entreprise pour voir son graphique :", df_display["Ticker"].unique())
+
+if selected_ticker:
+    stock = yf.Ticker(selected_ticker)
+
+    # 📈 Données historiques (long terme)
+    hist = stock.history(period="max")
+
+    if hist.empty:
+        st.warning("Données historiques indisponibles pour ce ticker.")
+    else:
+        # 🔹 Graphique Plotly
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=hist.index, y=hist["Close"], name="Cours de clôture"))
+        fig.update_layout(
+            title=f"📈 Évolution historique de {selected_ticker}",
+            xaxis_title="Date",
+            yaxis_title="Prix (€)",
+            template="plotly_dark",
+            height=500
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    # 🧾 Statistiques clés
+    info = stock.info
+    st.markdown("### 🧾 Fiche signalétique")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric("Nom", info.get("shortName", "N/A"))
+        st.metric("Prix actuel", f'{info.get("currentPrice", "N/A")} {info.get("currency", "")}')
+        st.metric("PER", round(info.get("trailingPE", 0), 2) if info.get("trailingPE") else "N/A")
+        st.metric("Capitalisation", f'{round(info.get("marketCap", 0)/1e9, 2)} B' if info.get("marketCap") else "N/A")
+
+    with col2:
+        st.metric("Secteur", info.get("sector", "N/A"))
+        st.metric("Industrie", info.get("industry", "N/A"))
+        st.metric("Dividende (%)", info.get("dividendYield", "N/A"))
+        st.metric("Beta", info.get("beta", "N/A"))
