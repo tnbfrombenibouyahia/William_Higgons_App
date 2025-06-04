@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
+from datetime import datetime
 
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
-st.title("📊 Screener William Higgons")
+st.title("👨‍🌾 Screener William Higgons")
 st.markdown("### 🧾 Aperçu du screening")
-st.write("Les entreprises en **vert** passent le filtre William Higgons.")
+st.write("Ce screener analyse les entreprises selon les critères de William Higgons.")
 
 # === Chargement des données ===
 @st.cache_data
@@ -43,11 +44,20 @@ def load_data():
 
 df = load_data()
 
-# Ajout de la colonne d'affichage avec emoji
+# Ajout de la colonne d'affichage
 df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
 
 # Suppression de la colonne booléenne
 df_display = df.drop(columns=["Higgons Valid"])
 
-# === Affichage tableau sans couleurs ===
+# === Affichage Streamlit ===
 st.dataframe(df_display, use_container_width=True)
+
+# === Affichage date mise à jour automatique ===
+st.markdown("---")
+try:
+    with open("data/last_update.txt", "r") as f:
+        last_update = f.read().strip()
+    st.info(f"🕒 Dernière mise à jour automatique des données : `{last_update}`")
+except FileNotFoundError:
+    st.warning("❌ Aucune mise à jour automatique enregistrée.")
