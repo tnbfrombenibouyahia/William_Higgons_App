@@ -1,0 +1,35 @@
+name: 🔄 Monthly Screener Update
+
+on:
+  schedule:
+    - cron: '0 7 1 * *'  # Tous les 1ers du mois à 7h UTC
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout du code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 📦 Installer les dépendances
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 🔄 Exécuter le script de mise à jour
+      run: python data/update_data.py
+
+    - name: 📤 Commit et Push des données à jour
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git add data/all_results_yfinance_clean.csv data/last_update.txt
+        git commit -m "🗓️ Mise à jour automatique mensuelle"
+        git push origin main
