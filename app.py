@@ -7,8 +7,14 @@ import plotly.graph_objects as go
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
+
+# 🎥 Vidéo de présentation
+st.markdown("### 🎥 William Higgons explique sa stratégie")
+st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
+
 st.markdown("### 🧾 Aperçu du screening")
 st.write("Les entreprises en **vert** passent le filtre William Higgons.")
+
 
 # === Chargement des données ===
 @st.cache_data
@@ -145,7 +151,7 @@ df_display = df_display.rename(columns={
     "Sector": "🏷️ Secteur",
     "Industry": "🏭 Industrie",
     "Pays": "🌍 Pays",
-    "Statut": "🤖 Filtre Higgons"
+    "🧠 Statut": "✅ Filtre William Higgons"
 })
 
 # === Affichage final
