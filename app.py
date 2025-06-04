@@ -45,7 +45,7 @@ def load_data():
 
     df["Pays"] = df["Ticker"].apply(detect_country)
 
-    # === Mapping des émojis secteur
+    # === Emojis pour les secteurs et industries
     sector_emojis = {
         "Technology": "💻",
         "Healthcare": "💊",
@@ -61,14 +61,14 @@ def load_data():
     }
 
     industry_emojis = {
-        "Software—Application": "📱",
+        "Software - Application": "📱",
         "Semiconductor Equipment & Materials": "🔋",
-        "Drug Manufacturers—General": "💉",
+        "Drug Manufacturers - General": "💉",
         "Packaged Foods": "🥫",
-        "Insurance—Diversified": "🛡️",
-        "Utilities—Regulated Electric": "⚡",
-        "Apparel Retail": "👕",
-        "Banks—Regional": "🏦",
+        "Insurance - Diversified": "🛡️",
+        "Telecom Services": "📞",
+        "Specialty Industrial Machinery": "🏭",
+        "Banks - Diversified": "🏦",
         "Life Insurance": "🧬",
         "Unknown": "❓"
     }
@@ -84,24 +84,60 @@ def load_data():
     df["Sector"] = df.apply(with_sector_emoji, axis=1)
     df["Industry"] = df.apply(with_industry_emoji, axis=1)
 
+    # Ajout du statut
+    df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
     return df
 
 df = load_data()
 
-# === Création de la colonne statut
-df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
-df_display = df.drop(columns=["Higgons Valid"])
+# === Barre latérale de filtre ===
+st.sidebar.header("🧰 Filtres")
 
-# === 🔍 Barre de recherche par Ticker ===
-st.sidebar.markdown("## 🔍 Recherche")
-search_query = st.sidebar.text_input("Rechercher un ticker (ex: ASML, SAP, TTE)", "")
-if search_query:
-    df_display = df_display[df_display["Ticker"].str.contains(search_query.upper())]
+# Recherche par Ticker
+search_ticker = st.sidebar.text_input("🔎 Rechercher un ticker", "")
 
-# === Affichage tableau final
+# Filtres dynamiques
+pays_filter = st.sidebar.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
+sector_filter = st.sidebar.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
+industry_filter = st.sidebar.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
+
+per_min, per_max = st.sidebar.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
+roe_min = st.sidebar.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
+growth_min = st.sidebar.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
+
+only_higgons = st.sidebar.checkbox("✅ Seulement les sociétés validées")
+
+# === Application des filtres ===
+df_filtered = df.copy()
+
+if search_ticker:
+    df_filtered = df_filtered[df_filtered["Ticker"].str.contains(search_ticker.upper())]
+
+if pays_filter:
+    df_filtered = df_filtered[df_filtered["Pays"] == pays_filter]
+
+if sector_filter:
+    df_filtered = df_filtered[df_filtered["Sector"] == sector_filter]
+
+if industry_filter:
+    df_filtered = df_filtered[df_filtered["Industry"] == industry_filter]
+
+df_filtered = df_filtered[
+    (df_filtered["PER"] >= per_min) & (df_filtered["PER"] <= per_max) &
+    (df_filtered["ROE (%)"] >= roe_min) &
+    (df_filtered["Revenue Growth (%)"] >= growth_min)
+]
+
+if only_higgons:
+    df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
+
+# Suppression colonne bool
+df_display = df_filtered.drop(columns=["Higgons Valid"])
+
+# === Affichage final
 st.dataframe(df_display, use_container_width=True)
 
-# === ⏰ Date de mise à jour automatique
+# === Mise à jour des données
 st.markdown("---")
 try:
     with open("data/last_update.txt", "r") as f:
