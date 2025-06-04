@@ -1,488 +1,474 @@
-Ticker,Price,EPS,PER,ROE (%),Revenue Growth (%)
-SAP.DE,269.55,4.86,55.46,6.88,9.51
-ASML.AS,653.1,22.34,29.23,40.98,2.56
-NESN.SW,86.78,4.18,20.76,30.3,-1.75
-ROG.SW,263.8,10.26,25.71,26.06,3.23
-NOVN.SW,95.3,5.26,18.12,27.11,10.85
-AZN.L,10638.0,3.69,2882.93,17.25,18.03
-HSBA.L,875.8,0.81,1081.23,12.96,4.59
-SIE.DE,214.05,9.85,21.73,16.19,1.4
-ULVR.L,4632.0,1.93,2400.0,28.73,1.94
-ALV.DE,350.8,25.14,13.95,16.47,16.03
-SU.PA,221.7,7.96,27.85,14.0,6.27
-MC.PA,473.6,24.91,19.01,18.59,-1.71
-DTE.DE,33.36,2.45,13.62,17.71,3.42
-TTE.PA,53.03,5.29,10.02,13.37,-10.66
-SAN.MC,7.0,0.8,8.75,12.75,6.62
-AI.PA,182.0,5.7,31.93,12.31,-1.99
-SAN.PA,86.77,5.04,17.22,7.17,6.41
-IBE.MC,15.92,0.61,26.1,11.91,-9.32
-AIR.PA,166.44,5.74,29.0,21.59,5.78
-ZURN.SW,578.2,32.96,17.54,22.83,11.13
-UBSG.SW,27.52,1.31,21.01,5.98,16.69
-CFR.SW,153.5,5.97,25.71,12.45,3.8
-OR.PA,374.7,12.07,31.04,19.34,5.6
-REL.L,3990.0,1.03,3873.79,55.56,2.98
-UCG.MI,57.24,6.05,9.46,15.57,4.81
-RMS.PA,2382.0,43.59,54.65,26.57,12.98
-RHM.DE,1835.0,18.55,98.92,17.7,35.88
-BNP.PA,77.22,9.56,8.08,9.12,10.27
-ABBN.SW,46.68,1.84,25.37,27.16,1.91
-BATS.L,3391.0,1.36,2493.38,6.18,-5.19
-CS.PA,42.13,3.27,12.88,15.79,6.2
-GSK.L,1485.0,0.76,1953.95,18.84,3.46
-MUV2.DE,572.0,35.36,16.18,17.42,7.92
-BBVA.MC,13.165,1.76,7.48,18.07,17.38
-EL.PA,244.7,5.11,47.89,5.84,4.38
-DG.PA,127.5,8.42,15.14,16.24,4.13
-ISP.MI,4.8915,0.5,9.78,13.3,11.32
-LSEG.L,11245.0,1.28,8785.16,2.98,5.72
-ABI.BR,62.22,2.97,20.95,7.48,0.65
-ENEL.MI,8.067,0.67,12.04,20.8,-14.36
-PRX.AS,44.885,2.77,16.2,16.01,10.51
-INGA.AS,18.54,1.96,9.46,12.7,-0.54
-ENR.DE,88.92,0.21,423.43,13.05,10.75
-RIO.L,4337.5,5.25,826.19,20.91,-0.71
-LLOY.L,77.04,0.06,1284.0,9.67,-3.1
-BARC.L,329.25,0.38,866.45,8.78,3.33
-CPG.L,2580.0,0.64,4031.25,20.56,10.8
-DGE.L,1990.5,1.2,1658.75,38.58,-1.39
-ITX.MC,47.2,1.87,25.24,29.81,7.47
-HOLN.SW,91.5,5.23,17.5,10.74,-2.23
-DB1.DE,281.2,10.73,26.21,18.09,15.21
-ADYEN.AS,1671.2,29.91,55.87,29.36,19.44
-SGO.PA,98.96,5.64,17.55,11.31,-2.86
-RACE.MI,419.0,8.79,47.67,43.06,11.83
-NWG.L,532.8,0.57,934.74,12.2,-0.85
-BN.PA,74.68,3.11,24.01,11.36,-0.88
-DBK.DE,24.445,1.64,14.91,4.33,4.06
-SREN.SW,143.7,8.72,16.48,14.03,-80.02
-IFX.DE,34.36,0.95,36.17,7.56,-8.3
-LONN.SW,564.4,8.86,63.7,6.82,-2.13
-HLN.L,405.1,0.16,2531.88,8.92,-0.61
-RKT.L,5014.0,2.04,2457.84,21.29,-3.0
-DSV.CO,1547.5,48.13,32.15,8.85,10.82
-EXPN.L,3672.0,0.94,3906.38,25.87,7.22
-DHL.DE,39.58,2.86,13.84,14.0,2.97
-ADS.DE,216.3,5.71,37.88,13.95,10.53
-GLE.PA,48.33,5.52,8.76,5.98,18.37
-MBG.DE,51.79,9.07,5.71,11.02,-4.46
-SIKA.SW,217.7,7.75,28.09,17.71,4.67
-BAS.DE,41.98,0.83,50.58,3.65,-5.29
-ALC.SW,70.24,1.87,37.56,4.72,4.82
-WKL.AS,154.55,4.48,34.5,69.84,5.95
-GIVN.SW,4147.0,117.36,35.34,23.81,7.19
-ENGI.PA,19.065,1.64,11.63,11.88,-10.6
-G.MI,31.45,2.44,12.89,12.25,11.07
-EOAN.DE,15.31,1.71,8.95,25.4,-14.48
-AD.AS,36.61,1.92,19.07,11.41,0.7
-AMS.MC,73.62,2.86,25.74,24.75,12.87
-TSCO.L,390.0,0.23,1695.65,13.94,2.54
-ARGX.BR,509.6,14.57,34.98,15.15,78.6
-LR.PA,107.3,4.53,23.69,15.49,2.76
-CBK.DE,26.91,2.19,12.29,7.77,4.66
-CABK.MC,7.512,0.82,9.16,15.71,6.73
-STAN.L,1145.5,1.09,1050.92,7.96,11.83
-PGHN.SW,1084.0,43.36,25.0,46.71,8.71
-ENI.MI,13.302,0.77,17.28,4.97,-5.25
-ORA.PA,12.7,0.74,17.16,7.4,1.47
-HO.PA,272.1,4.93,55.19,18.89,11.66
-IMB.L,2829.0,3.0,943.0,48.02,-0.2
-SLHN.SW,819.8,42.22,19.42,16.14,6.02
-CAP.PA,146.0,9.52,15.34,14.19,-1.89
-PRU.L,855.8,0.62,1380.32,13.06,-32.01
-NOKIA.HE,4.651,0.22,21.14,6.18,-9.07
-DSY.PA,32.43,0.9,36.03,13.24,4.41
-SAMPO.HE,9.338,0.42,22.23,16.35,12.16
-AHT.L,4265.0,2.58,1653.1,22.56,12.32
-BMW.DE,77.62,10.58,7.34,7.9,-8.44
-DANSKE.CO,255.6,27.76,9.21,13.45,6.27
-SSE.L,1750.5,1.08,1620.83,15.48,-16.28
-UMG.AS,27.1,1.11,24.41,,6.54
-HEI.DE,172.15,9.68,17.78,9.48,-0.1
-PUB.PA,93.34,6.63,14.08,15.01,8.3
-HEIA.AS,78.04,1.74,44.85,4.99,-1.78
-VIE.PA,30.11,1.52,19.81,8.5,-1.45
-ASM.AS,487.1,10.08,48.32,18.3,11.33
-RWE.DE,33.32,5.33,6.25,16.28,-15.07
-FER.MC,44.9,4.44,10.11,53.32,7.43
-KNEBV.HE,54.26,1.85,29.33,33.18,1.33
-EBS.VI,70.55,7.14,9.88,13.51,5.55
-GEBN.SW,620.2,18.05,34.36,45.86,0.05
-LDO.MI,54.48,1.89,28.83,11.95,16.17
-DTG.DE,37.25,3.63,10.26,13.06,-3.24
-EQT.ST,275.7,7.11,38.78,9.58,25.02
-SAND.ST,208.2,11.76,17.7,12.63,-2.87
-DNB.OL,274.4,29.8,9.21,16.17,4.39
-UCB.BR,158.95,5.37,29.6,10.62,17.14
-VOW3.DE,94.1,18.56,5.07,6.23,0.74
-KBC.BR,87.36,8.41,10.39,14.05,3.52
-EQNR.OL,245.7,32.29,7.61,20.8,-4.07
-MTX.DE,355.9,11.53,30.87,18.82,38.19
-ACA.PA,16.14,2.04,7.91,9.49,7.99
-STLAM.MI,8.74,1.84,4.75,6.7,-17.23
-DSFIR.AS,97.44,0.94,103.66,1.11,20.44
-AENA.MC,237.2,13.07,18.15,23.37,14.36
-RI.PA,89.86,4.37,20.56,9.37,-4.44
-FRE.DE,43.49,1.87,23.26,2.41,3.64
-NXT.L,12910.0,6.06,2130.36,44.99,11.42
-LGEN.L,253.7,0.03,8456.67,5.38,-36.26
-HNR1.DE,280.8,18.66,15.05,19.74,
-PRY.MI,57.58,2.4,23.99,14.33,10.89
-KPN.AS,4.157,0.2,20.79,24.02,3.02
-KRZ.IR,95.9,3.89,24.65,11.32,-0.66
-SCMN.SW,566.5,28.04,20.2,12.69,-0.33
-IHG.L,8520.0,2.86,2979.02,-27.16,6.47
-PHIA.AS,20.02,0.26,77.0,-5.85,-0.81
-SAB.MC,2.782,0.35,7.95,12.18,4.16
-MRK.DE,115.05,6.48,17.75,9.28,0.78
-SGE.L,1238.0,0.34,3641.18,29.55,6.78
-NN.AS,56.4,5.56,10.14,7.34,
-BAMI.MI,10.17,1.27,8.01,11.74,6.74
-LISP.SW,13270.0,289.29,45.87,13.89,5.14
-SHL.DE,46.19,1.86,24.83,10.67,3.15
-SGSN.SW,85.14,2.96,28.76,72.9,2.6
-VWS.CO,101.85,4.15,24.54,14.14,12.44
-SOON.SW,251.9,8.97,28.08,20.28,6.58
-A5G.IR,7.075,0.93,7.61,15.25,4.13
-SY1.DE,105.15,3.42,30.75,12.01,5.67
-KOG.OL,369.15,7.35,50.22,27.45,20.32
-STMN.SW,105.0,2.89,36.33,19.03,9.98
-TRN.MI,8.972,0.52,17.25,14.11,15.86
-PNDORA.CO,1199.5,68.01,17.64,94.9,12.6
-UPM.HE,23.8,0.57,41.75,3.91,-1.16
-HLMA.L,2906.0,0.76,3823.68,15.48,9.79
-REP.MC,12.14,0.95,12.78,6.63,-3.1
-RYA.IR,23.5,1.46,16.1,22.9,3.75
-SCHP.SW,293.6,9.04,32.48,19.18,-2.24
-INF.L,792.2,0.22,3600.91,4.59,11.4
-MONC.MI,54.76,2.36,23.2,17.83,4.18
-KER.PA,171.4,9.24,18.55,7.6,-12.12
-GMAB.CO,1403.0,110.42,12.71,21.38,30.67
-ABN.AS,23.07,2.68,8.61,9.2,3.61
-KRX.IR,73.65,3.62,20.35,15.5,6.4
-HEN3.DE,69.78,4.78,14.6,9.31,0.33
-BAER.SW,53.2,4.9,10.86,14.97,0.78
-ENX.PA,145.5,5.83,24.96,13.79,10.27
-FGR.PA,122.4,10.92,11.21,15.49,7.38
-BIRG.IR,12.29,1.42,8.65,11.77,-0.65
-FBK.MI,18.98,1.07,17.74,27.3,8.48
-BEI.DE,116.9,4.05,28.86,10.76,4.27
-SRG.MI,5.242,0.39,13.44,14.1,
-ACS.MC,58.05,3.26,17.81,17.55,16.5
-KNIN.SW,183.55,10.08,18.21,36.19,4.0
-LOGN.SW,68.68,3.47,19.79,,
-MB.MI,20.09,1.6,12.56,9.2,-2.06
-ALFA.ST,407.1,18.85,21.6,17.63,5.28
-ADM.L,3334.0,2.17,1536.41,48.41,36.97
-AKZA.AS,59.38,2.7,21.99,11.85,0.4
-SPSN.SW,117.0,4.48,26.12,5.39,0.89
-FME.DE,50.04,2.11,23.72,3.69,-0.61
-EN.PA,38.32,2.77,13.83,8.33,1.31
-EVO.ST,645.4,64.02,10.08,31.32,14.7
-SGRO.L,689.2,0.45,1531.56,4.93,-9.88
-AGS.BR,57.35,6.05,9.48,14.42,7.6
-AC.PA,45.72,2.35,19.46,12.12,10.88
-CNA.L,164.0,0.25,656.0,30.12,-24.74
-RTO.L,350.9,0.12,2924.17,7.26,1.13
-BVI.PA,29.98,1.25,23.98,28.88,6.36
-IAG.MC,3.984,0.56,7.11,44.28,8.99
-EDP.LS,3.552,0.2,17.76,6.94,-7.63
-GALD.SW,111.8,0.8,139.75,2.97,7.85
-G1A.DE,59.35,2.43,24.42,15.89,0.91
-RNO.PA,44.31,2.76,16.05,2.48,7.36
-CCH.L,3894.0,1.9,2049.47,25.6,5.6
-BNZL.L,2314.0,1.49,1553.02,17.95,-0.18
-ITRK.L,4752.0,2.13,2230.99,24.64,1.94
-WISE.L,1076.0,0.41,2624.39,36.19,55.86
-MKS.L,374.6,0.14,2675.71,,
-PSON.L,1085.5,0.63,1723.02,10.75,-3.32
-PST.MI,18.845,1.61,11.7,17.21,9.45
-VACN.SW,314.7,7.14,44.08,28.09,6.43
-URW.PA,82.12,1.04,78.96,0.83,6.37
-ELE.MC,26.93,2.03,13.27,23.28,-16.49
-QIA.DE,39.76,0.38,104.63,2.34,0.66
-BALN.SW,192.5,8.41,22.89,10.6,-8.59
-G24.DE,119.1,2.22,53.65,11.32,11.24
-BG.VI,109.1,9.23,11.82,16.06,4.69
-AGN.AS,6.354,0.37,17.17,7.49,-2.67
-SMIN.L,2190.0,0.89,2460.67,11.21,3.13
-TEL.OL,155.2,6.75,22.99,24.17,-0.65
-BESI.AS,106.75,2.26,47.23,36.31,4.94
-SVT.L,2655.0,0.76,3493.42,,
-BEAN.SW,788.5,11.83,66.65,25.28,9.91
-WRT1V.HE,17.83,0.93,19.17,19.92,7.22
-AUTO.L,800.2,0.32,2500.62,46.51,14.13
-CON.DE,76.26,5.84,13.06,8.14,-4.11
-CA.PA,13.27,1.08,12.29,6.68,2.78
-HEIO.AS,68.1,1.74,39.14,5.22,-1.78
-ABF.L,2042.0,1.77,1153.67,13.01,1.64
-LI.PA,33.86,3.76,9.01,12.77,5.88
-ANTO.L,1793.5,0.62,2892.74,8.77,4.57
-BTRW.L,444.9,0.1,4449.0,2.1,-21.67
-BPE.MI,7.718,0.96,8.04,12.35,1.93
-BOL.ST,300.3,40.48,7.42,15.42,13.56
-TELIA.ST,36.94,1.25,29.55,12.77,0.64
-DPLM.L,4620.0,1.25,3696.0,14.56,13.59
-PEO,20.5,1.27,16.14,4.85,155.88
-ORK.OL,114.3,6.31,18.11,12.61,4.22
-ZAL.DE,31.08,1.03,30.17,9.42,4.23
-ASRNL.AS,56.36,4.36,12.93,9.01,20.59
-ERF.PA,57.76,2.06,28.04,7.61,6.7
-BNR.DE,59.2,3.67,16.13,11.34,-3.44
-WPP.L,585.2,0.49,1194.29,15.6,-0.7
-BKT.MC,11.39,1.1,10.35,16.21,5.79
-WEIR.L,2406.0,1.21,1988.43,16.93,-4.95
-MOWI.OL,185.5,7.33,25.31,12.2,1.61
-TRYG.CO,167.0,8.15,20.49,12.2,0.1
-HELN.SW,192.3,8.9,21.61,13.16,7.06
-SPIE.PA,44.22,1.61,27.47,13.15,13.69
-NEM.DE,120.9,1.54,78.51,19.35,16.91
-PSPN.SW,145.0,7.67,18.9,6.93,-0.05
-TLX.DE,115.6,7.76,14.9,16.95,32.98
-FORTUM.HE,15.38,1.17,13.15,12.83,-13.57
-IMCD.AS,116.9,4.85,24.1,12.57,6.41
-STJ.L,1102.0,0.73,1509.59,31.29,36.73
-RMV.L,752.0,0.24,3133.33,238.32,7.02
-ICG.L,1991.0,1.54,1292.86,20.57,54.57
-BEZ.L,947.0,1.27,745.67,24.54,51.46
-EDEN.PA,26.65,2.01,13.26,-55.84,13.6
-ALO.PA,19.435,0.31,62.69,1.42,4.94
-METSO.HE,10.63,0.58,18.33,12.65,-9.78
-ELISA.HE,46.32,2.25,20.59,27.88,0.5
-OMV.VI,48.0,3.27,14.68,8.13,-13.89
-UNI.MI,17.26,1.5,11.51,11.52,4.84
-BMPS.MI,7.287,1.63,4.47,16.75,6.68
-EVD.DE,107.3,3.1,34.61,31.05,19.08
-ORNBV.HE,61.05,2.52,24.23,32.83,29.66
-JMT.LS,21.9,1.0,21.9,19.93,9.33
-INDT.ST,259.4,7.68,33.78,16.52,2.23
-NHY.OL,54.9,4.81,11.41,5.71,5.17
-IMI.L,1971.0,0.96,2053.12,22.9,0.64
-GALP.LS,14.685,1.44,10.2,22.18,2.61
-DNP,9.79,2.31,4.24,25.54,-581.54
-SOBI.ST,302.0,11.33,26.65,9.64,17.65
-AM.PA,323.6,11.81,27.4,14.59,29.86
-GAW.L,15420.0,5.3,2909.43,60.1,11.66
-GBLB.BR,72.65,0.24,302.71,0.94,
-AKRBP.OL,245.9,26.36,9.33,14.4,-9.85
-SBRY.L,287.2,0.18,1595.56,3.64,1.78
-KGF.L,283.0,0.1,2830.0,2.92,-1.51
-KESKOB.HE,20.96,0.91,23.03,13.93,1.16
-WTB.L,2889.0,1.41,2048.94,7.61,-1.28
-BCP.LS,0.6788,0.06,11.31,12.78,-5.45
-REC.MI,53.15,2.0,26.57,22.19,12.45
-KBX.DE,89.1,2.65,33.62,14.61,-0.54
-CTEC.L,290.6,0.07,4151.43,11.28,6.85
-BIM.PA,118.0,3.62,32.6,10.28,8.31
-SQN.SW,491.4,19.61,25.06,25.96,25.14
-LAND.L,631.5,0.53,1191.51,-4.98,4.17
-TEN.MI,15.51,1.45,10.7,12.27,-15.77
-GTT.PA,168.9,9.51,17.76,75.37,49.96
-DIM.PA,189.6,2.1,90.29,4.39,0.16
-HWDN.L,859.0,0.45,1908.89,22.09,0.48
-DCC.L,4580.0,2.11,2170.62,,
-MNDI.L,1193.5,0.42,2841.67,4.49,1.17
-LEG.DE,74.7,2.31,32.34,0.9,5.03
-RED.MC,18.0,0.94,19.15,7.15,-12.35
-HAG.DE,101.4,0.79,128.35,12.39,21.4
-HSX.L,1277.0,1.32,967.42,17.0,2.66
-SIGN.SW,16.44,0.47,34.98,6.21,3.04
-YAR.OL,367.8,11.44,32.15,0.2,-10.52
-IGG.L,1100.0,0.96,1145.83,16.28,-10.25
-ORSTED.CO,260.2,2.68,97.09,-0.25,-14.83
-SRT3.DE,205.9,1.37,150.29,3.04,-0.44
-GF.SW,64.3,2.22,28.96,196.33,23.99
-SW.PA,58.2,4.5,12.93,4.44,5.13
-RXL.PA,24.58,1.15,21.37,6.09,0.69
-AVOL.SW,44.4,0.68,65.29,4.38,7.31
-R3NK.DE,85.05,0.57,149.21,12.09,23.23
-PSN.L,1293.5,0.83,1558.43,7.62,15.42
-BKG.L,4140.0,3.73,1109.92,11.17,-3.37
-GET.PA,16.37,0.57,28.72,12.74,-11.76
-TEP.PA,85.86,8.43,10.19,11.48,23.19
-ALE,65.31,3.19,20.47,6.3,-18.62
-STB.OL,134.5,12.67,10.62,17.42,30.19
-DLG.L,301.0,0.11,2736.36,6.54,22.92
-FHZN.SW,227.2,10.56,21.52,11.01,7.29
-BLND.L,387.8,0.35,1108.0,-0.02,37.56
-GALE.SW,85.6,3.63,23.58,11.81,4.67
-SPX.L,5660.0,2.59,2185.33,15.82,-1.03
-CAST.ST,117.15,5.01,23.38,2.98,-0.22
-KCR.HE,67.4,4.68,14.4,19.83,6.55
-CRDA.L,3011.0,1.68,1792.26,6.94,-3.92
-LMP.L,199.8,0.17,1175.29,3.01,21.4
-VER.VI,67.1,5.01,13.39,18.79,-21.1
-EVK.DE,19.04,0.65,29.29,2.46,-0.72
-RILBA.CO,1345.0,88.64,15.17,20.85,7.97
-ACKB.BR,225.0,13.97,16.11,8.71,15.74
-P911.DE,41.59,3.49,11.92,15.59,-1.1
-EMSN.SW,612.5,19.6,31.25,25.11,-5.4
-AAK.ST,265.2,13.53,19.6,17.6,-2.12
-GFC.PA,95.3,4.16,22.91,2.95,2.2
-ACLN.SW,47.8,1.51,31.66,51.26,11.77
-SCR.PA,29.02,0.02,1451.0,0.09,-12.44
-AMUN.PA,73.4,6.42,11.43,10.87,10.23
-GJF.OL,256.6,10.91,23.52,19.77,9.05
-TE.PA,34.5,2.18,15.83,18.78,11.91
-VALMT.HE,28.65,1.55,18.48,10.74,-3.13
-CVC.AS,16.12,0.24,67.17,22.86,58.1
-SAVE.ST,250.0,11.25,22.22,35.45,12.72
-FNOX.ST,87.0,1.28,67.97,30.06,24.54
-ELIS.PA,23.68,1.33,17.8,9.39,6.13
-WDP.BR,21.08,1.95,10.81,9.18,15.95
-BPSO.MI,11.88,1.35,8.8,13.83,11.78
-UHR.SW,139.35,3.78,36.87,1.59,-14.62
-AZA.ST,329.7,14.57,22.63,35.66,13.5
-BOL.PA,5.48,0.05,109.6,7.16,-1.37
-MRL.MC,10.69,0.55,19.44,3.78,6.41
-SOF.BR,252.6,40.57,6.23,13.19,-2335.75
-ADEN.SW,22.66,1.61,14.07,8.47,-3.42
-SFZN.SW,93.1,3.6,25.86,16.33,1.82
-TEMN.SW,60.7,2.08,29.18,27.73,4.39
-SDR.L,364.8,0.26,1403.08,9.82,1.13
-BC.MI,105.9,1.76,60.17,24.39,12.21
-RAA.DE,720.5,22.09,32.62,29.24,6.01
-BME.L,332.0,0.33,1006.06,-50.0,10.05
-LOTB.BR,8850.0,184.08,48.08,19.29,15.89
-IPN.PA,104.9,4.32,24.28,8.27,8.11
-HIK.L,2130.0,1.2,1775.0,15.54,8.77
-LHA.DE,7.188,1.03,6.98,11.96,6.04
-BZU.MI,44.68,5.14,8.69,14.27,
-ANDR.VI,61.35,4.83,12.7,21.8,-4.0
-AKE.PA,62.45,3.85,16.22,4.7,0.32
-ISS.CO,173.6,14.3,12.14,23.16,6.46
-BKW.SW,172.3,11.72,14.7,11.94,6.44
-RAND.AS,36.4,0.61,59.67,2.98,-5.13
-FDJU.PA,32.04,2.14,14.97,33.53,16.92
-INW.MI,10.25,0.38,26.97,8.68,7.89
-NKT.CO,522.5,30.93,16.89,18.19,26.68
-A2A.MI,2.266,0.28,8.09,15.54,-36.82
-JDEP.AS,23.92,1.12,21.36,5.06,7.89
-HER.MI,4.384,0.35,12.53,13.44,-15.26
-UTG.L,860.5,0.96,896.35,9.18,8.4
-SUBC.OL,176.0,6.58,26.75,4.74,14.45
-IG.MI,6.95,0.62,11.21,19.48,-2.88
-DIE.BR,179.9,6.84,26.3,-81.44,2.14
-ELI.BR,92.3,5.39,17.12,8.11,-1.97
-ABDN.L,179.5,0.13,1380.77,4.93,5.39
-SB1NO.OL,177.4,13.2,13.44,9.86,13.52
-NEX.PA,100.7,6.16,16.35,15.39,9.7
-BWY.L,2646.0,1.23,2151.22,3.77,-30.13
-REY.MI,146.5,6.02,24.34,16.24,8.4
-ITV.L,77.0,0.1,770.0,22.57,-3.75
-JYSK.CO,621.0,79.05,7.86,10.5,-4.92
-BBY.L,500.0,0.34,1470.59,15.88,
-ANA.MC,149.7,8.11,18.46,8.77,12.74
-INVP.L,524.0,0.7,748.57,17.6,-11.59
-ARCAD.AS,44.46,2.7,16.47,19.71,-0.16
-ALLN.SW,185.6,12.62,14.71,8.0,-1.94
-JMAT.L,1732.0,2.11,820.85,4.54,-14.0
-CPR.MI,5.556,0.14,39.69,5.23,5.18
-WIE.VI,32.18,0.72,44.69,2.79,6.83
-NTGY.MC,25.98,1.99,13.06,20.06,-14.81
-IVG.MI,16.935,1.6,10.58,12.93,-4.31
-RBI.VI,26.82,5.44,4.93,6.06,0.74
-HUH1V.HE,32.04,2.29,13.99,11.0,-1.02
-BC8.DE,38.58,1.8,21.43,12.84,-1.82
-INCH.L,682.5,0.66,1034.09,30.53,-1.27
-CWK.L,5220.0,2.46,2121.95,12.41,11.89
-SYDB.CO,441.2,47.16,9.36,17.55,1.55
-DEMANT.CO,249.8,13.21,18.91,24.96,3.79
-BMED.MI,14.63,1.52,9.62,23.79,35.98
-BARN.SW,826.5,26.45,31.25,6.68,22.62
-AED.BR,66.55,4.06,16.39,5.62,8.23
-AG1.DE,24.72,0.24,103.0,3.41,14.81
-FNTN.DE,28.14,2.5,11.26,16.57,3.87
-SDF.DE,16.3,0.01,1630.0,-1.08,-5.67
-INPST.AS,14.39,0.54,26.65,50.79,23.48
-MAP.MC,3.374,0.31,10.88,10.88,0.76
-IP.MI,34.22,2.03,16.86,11.31,-7.22
-COFB.BR,77.4,2.91,26.6,1.81,-0.26
-RS1.L,571.5,0.32,1785.94,12.83,-1.34
-SPM.MI,2.246,0.15,14.97,12.12,22.44
-CMBN.SW,101.0,5.76,17.53,13.26,6.74
-AALB.AS,31.04,1.65,18.81,7.04,-5.28
-BGN.MI,50.7,3.68,13.78,29.54,23.7
-PLUS.L,3434.0,2.56,1341.41,42.39,5.53
-ROR.L,319.4,0.12,2661.67,17.39,4.91
-SALM.OL,444.4,13.33,33.34,16.56,-6.74
-DRX.L,657.5,1.35,487.04,25.35,-20.31
-NEXI.MI,5.302,0.14,37.87,1.53,
-VZN.SW,175.8,5.52,31.85,20.7,13.39
-TOM.OL,149.5,4.05,36.91,15.55,4.64
-LIGHT.AS,21.7,2.77,7.83,10.37,-8.37
-HOT.DE,161.7,12.63,12.8,72.37,19.98
-VIS.MC,61.9,3.4,18.21,16.75,-1.78
-AZE.BR,14.39,0.74,19.45,6.28,1.49
-COV.PA,51.7,0.63,82.06,0.83,4.0
-SUN.SW,158.0,7.65,20.65,21.4,7.58
-FPE3.DE,46.82,2.3,20.36,15.92,-0.45
-RBREW.CO,543.5,29.46,18.45,22.85,16.31
-AMP.MI,20.4,0.63,32.38,12.64,6.6
-AZM.MI,25.66,3.98,6.45,29.96,10.42
-SBMO.AS,21.4,0.75,28.53,4.14,-3.59
-SOP.PA,189.8,15.11,12.56,13.02,5.63
-BCVN.SW,94.7,5.09,18.61,11.22,-0.87
-GRG.L,2054.0,1.5,1369.33,26.89,11.32
-KGX.DE,42.14,1.56,27.01,5.82,0.61
-SCT.L,1787.0,0.63,2836.51,39.94,-2.3
-SHC.L,143.9,0.14,1027.86,6.86,16.4
-SK.PA,84.1,4.08,20.61,7.08,3.25
-THULE.ST,250.6,10.3,24.33,13.86,4.48
-FLS.CO,375.4,20.5,18.31,8.63,-16.26
-MYCR.ST,192.16,9.3,20.66,25.77,
-EMG.L,175.9,0.19,925.79,17.78,22.77
-AXFO.ST,276.1,9.5,29.06,31.08,3.63
-RUI.PA,28.92,3.28,8.82,12.08,0.21
-TEG.DE,14.9,0.58,25.69,4.01,-18.56
-SRP.L,189.1,0.04,4727.5,5.25,-1.77
-EZJ.L,580.4,0.54,1074.81,15.2,13.93
-ADP.PA,113.5,3.34,33.98,7.75,12.07
-TBCG.L,4430.0,6.28,705.41,23.11,19.64
-TCAP.L,260.0,0.21,1238.1,8.11,2.83
-SXS.L,2028.0,2.31,877.92,16.89,-10.39
-CCL.L,1576.0,1.15,1370.43,20.71,15.88
-BUCN.SW,392.0,22.07,17.76,12.05,-11.73
-GRF.MC,9.66,0.23,42.0,2.67,9.41
-VID.MC,95.3,7.08,13.46,22.78,11.41
-BYG.L,978.0,1.36,719.12,9.8,5.71
-TATE.L,545.0,0.12,4541.67,15.19,-5.94
-CLN.SW,8.74,0.73,11.97,10.45,-5.14
-GFTU.L,1005.8,0.8,1257.25,7.64,-1.59
-LOOMIS.ST,371.2,24.09,15.41,12.04,6.04
-PUM.DE,22.56,1.31,17.22,9.96,2.51
-VK.PA,15.715,1.84,8.54,18.0,-21.12
-GL9.IR,12.44,0.55,22.62,7.95,-29.23
-HEM.ST,291.8,5.16,56.55,38.55,38.81
-VAR.OL,30.36,2.7,11.24,39.29,8.16
-MANTA.HE,5.19,0.35,14.83,10.3,9.91
-BPT.L,286.6,0.06,4776.67,6.59,31.49
-TECN.SW,158.0,5.26,30.04,4.71,-13.04
-VTY.L,583.8,0.22,2653.64,2.3,6.04
-KEMIRA.HE,19.08,1.48,12.89,13.97,-12.87
-CCC.L,2598.0,1.53,1698.04,21.08,0.61
-VPK.AS,41.38,3.12,13.26,12.13,-7.72
-DKSH.SW,64.2,3.33,19.28,11.8,0.25
-DLN.L,1943.0,1.03,1886.41,3.27,4.4
-NDA.DE,80.1,15.91,5.03,9.14,0.44
-WIHL.ST,95.2,5.82,16.36,7.37,7.55
-FRO.OL,179.85,15.74,11.43,21.17,13.77
-DIA.MI,90.3,3.47,26.02,10.44,
-ATE.PA,72.7,5.33,13.64,9.15,1.83
-SFSN.SW,115.4,6.21,18.58,15.65,-1.3
-VRLA.PA,28.0,2.0,14.0,23.65,-11.47
-FR.PA,8.98,0.66,13.61,4.36,-2.5
-GXI.DE,47.86,2.28,20.99,7.26,2.28
-AFX.DE,54.6,1.77,30.85,8.75,-1.11
-BAKKA.OL,469.0,6.52,71.93,5.88,2.7
-CDI.PA,441.6,28.7,15.39,21.44,-1.71
-SAFE.L,640.0,1.7,376.47,16.72,-0.31
-HIAB.HE,48.02,2.45,19.6,104.03,-7.79
-GN.CO,93.46,5.5,16.99,9.13,-0.75
-BAVA.CO,179.5,16.64,10.79,8.66,-19.06
-COTN.SW,221.0,4.53,48.79,10.79,12.05
-BANB.SW,49.82,1.58,31.53,8.64,4.84
-IFCN.SW,96.9,3.86,25.1,29.52,-0.41
-FUR.AS,11.35,2.33,4.87,18.31,4.03
-PTEC.L,308.5,0.16,1928.12,12.29,9.86
+Ticker,Price,EPS,PER,ROE (%),Revenue Growth (%),Sector,Industry
+SAP.DE,269.5,4.88,55.23,6.88,9.51,Technology,Software - Application
+ASML.AS,654.7,22.14,29.57,40.98,2.56,Technology,Semiconductor Equipment & Materials
+NESN.SW,86.62,4.19,20.67,30.3,-1.75,Consumer Defensive,Packaged Foods
+ROG.SW,265.3,10.31,25.73,26.06,3.23,Healthcare,Drug Manufacturers - General
+NOVN.SW,94.93,5.25,18.08,27.11,10.85,Healthcare,Drug Manufacturers - General
+AZN.L,10614.0,3.67,2892.1,17.25,18.03,Healthcare,Drug Manufacturers - General
+HSBA.L,874.9,0.81,1080.12,12.96,4.59,Financial Services,Banks - Diversified
+SIE.DE,217.75,9.85,22.11,16.19,1.4,Industrials,Specialty Industrial Machinery
+ULVR.L,4611.0,1.94,2376.8,28.73,1.94,Consumer Defensive,Household & Personal Products
+ALV.DE,352.3,25.15,14.01,16.47,16.03,Financial Services,Insurance - Diversified
+SU.PA,221.25,7.89,28.04,14.0,6.27,Industrials,Specialty Industrial Machinery
+MC.PA,472.25,25.1,18.81,18.59,-1.71,Consumer Cyclical,Luxury Goods
+DTE.DE,33.39,2.45,13.63,17.71,3.42,Communication Services,Telecom Services
+TTE.PA,53.09,5.21,10.19,13.37,-10.66,Energy,Oil & Gas Integrated
+SAN.MC,7.022,0.81,8.67,12.75,6.62,Financial Services,Banks - Diversified
+AI.PA,182.26,5.71,31.92,12.31,-1.99,Basic Materials,Specialty Chemicals
+SAN.PA,86.67,4.99,17.37,7.17,6.41,Healthcare,Drug Manufacturers - General
+IBE.MC,15.895,0.62,25.64,11.91,-9.32,Utilities,Utilities - Diversified
+AIR.PA,171.98,5.61,30.66,21.59,5.78,Industrials,Aerospace & Defense
+ZURN.SW,581.4,33.02,17.61,22.83,11.13,Financial Services,Insurance - Diversified
+UBSG.SW,27.17,1.24,21.91,5.98,16.69,Financial Services,Banks - Diversified
+CFR.SW,153.25,5.97,25.67,12.45,3.8,Consumer Cyclical,Luxury Goods
+OR.PA,374.15,11.95,31.31,19.34,5.6,Consumer Defensive,Household & Personal Products
+REL.L,3970.0,1.03,3854.37,55.56,2.98,Industrials,Specialty Business Services
+UCG.MI,57.46,6.05,9.5,15.57,4.81,Financial Services,Banks - Regional
+RMS.PA,2379.0,43.83,54.28,26.57,12.98,Consumer Cyclical,Luxury Goods
+RHM.DE,1833.5,18.53,98.95,17.7,35.88,Industrials,Aerospace & Defense
+BNP.PA,77.93,9.5,8.2,9.12,10.27,Financial Services,Banks - Regional
+ABBN.SW,46.79,1.84,25.43,27.16,1.91,Industrials,Electrical Equipment & Parts
+BATS.L,3371.0,1.36,2478.68,6.18,-5.19,Consumer Defensive,Tobacco
+CS.PA,42.45,3.24,13.1,15.79,6.2,Financial Services,Insurance - Diversified
+GSK.L,1481.5,0.76,1949.34,18.84,3.46,Healthcare,Drug Manufacturers - General
+MUV2.DE,578.6,35.35,16.37,17.42,7.92,Financial Services,Insurance - Reinsurance
+BBVA.MC,13.23,1.77,7.47,18.07,17.38,Financial Services,Banks - Diversified
+EL.PA,244.1,5.14,47.49,5.84,4.38,Healthcare,Medical Instruments & Supplies
+DG.PA,126.6,8.43,15.02,16.24,4.13,Industrials,Engineering & Construction
+ISP.MI,4.9195,0.5,9.84,13.3,11.32,Financial Services,Banks - Regional
+LSEG.L,11235.0,1.28,8777.34,2.98,5.72,Financial Services,Financial Data & Stock Exchanges
+ABI.BR,62.2,2.97,20.94,7.48,0.65,Consumer Defensive,Beverages - Brewers
+ENEL.MI,8.047,0.67,12.01,20.8,-14.36,Utilities,Utilities - Diversified
+PRX.AS,45.41,2.77,16.39,16.01,10.51,Communication Services,Internet Content & Information
+INGA.AS,18.648,1.97,9.47,12.7,-0.54,Financial Services,Banks - Diversified
+ENR.DE,87.96,0.21,418.86,13.05,10.75,Industrials,Specialty Industrial Machinery
+RIO.L,4335.5,5.22,830.56,20.91,-0.71,Basic Materials,Other Industrial Metals & Mining
+LLOY.L,77.14,0.06,1285.67,9.67,-3.1,Financial Services,Banks - Regional
+BARC.L,331.2,0.38,871.58,8.78,3.33,Financial Services,Banks - Diversified
+CPG.L,2575.0,0.63,4087.3,20.56,10.8,Consumer Cyclical,Restaurants
+DGE.L,1994.5,1.19,1676.05,38.58,-1.39,Consumer Defensive,Beverages - Wineries & Distilleries
+ITX.MC,47.47,1.88,25.25,29.81,7.47,Consumer Cyclical,Apparel Retail
+HOLN.SW,91.38,5.22,17.51,10.74,-2.23,Basic Materials,Building Materials
+DB1.DE,281.4,10.74,26.2,18.09,15.21,Financial Services,Financial Data & Stock Exchanges
+ADYEN.AS,1671.8,29.58,56.52,29.36,19.44,Technology,Software - Infrastructure
+SGO.PA,99.74,5.64,17.68,11.31,-2.86,Industrials,Building Products & Equipment
+RACE.MI,416.8,8.8,47.36,43.06,11.83,Consumer Cyclical,Auto Manufacturers
+NWG.L,534.999,0.57,938.59,12.2,-0.85,Financial Services,Banks - Regional
+BN.PA,74.56,3.13,23.82,11.36,-0.88,Consumer Defensive,Packaged Foods
+DBK.DE,24.705,1.64,15.06,4.33,4.06,Financial Services,Banks - Regional
+SREN.SW,144.3,8.87,16.27,14.03,-80.02,Financial Services,Insurance - Reinsurance
+IFX.DE,35.535,0.95,37.41,7.56,-8.3,Technology,Semiconductors
+LONN.SW,561.0,8.92,62.89,6.82,-2.13,Healthcare,Diagnostics & Research
+HLN.L,401.399,0.16,2508.74,8.92,-0.61,Healthcare,Drug Manufacturers - Specialty & Generic
+RKT.L,5002.0,2.04,2451.96,21.29,-3.0,Consumer Defensive,Household & Personal Products
+DSV.CO,1565.0,47.66,32.84,8.85,10.82,Industrials,Integrated Freight & Logistics
+EXPN.L,3690.0,0.93,3967.74,25.87,7.22,Industrials,Consulting Services
+DHL.DE,40.61,2.86,14.2,14.0,2.97,Industrials,Integrated Freight & Logistics
+ADS.DE,217.5,5.71,38.09,13.95,10.53,Consumer Cyclical,Footwear & Accessories
+GLE.PA,48.65,5.53,8.8,5.98,18.37,Financial Services,Banks - Regional
+MBG.DE,51.9,9.07,5.72,11.02,-4.46,Consumer Cyclical,Auto Manufacturers
+SIKA.SW,217.7,7.75,28.09,17.71,4.67,Basic Materials,Specialty Chemicals
+BAS.DE,42.62,0.83,51.35,3.65,-5.29,Basic Materials,Chemicals
+ALC.SW,70.18,1.85,37.94,4.72,4.82,Healthcare,Medical Instruments & Supplies
+WKL.AS,154.7,4.51,34.3,69.84,5.95,Industrials,Specialty Business Services
+GIVN.SW,4170.0,117.77,35.41,23.81,7.19,Basic Materials,Specialty Chemicals
+ENGI.PA,19.08,1.65,11.56,11.88,-10.6,Utilities,Utilities - Diversified
+G.MI,31.7,2.44,12.99,12.25,11.07,Financial Services,Insurance - Diversified
+EOAN.DE,15.4,1.71,9.01,25.4,-14.48,Utilities,Utilities - Diversified
+AD.AS,36.61,1.95,18.77,11.41,0.7,Consumer Defensive,Grocery Stores
+AMS.MC,74.04,2.88,25.71,24.75,12.87,Technology,Information Technology Services
+TSCO.L,390.0999,0.23,1696.09,13.94,2.54,Consumer Defensive,Grocery Stores
+ARGX.BR,503.2,14.32,35.14,15.15,78.6,Healthcare,Biotechnology
+LR.PA,107.85,4.49,24.02,15.49,2.76,Industrials,Electrical Equipment & Parts
+CBK.DE,27.19,2.19,12.42,7.77,4.66,Financial Services,Banks - Regional
+CABK.MC,7.518,0.83,9.06,15.71,6.73,Financial Services,Banks - Regional
+STAN.L,1150.5,1.09,1055.5,7.96,11.83,Financial Services,Banks - Diversified
+PGHN.SW,1084.0,43.03,25.19,46.71,8.71,Financial Services,Asset Management
+ENI.MI,13.306,0.77,17.28,4.97,-5.25,Energy,Oil & Gas Integrated
+ORA.PA,12.705,0.74,17.17,7.4,1.47,Communication Services,Telecom Services
+HO.PA,271.2,4.9,55.35,18.89,11.66,Industrials,Aerospace & Defense
+IMB.L,2797.0,3.0,932.33,48.02,-0.2,Consumer Defensive,Tobacco
+SLHN.SW,825.2,42.3,19.51,16.14,6.02,Financial Services,Insurance - Diversified
+CAP.PA,146.75,9.48,15.48,14.19,-1.89,Technology,Information Technology Services
+PRU.L,859.0,0.62,1385.48,13.06,-32.01,Financial Services,Insurance - Life
+NOKIA.HE,4.709,0.22,21.4,6.18,-9.07,Technology,Communication Equipment
+DSY.PA,32.63,0.89,36.66,13.24,4.41,Technology,Software - Application
+SAMPO.HE,9.394,0.42,22.37,16.35,12.16,Financial Services,Insurance - Diversified
+AHT.L,4257.7915,2.56,1663.2,22.56,12.32,Industrials,Rental & Leasing Services
+BMW.DE,78.38,10.58,7.41,7.9,-8.44,Consumer Cyclical,Auto Manufacturers
+DANSKE.CO,258.4,28.19,9.17,13.45,6.27,Financial Services,Banks - Regional
+SSE.L,1743.0,1.08,1613.89,15.48,-16.28,Utilities,Utilities - Diversified
+HEI.DE,173.2,9.67,17.91,9.48,-0.1,Basic Materials,Building Materials
+PUB.PA,93.66,6.55,14.3,15.01,8.3,Communication Services,Advertising Agencies
+HEIA.AS,78.72,1.74,45.24,4.99,-1.78,Consumer Defensive,Beverages - Brewers
+VIE.PA,30.08,1.54,19.53,8.5,-1.45,Industrials,Waste Management
+ASM.AS,490.3,9.79,50.08,18.3,11.33,Technology,Semiconductor Equipment & Materials
+RWE.DE,33.69,5.33,6.32,16.28,-15.07,Utilities,Utilities - Diversified
+FER.MC,44.48,4.45,10.0,53.32,7.43,Industrials,Engineering & Construction
+KNEBV.HE,54.66,1.86,29.39,33.18,1.33,Industrials,Specialty Industrial Machinery
+EBS.VI,70.95,7.14,9.94,13.51,5.55,Financial Services,Banks - Regional
+GEBN.SW,623.2,17.99,34.64,45.86,0.05,Industrials,Building Products & Equipment
+LDO.MI,54.34,1.89,28.75,11.95,16.17,Industrials,Aerospace & Defense
+DTG.DE,38.05,3.63,10.48,13.06,-3.24,Industrials,Farm & Heavy Construction Machinery
+EQT.ST,276.2,7.17,38.52,9.58,25.02,Financial Services,Asset Management
+SAND.ST,210.4,11.72,17.95,12.63,-2.87,Industrials,Specialty Industrial Machinery
+DNB.OL,276.0,29.91,9.23,16.17,4.39,Financial Services,Banks - Regional
+UCB.BR,159.75,5.48,29.15,10.62,17.14,Healthcare,Biotechnology
+VOW3.DE,94.54,18.56,5.09,6.23,0.74,Consumer Cyclical,Auto Manufacturers
+KBC.BR,87.88,8.47,10.38,14.05,3.52,Financial Services,Banks - Regional
+EQNR.OL,247.2,31.82,7.77,20.8,-4.07,Energy,Oil & Gas Integrated
+MTX.DE,360.2,11.53,31.24,18.82,38.19,Industrials,Aerospace & Defense
+ACA.PA,16.195,2.04,7.94,9.49,7.99,Financial Services,Banks - Regional
+STLAM.MI,8.702,1.84,4.73,6.7,-17.23,Consumer Cyclical,Auto Manufacturers
+DSFIR.AS,98.0,0.94,104.26,1.11,20.44,Basic Materials,Specialty Chemicals
+AENA.MC,237.8,13.16,18.07,23.37,14.36,Industrials,Airports & Air Services
+RI.PA,90.24,4.36,20.7,9.37,-4.44,Consumer Defensive,Beverages - Wineries & Distilleries
+FRE.DE,43.58,1.87,23.3,2.41,3.64,Healthcare,Medical Care Facilities
+NXT.L,12840.0,6.05,2122.31,44.99,11.42,Consumer Cyclical,Apparel Retail
+LGEN.L,254.6,0.03,8486.67,5.38,-36.26,Financial Services,Asset Management
+PRY.MI,58.3,2.4,24.29,14.33,10.89,Industrials,Electrical Equipment & Parts
+KPN.AS,4.163,0.2,20.82,24.02,3.02,Communication Services,Telecom Services
+KRZ.IR,95.8,3.88,24.69,11.32,-0.66,Consumer Defensive,Packaged Foods
+SCMN.SW,566.0,28.04,20.19,12.69,-0.33,Communication Services,Telecom Services
+IHG.L,8444.0,2.85,2962.81,-27.16,6.47,Consumer Cyclical,Lodging
+PHIA.AS,20.05,0.26,77.12,-5.85,-0.81,Healthcare,Medical Devices
+SAB.MC,2.807,0.36,7.8,12.18,4.16,Financial Services,Banks - Diversified
+MRK.DE,115.3,6.48,17.79,9.28,0.78,Healthcare,Drug Manufacturers - Specialty & Generic
+SGE.L,1236.0,0.34,3635.29,29.55,6.78,Technology,Software - Application
+BAMI.MI,10.195,1.27,8.03,11.74,6.74,Financial Services,Banks - Regional
+LISP.SW,13270.0,289.29,45.87,13.89,5.14,Consumer Defensive,Confectioners
+SHL.DE,46.11,1.86,24.79,10.67,3.15,Healthcare,Medical Devices
+SGSN.SW,84.54,2.96,28.56,72.9,2.6,Industrials,Consulting Services
+VWS.CO,104.7,4.18,25.05,14.14,12.44,Industrials,Specialty Industrial Machinery
+SOON.SW,251.8,9.04,27.85,20.28,6.58,Healthcare,Medical Devices
+A5G.IR,7.095,0.92,7.71,15.25,4.13,Financial Services,Banks - Regional
+SY1.DE,106.0,3.42,30.99,12.01,5.67,Basic Materials,Specialty Chemicals
+KOG.OL,368.2,7.16,51.42,27.45,20.32,Industrials,Aerospace & Defense
+STMN.SW,105.55,2.87,36.78,19.03,9.98,Healthcare,Medical Instruments & Supplies
+TRN.MI,8.95,0.52,17.21,14.11,15.86,Utilities,Utilities - Regulated Electric
+PNDORA.CO,1208.5,66.81,18.09,94.9,12.6,Consumer Cyclical,Luxury Goods
+UPM.HE,23.98,0.57,42.07,3.91,-1.16,Basic Materials,Paper & Paper Products
+HLMA.L,2910.0,0.76,3828.95,15.48,9.79,Industrials,Conglomerates
+REP.MC,12.23,0.94,13.01,6.63,-3.1,Energy,Oil & Gas Integrated
+RYA.IR,23.36,1.45,16.11,22.9,3.75,Industrials,Airlines
+SCHP.SW,295.8,9.04,32.72,19.18,-2.24,Industrials,Specialty Industrial Machinery
+INF.L,793.8,0.22,3608.18,4.59,11.4,Communication Services,Publishing
+MONC.MI,55.04,2.36,23.32,17.83,4.18,Consumer Cyclical,Apparel Manufacturing
+KER.PA,171.74,9.24,18.59,7.6,-12.12,Consumer Cyclical,Luxury Goods
+GMAB.CO,1432.5,110.98,12.91,21.38,30.67,Healthcare,Biotechnology
+ABN.AS,23.3,2.64,8.83,9.2,3.61,Financial Services,Banks - Diversified
+KRX.IR,74.05,3.62,20.46,15.5,6.4,Industrials,Building Products & Equipment
+HEN3.DE,69.86,4.78,14.62,9.31,0.33,Consumer Defensive,Household & Personal Products
+BAER.SW,52.6,4.97,10.58,14.97,0.78,Financial Services,Asset Management
+ENX.PA,145.0,5.89,24.62,13.79,10.27,Financial Services,Financial Data & Stock Exchanges
+FGR.PA,121.9,10.94,11.14,15.49,7.38,Industrials,Engineering & Construction
+BIRG.IR,12.295,1.42,8.66,11.77,-0.65,Financial Services,Banks - Regional
+FBK.MI,19.12,1.07,17.87,27.3,8.48,Financial Services,Banks - Regional
+BEI.DE,116.85,4.04,28.92,10.76,4.27,Consumer Defensive,Household & Personal Products
+ACS.MC,57.9,3.27,17.71,17.55,16.5,Industrials,Engineering & Construction
+KNIN.SW,184.95,10.1,18.31,36.19,4.0,Industrials,Integrated Freight & Logistics
+MB.MI,20.15,1.6,12.59,9.2,-2.06,Financial Services,Banks - Regional
+ALFA.ST,411.0,18.65,22.04,17.63,5.28,Industrials,Specialty Industrial Machinery
+ADM.L,3318.0,2.17,1529.03,48.41,36.97,Financial Services,Insurance - Property & Casualty
+AKZA.AS,59.92,2.72,22.03,11.85,0.4,Basic Materials,Specialty Chemicals
+SPSN.SW,116.3,4.52,25.73,5.39,0.89,Real Estate,Real Estate - Diversified
+FME.DE,50.08,2.11,23.73,3.69,-0.61,Healthcare,Medical Care Facilities
+EN.PA,38.2,2.78,13.74,8.33,1.31,Industrials,Engineering & Construction
+EVO.ST,648.2,64.35,10.07,31.32,14.7,Consumer Cyclical,Gambling
+SGRO.L,688.0,0.45,1528.89,4.93,-9.88,Real Estate,REIT - Industrial
+AGS.BR,56.1,6.09,9.21,14.42,7.6,Financial Services,Insurance - Diversified
+AC.PA,45.66,2.33,19.6,12.12,10.88,Consumer Cyclical,Lodging
+CNA.L,162.95,0.25,651.8,30.12,-24.74,Utilities,Utilities - Independent Power Producers
+RTO.L,349.95,0.12,2916.25,7.26,1.13,Industrials,Specialty Business Services
+BVI.PA,30.08,1.25,24.06,28.88,6.36,Industrials,Consulting Services
+IAG.MC,4.0,0.59,6.78,44.28,8.99,Industrials,Airlines
+EDP.LS,3.552,0.2,17.76,6.94,-7.63,Utilities,Utilities - Diversified
+GALD.SW,112.9,0.79,142.91,2.97,7.85,Healthcare,Drug Manufacturers - Specialty & Generic
+G1A.DE,59.8,2.43,24.61,15.89,0.91,Industrials,Specialty Industrial Machinery
+RNO.PA,44.16,2.72,16.24,2.48,7.36,Consumer Cyclical,Auto Manufacturers
+CCH.L,3878.0,1.9,2041.05,25.6,5.6,Consumer Defensive,Beverages - Non-Alcoholic
+BNZL.L,2318.0,1.49,1555.7,17.95,-0.18,Consumer Defensive,Food Distribution
+ITRK.L,4754.0,2.13,2231.92,24.64,1.94,Industrials,Specialty Business Services
+WISE.L,1075.0,0.41,2621.95,36.19,55.86,Technology,Information Technology Services
+PSON.L,1079.5,0.64,1686.72,10.75,-3.32,Communication Services,Publishing
+PST.MI,18.935,1.61,11.76,17.21,9.45,Industrials,Conglomerates
+VACN.SW,316.3,7.05,44.87,28.09,6.43,Industrials,Specialty Industrial Machinery
+URW.PA,82.38,1.04,79.21,0.83,6.37,Real Estate,REIT - Retail
+ELE.MC,26.94,2.05,13.14,23.28,-16.49,Utilities,Utilities - Regulated Electric
+QIA.DE,39.865,0.38,104.91,2.34,0.66,Healthcare,Diagnostics & Research
+BALN.SW,192.9,8.47,22.77,10.6,-8.59,Financial Services,Insurance - Diversified
+G24.DE,118.8,2.22,53.51,11.32,11.24,Communication Services,Internet Content & Information
+BG.VI,109.5,9.32,11.75,16.06,4.69,Financial Services,Banks - Regional
+AGN.AS,6.37,0.37,17.22,7.49,-2.67,Financial Services,Insurance - Diversified
+SMIN.L,2202.0,0.89,2474.16,11.21,3.13,Industrials,Specialty Industrial Machinery
+TEL.OL,155.0,6.81,22.76,24.17,-0.65,Communication Services,Telecom Services
+BESI.AS,107.2,2.26,47.43,36.31,4.94,Technology,Semiconductor Equipment & Materials
+BEAN.SW,791.0,11.91,66.41,25.28,9.91,Industrials,Building Products & Equipment
+WRT1V.HE,18.225,0.92,19.81,19.92,7.22,Industrials,Specialty Industrial Machinery
+AUTO.L,785.6,0.32,2455.0,46.51,14.13,Communication Services,Internet Content & Information
+CON.DE,76.6,5.84,13.12,8.14,-4.11,Consumer Cyclical,Auto Parts
+CA.PA,13.215,1.07,12.35,6.68,2.78,Consumer Defensive,Grocery Stores
+HEIO.AS,68.7,1.76,39.03,5.22,-1.78,Consumer Defensive,Beverages - Brewers
+ABF.L,2056.0,1.77,1161.58,13.01,1.64,Consumer Defensive,Packaged Foods
+LI.PA,33.96,3.83,8.87,12.77,5.88,Real Estate,REIT - Retail
+ANTO.L,1839.5,0.62,2966.94,8.77,4.57,Basic Materials,Copper
+BTRW.L,446.2986,0.1,4462.99,2.1,-21.67,Consumer Cyclical,Residential Construction
+BPE.MI,7.704,0.96,8.03,12.35,1.93,Financial Services,Banks - Regional
+BOL.ST,305.7,40.48,7.55,15.42,13.56,Basic Materials,Other Industrial Metals & Mining
+TELIA.ST,37.01,1.26,29.37,12.77,0.64,Communication Services,Telecom Services
+DPLM.L,4648.0,1.24,3748.39,14.56,13.59,Industrials,Industrial Distribution
+PEO,20.5,1.27,16.14,4.85,155.88,Financial Services,Asset Management
+ORK.OL,114.3,6.34,18.03,12.61,4.22,Consumer Defensive,Packaged Foods
+ZAL.DE,31.32,1.03,30.41,9.42,4.23,Consumer Cyclical,Internet Retail
+ASRNL.AS,56.2,4.39,12.8,9.01,20.59,Financial Services,Insurance - Diversified
+ERF.PA,56.98,2.09,27.26,7.61,6.7,Healthcare,Diagnostics & Research
+BNR.DE,60.44,3.67,16.47,11.34,-3.44,Basic Materials,Specialty Chemicals
+WPP.L,582.8,0.49,1189.39,15.6,-0.7,Communication Services,Advertising Agencies
+BKT.MC,11.39,1.11,10.26,16.21,5.79,Financial Services,Banks - Regional
+WEIR.L,2426.0,1.21,2004.96,16.93,-4.95,Industrials,Specialty Industrial Machinery
+MOWI.OL,186.8,7.42,25.18,12.2,1.61,Consumer Defensive,Farm Products
+TRYG.CO,168.1,8.27,20.33,12.2,0.1,Financial Services,Insurance - Diversified
+HELN.SW,192.8,8.98,21.47,13.16,7.06,Financial Services,Insurance - Diversified
+SPIE.PA,44.16,1.62,27.26,13.15,13.69,Industrials,Engineering & Construction
+NEM.DE,121.5,1.54,78.9,19.35,16.91,Technology,Software - Application
+PSPN.SW,144.3,7.71,18.72,6.93,-0.05,Real Estate,Real Estate Services
+TLX.DE,116.5,7.76,15.01,16.95,32.98,Financial Services,Insurance - Diversified
+FORTUM.HE,15.54,1.17,13.28,12.83,-13.57,Utilities,Utilities - Renewable
+IMCD.AS,117.1,4.86,24.09,12.57,6.41,Basic Materials,Specialty Chemicals
+STJ.L,1106.5,0.73,1515.75,31.29,36.73,Financial Services,Asset Management
+RMV.L,753.4,0.24,3139.17,238.32,7.02,Communication Services,Internet Content & Information
+ICG.L,1991.0,1.54,1292.86,20.57,54.57,Financial Services,Asset Management
+BEZ.L,955.0,1.26,757.94,24.54,51.46,Financial Services,Insurance - Specialty
+EDEN.PA,26.8,2.01,13.33,-55.84,13.6,Financial Services,Credit Services
+ALO.PA,19.42,0.31,62.65,1.42,4.94,Industrials,Railroads
+METSO.HE,10.845,0.58,18.7,12.65,-9.78,Industrials,Farm & Heavy Construction Machinery
+ELISA.HE,47.64,2.27,20.99,27.88,0.5,Communication Services,Telecom Services
+OMV.VI,43.6,3.24,13.46,8.13,-13.89,Energy,Oil & Gas Integrated
+UNI.MI,17.27,1.5,11.51,11.52,4.84,Financial Services,Insurance - Diversified
+BMPS.MI,7.282,1.63,4.47,16.75,6.68,Financial Services,Banks - Regional
+EVD.DE,106.8,3.1,34.45,31.05,19.08,Communication Services,Entertainment
+ORNBV.HE,61.35,2.48,24.74,32.83,29.66,Healthcare,Drug Manufacturers - General
+JMT.LS,21.9,1.0,21.9,19.93,9.33,Consumer Defensive,Food Distribution
+INDT.ST,261.6,7.65,34.2,16.52,2.23,Industrials,Industrial Distribution
+NHY.OL,54.38,4.88,11.14,5.71,5.17,Basic Materials,Aluminum
+IMI.L,1994.0,0.96,2077.08,22.9,0.64,Industrials,Specialty Industrial Machinery
+GALP.LS,14.685,1.44,10.2,22.18,2.61,Energy,Oil & Gas Integrated
+DNP,9.79,2.31,4.24,25.54,-581.54,Financial Services,Asset Management
+SOBI.ST,302.6,11.42,26.5,9.64,17.65,Healthcare,Drug Manufacturers - Specialty & Generic
+AM.PA,325.6,11.78,27.64,14.59,29.86,Industrials,Aerospace & Defense
+GAW.L,15700.0,5.3,2962.26,60.1,11.66,Consumer Cyclical,Leisure
+AKRBP.OL,247.4,26.16,9.46,14.4,-9.85,Energy,Oil & Gas E&P
+SBRY.L,285.392,0.18,1585.51,3.64,1.78,Consumer Defensive,Grocery Stores
+KGF.L,284.2,0.1,2842.0,2.92,-1.51,Consumer Cyclical,Home Improvement Retail
+KESKOB.HE,20.92,0.92,22.74,13.93,1.16,Consumer Defensive,Grocery Stores
+WTB.L,2896.0,1.41,2053.9,7.61,-1.28,Consumer Cyclical,Lodging
+BCP.LS,0.6788,0.06,11.31,12.78,-5.45,Financial Services,Banks - Regional
+REC.MI,53.15,2.0,26.57,22.19,12.45,Healthcare,Drug Manufacturers - General
+KBX.DE,90.05,2.65,33.98,14.61,-0.54,Consumer Cyclical,Auto Parts
+CTEC.L,290.8,0.07,4154.29,11.28,6.85,Healthcare,Medical Instruments & Supplies
+BIM.PA,118.7,3.63,32.7,10.28,8.31,Healthcare,Diagnostics & Research
+SQN.SW,491.2,19.51,25.18,25.96,25.14,Financial Services,Capital Markets
+LAND.L,626.5,0.53,1182.08,-4.98,4.17,Real Estate,REIT - Diversified
+TEN.MI,15.57,1.43,10.89,12.27,-15.77,Energy,Oil & Gas Equipment & Services
+GTT.PA,169.3,9.37,18.07,75.37,49.96,Energy,Oil & Gas Equipment & Services
+DIM.PA,188.25,2.1,89.64,4.39,0.16,Healthcare,Medical Instruments & Supplies
+HWDN.L,860.5,0.45,1912.22,22.09,0.48,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+MNDI.L,1208.5,0.42,2877.38,4.49,1.17,Basic Materials,Paper & Paper Products
+LEG.DE,74.25,2.31,32.14,0.9,5.03,Real Estate,Real Estate Services
+RED.MC,17.98,0.95,18.93,7.15,-12.35,Utilities,Utilities - Regulated Electric
+HAG.DE,102.4,0.79,129.62,12.39,21.4,Industrials,Aerospace & Defense
+HSX.L,1288.0,1.31,983.21,17.0,2.66,Financial Services,Insurance - Property & Casualty
+SIGN.SW,16.56,0.48,34.5,6.21,3.04,Consumer Cyclical,Packaging & Containers
+YAR.OL,368.6,11.55,31.91,0.2,-10.52,Basic Materials,Agricultural Inputs
+IGG.L,1071.234,0.96,1115.87,16.28,-10.25,Financial Services,Capital Markets
+ORSTED.CO,267.9,2.71,98.86,-0.25,-14.83,Utilities,Utilities - Renewable
+SRT3.DE,202.4,1.38,146.67,3.04,-0.44,Healthcare,Medical Instruments & Supplies
+GF.SW,64.7,2.19,29.54,196.33,23.99,Industrials,Specialty Industrial Machinery
+SW.PA,58.05,4.57,12.7,4.44,5.13,Industrials,Specialty Business Services
+RXL.PA,24.74,1.13,21.89,6.09,0.69,Technology,Electronics & Computer Distribution
+AVOL.SW,44.8,0.68,65.88,4.38,7.31,Consumer Cyclical,Specialty Retail
+R3NK.DE,85.34,0.57,149.72,12.09,23.23,Industrials,Aerospace & Defense
+PSN.L,1299.5,0.83,1565.66,7.62,15.42,Consumer Cyclical,Residential Construction
+BKG.L,4144.0,3.73,1110.99,11.17,-3.37,Consumer Cyclical,Residential Construction
+GET.PA,16.35,0.58,28.19,12.74,-11.76,Industrials,Railroads
+TEP.PA,87.06,8.71,10.0,11.48,23.19,Industrials,Specialty Business Services
+ALE,65.31,3.19,20.47,6.3,-18.62,Utilities,Utilities - Diversified
+STB.OL,134.9,12.72,10.61,17.42,30.19,Financial Services,Financial Conglomerates
+DLG.L,301.34,0.11,2739.45,6.54,22.92,Financial Services,Insurance - Property & Casualty
+FHZN.SW,227.6,10.63,21.41,11.01,7.29,Industrials,Airports & Air Services
+BLND.L,387.0,0.35,1105.71,-0.02,37.56,Real Estate,REIT - Diversified
+GALE.SW,85.45,3.67,23.28,11.81,4.67,Healthcare,Medical Distribution
+SPX.L,5680.0,2.59,2193.05,15.82,-1.03,Industrials,Specialty Industrial Machinery
+CAST.ST,116.2,5.15,22.56,2.98,-0.22,Real Estate,Real Estate - Development
+KCR.HE,67.85,4.81,14.11,19.83,6.55,Industrials,Farm & Heavy Construction Machinery
+CRDA.L,3026.0,1.68,1801.19,6.94,-3.92,Basic Materials,Specialty Chemicals
+LMP.L,199.7,0.17,1174.71,3.01,21.4,Real Estate,REIT - Industrial
+VER.VI,67.8,5.08,13.35,18.79,-21.1,Utilities,Utilities - Renewable
+EVK.DE,19.18,0.65,29.51,2.46,-0.72,Basic Materials,Specialty Chemicals
+RILBA.CO,1353.0,88.64,15.26,20.85,7.97,Financial Services,Banks - Regional
+ACKB.BR,224.6,14.04,16.0,8.71,15.74,Industrials,Engineering & Construction
+P911.DE,41.63,3.49,11.93,15.59,-1.1,Consumer Cyclical,Auto Manufacturers
+EMSN.SW,615.5,19.72,31.21,25.11,-5.4,Basic Materials,Specialty Chemicals
+AAK.ST,267.0,13.55,19.7,17.6,-2.12,Consumer Defensive,Packaged Foods
+GFC.PA,94.85,4.18,22.69,2.95,2.2,Real Estate,REIT - Office
+ACLN.SW,48.02,1.49,32.23,51.26,11.77,Industrials,Specialty Industrial Machinery
+SCR.PA,29.18,0.02,1459.0,0.09,-12.44,Financial Services,Insurance - Reinsurance
+AMUN.PA,73.2,6.37,11.49,10.87,10.23,Financial Services,Asset Management
+GJF.OL,257.8,11.01,23.42,19.77,9.05,Financial Services,Insurance - Property & Casualty
+TE.PA,34.6,2.17,15.94,18.78,11.91,Energy,Oil & Gas Equipment & Services
+VALMT.HE,28.86,1.55,18.62,10.74,-3.13,Industrials,Specialty Industrial Machinery
+CVC.AS,16.23,0.24,67.62,22.86,58.1,Financial Services,Asset Management
+SAVE.ST,247.6,11.25,22.01,35.45,12.72,Financial Services,Capital Markets
+FNOX.ST,86.68,1.26,68.79,30.06,24.54,Technology,Software - Application
+ELIS.PA,23.64,1.35,17.51,9.39,6.13,Industrials,Specialty Business Services
+WDP.BR,21.08,1.96,10.76,9.18,15.95,Real Estate,REIT - Industrial
+BPSO.MI,11.875,1.35,8.8,13.83,11.78,Financial Services,Banks - Regional
+UHR.SW,140.15,3.73,37.57,1.59,-14.62,Consumer Cyclical,Luxury Goods
+AZA.ST,322.2,15.27,21.1,35.66,13.5,Financial Services,Banks - Regional
+BOL.PA,5.475,0.05,109.5,7.16,-1.37,Communication Services,Entertainment
+MRL.MC,10.69,0.56,19.09,3.78,6.41,Real Estate,REIT - Office
+SOF.BR,250.4,40.09,6.25,13.19,-2335.75,Financial Services,Asset Management
+ADEN.SW,22.92,1.61,14.24,8.47,-3.42,Industrials,Staffing & Employment Services
+SFZN.SW,93.1,3.69,25.23,16.33,1.82,Healthcare,Drug Manufacturers - Specialty & Generic
+TEMN.SW,61.25,2.08,29.45,27.73,4.39,,
+SDR.L,363.6,0.26,1398.46,9.82,1.13,Financial Services,Asset Management
+BC.MI,106.8,1.76,60.68,24.39,12.21,Consumer Cyclical,Luxury Goods
+RAA.DE,729.0,22.12,32.96,29.24,6.01,Industrials,Specialty Industrial Machinery
+BME.L,315.481,0.33,956.0,-50.0,10.05,Consumer Defensive,Discount Stores
+LOTB.BR,8900.0,187.62,47.44,19.29,15.89,Consumer Defensive,Packaged Foods
+IPN.PA,103.2,4.27,24.17,8.27,8.11,Healthcare,Drug Manufacturers - Specialty & Generic
+HIK.L,2120.0,1.19,1781.51,15.54,8.77,Healthcare,Drug Manufacturers - Specialty & Generic
+LHA.DE,7.236,1.03,7.03,11.96,6.04,Industrials,Airlines
+ANDR.VI,61.95,4.85,12.77,21.8,-4.0,Industrials,Industrial Distribution
+AKE.PA,63.5,3.83,16.58,4.7,0.32,Basic Materials,Specialty Chemicals
+ISS.CO,174.3,14.39,12.11,23.16,6.46,Industrials,Specialty Business Services
+BKW.SW,172.5,11.8,14.62,11.94,6.44,Utilities,Utilities - Renewable
+RAND.AS,36.69,0.61,60.15,2.98,-5.13,Industrials,Staffing & Employment Services
+FDJU.PA,32.1,2.16,14.86,33.53,16.92,Consumer Cyclical,Gambling
+INW.MI,10.24,0.38,26.95,8.68,7.89,Real Estate,Real Estate Services
+NKT.CO,525.5,32.81,16.02,18.19,26.68,Industrials,Electrical Equipment & Parts
+A2A.MI,2.274,0.28,8.12,15.54,-36.82,Utilities,Utilities - Diversified
+JDEP.AS,24.06,1.13,21.29,5.06,7.89,Consumer Defensive,Packaged Foods
+HER.MI,4.372,0.35,12.49,13.44,-15.26,Utilities,Utilities - Diversified
+UTG.L,856.5,0.96,892.19,9.18,8.4,Real Estate,REIT - Diversified
+SUBC.OL,179.2,6.55,27.36,4.74,14.45,Energy,Oil & Gas Equipment & Services
+IG.MI,6.915,0.62,11.15,19.48,-2.88,Utilities,Utilities - Regulated Gas
+DIE.BR,179.2,6.87,26.08,-81.44,2.14,Consumer Cyclical,Auto & Truck Dealerships
+ELI.BR,93.05,5.43,17.14,8.11,-1.97,Utilities,Utilities - Regulated Electric
+ABDN.L,178.9,0.13,1376.15,4.93,5.39,Financial Services,Asset Management
+SB1NO.OL,178.0,13.2,13.48,9.86,13.52,Financial Services,Banks - Regional
+NEX.PA,101.9,6.19,16.46,15.39,9.7,Industrials,Electrical Equipment & Parts
+BWY.L,2656.0,1.23,2159.35,3.77,-30.13,Consumer Cyclical,Residential Construction
+REY.MI,146.1,6.02,24.27,16.24,8.4,Technology,Information Technology Services
+ITV.L,77.25,0.1,772.5,22.57,-3.75,Communication Services,Broadcasting
+JYSK.CO,627.5,80.36,7.81,10.5,-4.92,Financial Services,Banks - Regional
+ANA.MC,152.6,7.74,19.72,8.77,12.74,Industrials,Engineering & Construction
+INVP.L,524.0,0.7,748.57,17.6,-11.59,Financial Services,Capital Markets
+ARCAD.AS,44.26,2.7,16.39,19.71,-0.16,Industrials,Engineering & Construction
+ALLN.SW,185.8,12.81,14.5,8.0,-1.94,Real Estate,Real Estate Services
+JMAT.L,1735.0,2.11,822.27,4.54,-14.0,Basic Materials,Specialty Chemicals
+CPR.MI,5.608,0.14,40.06,5.23,5.18,Consumer Defensive,Beverages - Wineries & Distilleries
+WIE.VI,32.32,0.72,44.89,2.79,6.83,Basic Materials,Building Materials
+NTGY.MC,26.04,2.0,13.02,20.06,-14.81,Utilities,Utilities - Regulated Gas
+IVG.MI,17.225,1.6,10.77,12.93,-4.31,Industrials,Farm & Heavy Construction Machinery
+RBI.VI,26.9,5.47,4.92,6.06,0.74,Financial Services,Banks - Regional
+HUH1V.HE,32.08,2.32,13.83,11.0,-1.02,Consumer Cyclical,Packaging & Containers
+BC8.DE,39.0,1.8,21.67,12.84,-1.82,Technology,Information Technology Services
+INCH.L,683.5,0.66,1035.61,30.53,-1.27,Consumer Cyclical,Auto & Truck Dealerships
+CWK.L,5230.0,2.46,2126.02,12.41,11.89,Consumer Defensive,Packaged Foods
+SYDB.CO,445.4,47.69,9.34,17.55,1.55,Financial Services,Banks - Regional
+DEMANT.CO,254.8,13.31,19.14,24.96,3.79,Healthcare,Medical Devices
+BMED.MI,14.58,1.52,9.59,23.79,35.98,Financial Services,Banks - Regional
+BARN.SW,840.0,26.2,32.06,6.68,22.62,Consumer Defensive,Confectioners
+AED.BR,65.5,4.04,16.21,5.62,8.23,Real Estate,REIT - Healthcare Facilities
+AG1.DE,25.02,0.24,104.25,3.41,14.81,Consumer Cyclical,Auto & Truck Dealerships
+FNTN.DE,28.28,2.5,11.31,16.57,3.87,Communication Services,Telecom Services
+SDF.DE,16.41,0.01,1641.0,-1.08,-5.67,Basic Materials,Agricultural Inputs
+INPST.AS,14.43,0.55,26.24,50.79,23.48,Industrials,Specialty Business Services
+MAP.MC,3.396,0.32,10.61,10.88,0.76,Financial Services,Insurance - Diversified
+IP.MI,34.54,2.03,17.01,11.31,-7.22,Industrials,Specialty Industrial Machinery
+COFB.BR,76.35,2.91,26.24,1.81,-0.26,Real Estate,REIT - Healthcare Facilities
+RS1.L,578.0,0.33,1751.52,12.83,-1.34,Industrials,Industrial Distribution
+SPM.MI,2.269,0.15,15.13,12.12,22.44,Energy,Oil & Gas Equipment & Services
+CMBN.SW,101.2,5.8,17.45,13.26,6.74,Financial Services,Banks - Regional
+AALB.AS,31.48,1.62,19.43,7.04,-5.28,Industrials,Specialty Industrial Machinery
+BGN.MI,51.1,3.68,13.89,29.54,23.7,Financial Services,Banks - Regional
+PLUS.L,3412.0,2.54,1343.31,42.39,5.53,Financial Services,Capital Markets
+ROR.L,321.0,0.12,2675.0,17.39,4.91,Industrials,Specialty Industrial Machinery
+SALM.OL,446.0,13.6,32.79,16.56,-6.74,Consumer Defensive,Farm Products
+DRX.L,663.0,1.35,491.11,25.35,-20.31,Utilities,Utilities - Renewable
+VZN.SW,175.8,5.52,31.85,20.7,13.39,Financial Services,Asset Management
+TOM.OL,151.7,4.07,37.27,15.55,4.64,Industrials,Waste Management
+LIGHT.AS,21.72,2.76,7.87,10.37,-8.37,Industrials,Electrical Equipment & Parts
+HOT.DE,162.7,12.63,12.88,72.37,19.98,Industrials,Engineering & Construction
+VIS.MC,62.3,3.44,18.11,16.75,-1.78,Consumer Cyclical,Packaging & Containers
+AZE.BR,14.41,0.74,19.47,6.28,1.49,Basic Materials,Specialty Chemicals
+COV.PA,51.6,0.63,81.9,0.83,4.0,Real Estate,REIT - Diversified
+SUN.SW,159.6,7.65,20.86,21.4,7.58,Industrials,Specialty Industrial Machinery
+FPE3.DE,47.76,2.3,20.77,15.92,-0.45,Basic Materials,Specialty Chemicals
+RBREW.CO,547.0,29.68,18.43,22.85,16.31,Consumer Defensive,Beverages - Brewers
+AMP.MI,20.47,0.63,32.49,12.64,6.6,Healthcare,Medical Distribution
+AZM.MI,25.74,3.98,6.47,29.96,10.42,Financial Services,Asset Management
+SBMO.AS,21.34,0.73,29.23,4.14,-3.59,Energy,Oil & Gas Equipment & Services
+SOP.PA,191.2,15.2,12.58,13.02,5.63,Technology,Information Technology Services
+BCVN.SW,94.7,5.13,18.46,11.22,-0.87,Financial Services,Banks - Regional
+GRG.L,2056.7134,1.5,1371.14,26.89,11.32,Consumer Cyclical,Restaurants
+KGX.DE,43.84,1.56,28.1,5.82,0.61,Industrials,Farm & Heavy Construction Machinery
+SCT.L,1789.0,0.63,2839.68,39.94,-2.3,Technology,Electronics & Computer Distribution
+SHC.L,143.1,0.14,1022.14,6.86,16.4,Real Estate,REIT - Retail
+SK.PA,84.25,4.23,19.92,7.08,3.25,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+THULE.ST,255.8,10.22,25.03,13.86,4.48,Consumer Cyclical,Leisure
+FLS.CO,380.8,20.5,18.58,8.63,-16.26,Industrials,Specialty Industrial Machinery
+EMG.L,176.381,0.19,928.32,17.78,22.77,Financial Services,Asset Management
+AXFO.ST,276.0,9.61,28.72,31.08,3.63,Consumer Defensive,Grocery Stores
+RUI.PA,28.98,3.3,8.78,12.08,0.21,Energy,Oil & Gas Refining & Marketing
+TEG.DE,14.85,0.58,25.6,4.01,-18.56,Real Estate,Real Estate - Diversified
+SRP.L,188.7991,0.04,4719.98,5.25,-1.77,Industrials,Specialty Business Services
+EZJ.L,581.6,0.54,1077.04,15.2,13.93,Industrials,Airlines
+ADP.PA,113.4,3.45,32.87,7.75,12.07,Industrials,Airports & Air Services
+TBCG.L,4505.0,6.28,717.36,23.11,19.64,Financial Services,Banks - Regional
+TCAP.L,259.5,0.21,1235.71,8.11,2.83,Financial Services,Capital Markets
+SXS.L,2046.0,2.31,885.71,16.89,-10.39,Technology,Scientific & Technical Instruments
+CCL.L,1587.5,1.14,1392.54,20.71,15.88,Consumer Cyclical,Travel Services
+BUCN.SW,396.5,22.15,17.9,12.05,-11.73,Industrials,Specialty Industrial Machinery
+GRF.MC,9.808,0.23,42.64,2.67,9.41,Healthcare,Drug Manufacturers - General
+VID.MC,95.8,7.07,13.55,22.78,11.41,Consumer Cyclical,Packaging & Containers
+BYG.L,974.0,1.36,716.18,9.8,5.71,Real Estate,REIT - Industrial
+TATE.L,548.034,0.12,4566.95,15.19,-5.94,Consumer Defensive,Packaged Foods
+CLN.SW,8.85,0.74,11.96,10.45,-5.14,Basic Materials,Specialty Chemicals
+GFTU.L,1007.2,0.8,1259.0,7.64,-1.59,Industrials,Industrial Distribution
+LOOMIS.ST,376.0,23.94,15.71,12.04,6.04,Industrials,Security & Protection Services
+PUM.DE,22.74,1.31,17.36,9.96,2.51,Consumer Cyclical,Footwear & Accessories
+VK.PA,15.76,1.81,8.71,18.0,-21.12,Basic Materials,Steel
+GL9.IR,12.41,0.54,22.98,7.95,-29.23,Consumer Defensive,Packaged Foods
+HEM.ST,292.4,5.34,54.76,38.55,38.81,Communication Services,Internet Content & Information
+VAR.OL,30.8,2.71,11.37,39.29,8.16,Energy,Oil & Gas E&P
+MANTA.HE,5.364,0.35,15.33,10.3,9.91,Financial Services,Financial Conglomerates
+BPT.L,285.8,0.06,4763.33,6.59,31.49,Financial Services,Asset Management
+TECN.SW,158.0,5.29,29.87,4.71,-13.04,Healthcare,Medical Instruments & Supplies
+VTY.L,586.68,0.22,2666.73,2.3,6.04,Consumer Cyclical,Residential Construction
+KEMIRA.HE,19.26,1.5,12.84,13.97,-12.87,Basic Materials,Chemicals
+CCC.L,2605.878,1.53,1703.19,21.08,0.61,Technology,Information Technology Services
+VPK.AS,41.3,3.11,13.28,12.13,-7.72,Energy,Oil & Gas Midstream
+DKSH.SW,64.6,3.3,19.58,11.8,0.25,Industrials,Consulting Services
+DLN.L,1948.0,1.03,1891.26,3.27,4.4,Real Estate,REIT - Office
+NDA.DE,82.0,15.91,5.15,9.14,0.44,Industrials,Metal Fabrication
+WIHL.ST,94.7,5.82,16.27,7.37,7.55,Real Estate,Real Estate Services
+FRO.OL,180.2,16.04,11.23,21.17,13.77,Energy,Oil & Gas Midstream
+ATE.PA,73.35,5.32,13.79,9.15,1.83,Technology,Information Technology Services
+SFSN.SW,116.4,6.21,18.74,15.65,-1.3,Industrials,Tools & Accessories
+VRLA.PA,28.02,2.0,14.01,23.65,-11.47,Consumer Cyclical,Packaging & Containers
+FR.PA,8.994,0.66,13.63,4.36,-2.5,Consumer Cyclical,Auto Parts
+GXI.DE,46.32,2.28,20.32,7.26,2.28,Healthcare,Medical Instruments & Supplies
+AFX.DE,54.9,1.77,31.02,8.75,-1.11,Healthcare,Medical Instruments & Supplies
+BAKKA.OL,471.4,6.52,72.3,5.88,2.7,Consumer Defensive,Farm Products
+CDI.PA,439.6,28.88,15.22,21.44,-1.71,Consumer Cyclical,Luxury Goods
+SAFE.L,634.0,1.7,372.94,16.72,-0.31,Real Estate,REIT - Industrial
+HIAB.HE,48.98,2.45,19.99,104.03,-7.79,Industrials,Farm & Heavy Construction Machinery
+GN.CO,93.42,5.53,16.89,9.13,-0.75,Healthcare,Medical Devices
+BAVA.CO,180.1,16.8,10.72,8.66,-19.06,Healthcare,Biotechnology
+COTN.SW,222.6,4.53,49.14,10.79,12.05,Technology,Scientific & Technical Instruments
+BANB.SW,49.54,1.6,30.96,8.64,4.84,Basic Materials,Chemicals
+IFCN.SW,97.9,3.8,25.76,29.52,-0.41,Technology,Scientific & Technical Instruments
+FUR.AS,11.49,2.29,5.02,18.31,4.03,Energy,Oil & Gas Equipment & Services
+PTEC.L,308.0,0.16,1925.0,12.29,9.86,Consumer Cyclical,Gambling
