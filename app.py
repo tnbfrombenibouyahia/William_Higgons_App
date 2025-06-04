@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
+import yfinance as yf
+import plotly.graph_objects as go
 
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
@@ -146,17 +148,11 @@ try:
 except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
 
-import yfinance as yf
-import plotly.graph_objects as go
-
 # === 🔎 Zoom sur une société ===
 st.markdown("---")
 st.subheader("📊 Analyse individuelle")
 
 if not df_display.empty:
-    st.markdown("---")
-    st.subheader("📊 Analyse individuelle")
-
     selected_ticker = st.selectbox(
         "Sélectionner une entreprise pour voir son graphique :", 
         df_display["Ticker"].unique()
@@ -165,8 +161,9 @@ if not df_display.empty:
     if selected_ticker:
         stock = yf.Ticker(selected_ticker)
 
-        # 📈 Données historiques
-        hist = stock.history(period="max")
+        with st.spinner("Chargement des données..."):
+            # 📈 Données historiques
+            hist = stock.history(period="max")
 
         if hist.empty:
             st.warning("Données historiques indisponibles pour ce ticker.")
@@ -182,20 +179,27 @@ if not df_display.empty:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-        info = stock.info
         st.markdown("### 🧾 Fiche signalétique")
+
+        try:
+            info = stock.info
+        except Exception:
+            info = {}
+
         col1, col2 = st.columns(2)
 
         with col1:
             st.metric("Nom", info.get("shortName", "N/A"))
             st.metric("Prix actuel", f'{info.get("currentPrice", "N/A")} {info.get("currency", "")}')
             st.metric("PER", round(info.get("trailingPE", 0), 2) if info.get("trailingPE") else "N/A")
-            st.metric("Capitalisation", f'{round(info.get("marketCap", 0)/1e9, 2)} B' if info.get("marketCap") else "N/A")
+            market_cap = info.get("marketCap")
+            st.metric("Capitalisation", f"{round(market_cap/1e9, 2)} B" if market_cap else "N/A")
 
         with col2:
             st.metric("Secteur", info.get("sector", "N/A"))
             st.metric("Industrie", info.get("industry", "N/A"))
-            st.metric("Dividende (%)", info.get("dividendYield", "N/A"))
+            dividend = info.get("dividendYield")
+            st.metric("Dividende (%)", f"{round(dividend * 100, 2)}%" if dividend else "N/A")
             st.metric("Beta", info.get("beta", "N/A"))
 else:
     st.warning("Aucune entreprise à afficher pour l’analyse individuelle.")
