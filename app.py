@@ -13,14 +13,14 @@ st.write("Les entreprises en **vert** passent le filtre William Higgons.")
 def load_data():
     df = pd.read_csv("data/all_results_yfinance_clean.csv")
 
-    # Statut booléen du filtre Higgons
+    # Statut booléen Higgons
     df["Higgons Valid"] = (
         (df["PER"] < 12)
         & (df["ROE (%)"] > 10)
         & (df["Revenue Growth (%)"] > 0)
     )
 
-    # Mapping des suffixes vers pays
+    # === Ajout du pays ===
     suffix_to_country = {
         ".DE": "🇩🇪 Allemagne",
         ".PA": "🇫🇷 France",
@@ -31,8 +31,8 @@ def load_data():
         ".MC": "🇪🇸 Espagne",
         ".CO": "🇩🇰 Danemark",
         ".ST": "🇸🇪 Suède",
-        ".OL": "🇳🇴 Norvège",
         ".BR": "🇧🇪 Belgique",
+        ".OL": "🇳🇴 Norvège",
         ".VI": "🇦🇹 Autriche",
     }
 
@@ -44,23 +44,55 @@ def load_data():
 
     df["Pays"] = df["Ticker"].apply(detect_country)
 
-    # Colonnes affichées
-    colonnes = [
-        "Ticker", "Pays", "Price", "EPS", "PER", "ROE (%)", "Revenue Growth (%)"
-    ]
-    if "Sector" in df.columns:
-        colonnes.append("Sector")
+    # === Ajout d'émojis pour Sector ===
+    sector_emojis = {
+        "Technology": "💻 Technology",
+        "Healthcare": "🧬 Healthcare",
+        "Financial Services": "💰 Financial Services",
+        "Consumer Defensive": "🛒 Consumer Defensive",
+        "Consumer Cyclical": "🛍️ Consumer Cyclical",
+        "Communication Services": "📡 Communication Services",
+        "Industrials": "🏭 Industrials",
+        "Energy": "⚡ Energy",
+        "Utilities": "🔌 Utilities",
+        "Real Estate": "🏘️ Real Estate",
+        "Basic Materials": "🧱 Basic Materials"
+    }
 
-    # Statut visuel
-    df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
+    df["Sector"] = df["Sector"].apply(lambda x: sector_emojis.get(x, f"❓ {x}"))
 
-    return df[colonnes + ["🧠 Statut"]]
+    # === Ajout d'émojis pour Industry ===
+    industry_emojis = {
+        "Software - Application": "📱 Software",
+        "Drug Manufacturers - General": "💊 Pharma",
+        "Semiconductor Equipment & Materials": "🔩 Semiconductors",
+        "Packaged Foods": "🥫 Packaged Foods",
+        "Banks - Regional": "🏦 Regional Banks",
+        "Insurance - Life": "🛡️ Life Insurance",
+        "Utilities - Renewable": "🌱 Renewable Energy"
+    }
+
+    df["Industry"] = df["Industry"].apply(lambda x: industry_emojis.get(x, f"❓ {x}"))
+
+    return df
+
+# === Chargement des données ===
+df = load_data()
+
+# 🧠 Affichage du statut
+df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
+
+# Suppression de la colonne booléenne
+df_display = df.drop(columns=["Higgons Valid"])
+
+# Ordre des colonnes (optionnel)
+colonnes = ["Ticker", "Pays", "Sector", "Industry", "Price", "EPS", "PER", "ROE (%)", "Revenue Growth (%)", "🧠 Statut"]
+df_display = df_display[[col for col in colonnes if col in df_display.columns]]
 
 # === Affichage principal ===
-df_display = load_data()
 st.dataframe(df_display, use_container_width=True)
 
-# === Date de mise à jour ===
+# === Dernière mise à jour ===
 st.markdown("---")
 try:
     with open("data/last_update.txt", "r") as f:
