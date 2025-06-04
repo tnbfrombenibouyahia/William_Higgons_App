@@ -1,19 +1,19 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+import os
 
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
-st.title("👨‍🌾 Screener William Higgons")
+st.title("📊 Screener William Higgons")
 st.markdown("### 🧾 Aperçu du screening")
-st.write("Ce screener analyse les entreprises selon les critères de William Higgons.")
+st.write("Les entreprises en **vert** passent le filtre William Higgons.")
 
 # === Chargement des données ===
 @st.cache_data
 def load_data():
     df = pd.read_csv("data/all_results_yfinance_clean.csv")
 
-    # Ajout du statut booléen
+    # Statut booléen du filtre Higgons
     df["Higgons Valid"] = (
         (df["PER"] < 12)
         & (df["ROE (%)"] > 10)
@@ -31,6 +31,9 @@ def load_data():
         ".MC": "🇪🇸 Espagne",
         ".CO": "🇩🇰 Danemark",
         ".ST": "🇸🇪 Suède",
+        ".OL": "🇳🇴 Norvège",
+        ".BR": "🇧🇪 Belgique",
+        ".VI": "🇦🇹 Autriche",
     }
 
     def detect_country(ticker):
@@ -40,20 +43,24 @@ def load_data():
         return "❓ Inconnu"
 
     df["Pays"] = df["Ticker"].apply(detect_country)
-    return df
 
-df = load_data()
+    # Colonnes affichées
+    colonnes = [
+        "Ticker", "Pays", "Price", "EPS", "PER", "ROE (%)", "Revenue Growth (%)"
+    ]
+    if "Sector" in df.columns:
+        colonnes.append("Sector")
 
-# Ajout de la colonne d'affichage
-df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
+    # Statut visuel
+    df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
 
-# Suppression de la colonne booléenne
-df_display = df.drop(columns=["Higgons Valid"])
+    return df[colonnes + ["🧠 Statut"]]
 
-# === Affichage Streamlit ===
+# === Affichage principal ===
+df_display = load_data()
 st.dataframe(df_display, use_container_width=True)
 
-# === Affichage date mise à jour automatique ===
+# === Date de mise à jour ===
 st.markdown("---")
 try:
     with open("data/last_update.txt", "r") as f:
