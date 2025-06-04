@@ -178,28 +178,3 @@ if not df_display.empty:
                 height=500
             )
             st.plotly_chart(fig, use_container_width=True)
-
-        st.markdown("### 🧾 Fiche signalétique")
-
-        try:
-            info = stock.info
-        except Exception:
-            info = {}
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.metric("Nom", info.get("shortName", "N/A"))
-            st.metric("Prix actuel", f'{info.get("currentPrice", "N/A")} {info.get("currency", "")}')
-            st.metric("PER", round(info.get("trailingPE", 0), 2) if info.get("trailingPE") else "N/A")
-            market_cap = info.get("marketCap")
-            st.metric("Capitalisation", f"{round(market_cap/1e9, 2)} B" if market_cap else "N/A")
-
-        with col2:
-            st.metric("Secteur", info.get("sector", "N/A"))
-            st.metric("Industrie", info.get("industry", "N/A"))
-            dividend = info.get("dividendYield")
-            st.metric("Dividende (%)", f"{round(dividend * 100, 2)}%" if dividend else "N/A")
-            st.metric("Beta", info.get("beta", "N/A"))
-else:
-    st.warning("Aucune entreprise à afficher pour l’analyse individuelle.")
