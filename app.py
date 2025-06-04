@@ -139,26 +139,6 @@ df_display = df_filtered.drop(columns=["Higgons Valid"])
 # === Affichage final
 st.dataframe(df_display, use_container_width=True)
 
-
-# === 📅 Dernière mise à jour tout en bas
-st.markdown("\n\n\n")  # Ajoute de l'espace
-try:
-    with open("data/last_update.txt", "r") as f:
-        last_update = f.read().strip()
-    st.markdown(
-        f"<div style='margin-top: 100px; padding: 1rem; background-color: #1e3a5f; color: white; border-radius: 8px; text-align: center;'>"
-        f"🕒 Dernière mise à jour automatique des données : <b>{last_update}</b>"
-        f"</div>",
-        unsafe_allow_html=True
-    )
-except FileNotFoundError:
-    st.markdown(
-        "<div style='margin-top: 100px; padding: 1rem; background-color: #1e3a5f; color: white; border-radius: 8px; text-align: center;'>"
-        "⚠️ Aucune mise à jour automatique détectée."
-        "</div>",
-        unsafe_allow_html=True
-    )
-
 # === 🔎 Zoom sur une société ===
 st.markdown("---")
 st.subheader("📊 Analyse individuelle")
@@ -189,3 +169,13 @@ if not df_display.empty:
                 height=500
             )
             st.plotly_chart(fig, use_container_width=True)
+
+
+# === 📅 Date de dernière mise à jour (juste après l'analyse)
+st.markdown("---")
+try:
+    with open("data/last_update.txt", "r") as f:
+        last_update = f.read().strip()
+    st.info(f"🕒 Dernière mise à jour automatique des données : `{last_update}`")
+except FileNotFoundError:
+    st.warning("⚠️ Aucune mise à jour automatique détectée.")
