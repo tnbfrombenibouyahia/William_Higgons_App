@@ -136,6 +136,18 @@ if only_higgons:
 # Suppression colonne bool
 df_display = df_filtered.drop(columns=["Higgons Valid"])
 
+df_display = df_display.rename(columns={
+    "Price": "💰 Cours de l'action (€)",
+    "EPS": "📊 Bénéfice par action (EPS)",
+    "PER": "📉 Price Earning Ratio (PER)",
+    "ROE (%)": "🏦 Rentabilité des fonds propres (ROE %)",
+    "Revenue Growth (%)": "📈 Croissance du chiffre d'affaires (%)",
+    "Sector": "🏷️ Secteur",
+    "Industry": "🏭 Industrie",
+    "Pays": "🌍 Pays",
+    "Statut": "🤖 Filtre Higgons"
+})
+
 # === Affichage final
 st.dataframe(df_display, use_container_width=True)
 
