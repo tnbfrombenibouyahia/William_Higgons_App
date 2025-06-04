@@ -153,10 +153,10 @@ st.markdown("---")
 st.subheader("📊 Analyse individuelle")
 
 if not df_display.empty:
-    selected_ticker = st.selectbox(
-        "Sélectionner une entreprise pour voir son graphique :", 
-        df_display["Ticker"].unique()
-    )
+    selected_ticker = st.text_input(
+    "🔍 Entrer un ticker pour afficher son graphique :", 
+    value=df_display["Ticker"].iloc[0] if not df_display.empty else ""
+)
 
     if selected_ticker:
         stock = yf.Ticker(selected_ticker)
