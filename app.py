@@ -1,107 +1,111 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
 
-# === Config ===
-st.set_page_config(page_title="Screener William Higgons", layout="wide")
-st.title("👨‍🌾 Screener William Higgons")
-st.markdown("Filtre les entreprises du Stoxx600 selon les critères Higgons : PER < 12, ROE > 10%, Chiffre d'affaires en croissance.")
+# === Configuration de la page ===
+st.set_page_config(page_title="William Higgons Screener", layout="wide")
+st.title("📊 Screener William Higgons")
+st.markdown("### 🧾 Aperçu du screening")
+st.write("Les entreprises en **vert** passent le filtre William Higgons.")
 
 # === Chargement des données ===
 @st.cache_data
-
 def load_data():
     df = pd.read_csv("data/all_results_yfinance_clean.csv")
 
-    # Drapeau Higgons
+    # Colonne de statut booléen Higgons
     df["Higgons Valid"] = (
-        (df["PER"] < 12)
-        & (df["ROE (%)"] > 10)
-        & (df["Revenue Growth (%)"] > 0)
+        (df["PER"] < 12) &
+        (df["ROE (%)"] > 10) &
+        (df["Revenue Growth (%)"] > 0)
     )
 
-    # Pays
+    # Mapping suffixe → pays
     suffix_to_country = {
-        ".DE": "🇩🇪 Allemagne",
-        ".PA": "🇫🇷 France",
-        ".AS": "🇳🇱 Pays-Bas",
-        ".MI": "🇮🇹 Italie",
-        ".SW": "🇨🇭 Suisse",
-        ".L": "🇬🇧 Royaume-Uni",
-        ".MC": "🇪🇸 Espagne",
-        ".CO": "🇩🇰 Danemark",
-        ".ST": "🇸🇪 Suède",
+        ".DE": "🇩🇪 Allemagne", ".PA": "🇫🇷 France", ".AS": "🇳🇱 Pays-Bas",
+        ".MI": "🇮🇹 Italie", ".SW": "🇨🇭 Suisse", ".L": "🇬🇧 Royaume-Uni",
+        ".MC": "🇪🇸 Espagne", ".CO": "🇩🇰 Danemark", ".ST": "🇸🇪 Suède",
+        ".BR": "🇧🇪 Belgique", ".OL": "🇳🇴 Norvège", ".IR": "🇮🇪 Irlande",
+        ".VI": "🇦🇹 Autriche"
     }
-    df["Pays"] = df["Ticker"].apply(lambda t: next((country for suffix, country in suffix_to_country.items() if t.endswith(suffix)), "❓ Inconnu"))
 
-    # Emoji pour secteur
+    def detect_country(ticker):
+        for suffix, country in suffix_to_country.items():
+            if ticker.endswith(suffix):
+                return country
+        return "❓ Inconnu"
+
+    df["Pays"] = df["Ticker"].apply(detect_country)
+
+    # Ajout émojis secteur
     sector_emojis = {
-        "Technology": "💻", "Consumer Defensive": "🍬",
-        "Healthcare": "💉", "Financial Services": "💰",
-        "Industrials": "💼", "Basic Materials": "🏫",
-        "Energy": "⛽", "Utilities": "🔦",
-        "Real Estate": "🏠", "Communication Services": "📱"
+        "Technology": "💻", "Healthcare": "💊", "Financial Services": "💰",
+        "Consumer Defensive": "🛒", "Industrials": "🏭", "Utilities": "🔌",
+        "Basic Materials": "⚙️", "Energy": "🛢️", "Real Estate": "🏠",
+        "Consumer Cyclical": "🎯", "Communication Services": "📡"
     }
-    df["Secteur"] = df["Sector"].apply(lambda s: f"{sector_emojis.get(s, '')} {s}" if pd.notna(s) else "")
-    df["Industrie"] = df["Industry"].apply(lambda i: f"🔢 {i}" if pd.notna(i) else "")
 
+    df["Sector"] = df["Sector"].apply(lambda x: f"{sector_emojis.get(x, '📂')} {x}")
+
+    # Ajout émojis industrie
+    industry_emojis = {
+        "Software – Application": "🧩", "Drug Manufacturers – General": "💊",
+        "Semiconductor Equipment & Materials": "🔋",
+        "Packaged Foods": "🥫", "Insurance – Diversified": "🛡️",
+        "Banks – Regional": "🏦", "Life Insurance": "🧬",
+        "Utilities – Regulated Electric": "🔌",
+        "Oil & Gas Integrated": "⛽", "Apparel Retail": "👕"
+    }
+
+    df["Industry"] = df["Industry"].apply(lambda x: f"{industry_emojis.get(x, '🏷️')} {x}")
+
+    # Colonne statut visuel
     df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
+
     return df
 
 df = load_data()
 
-# === Filtres ===
-st.sidebar.header("🔧 Filtres")
+# === 🎛️ Filtres dynamiques ===
+st.sidebar.title("🎛️ Filtres")
+pays = st.sidebar.multiselect("🌍 Pays", options=sorted(df["Pays"].unique()), default=None)
+secteurs = st.sidebar.multiselect("🏢 Secteur", options=sorted(df["Sector"].unique()), default=None)
+industries = st.sidebar.multiselect("🏷️ Industrie", options=sorted(df["Industry"].unique()), default=None)
 
-# Pays
-pays = st.sidebar.multiselect("🌐 Pays", options=sorted(df["Pays"].unique()), default=None)
+per_min, per_max = st.sidebar.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
+roe_min = st.sidebar.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
+growth_min = st.sidebar.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
+
+valid_only = st.sidebar.checkbox("✅ Seulement les sociétés validées")
+
+# === 📄 Application des filtres ===
+df_filtered = df.copy()
 if pays:
-    df = df[df["Pays"].isin(pays)]
-
-# Secteur
-secteurs = st.sidebar.multiselect("🌍 Secteurs", options=sorted(df["Secteur"].dropna().unique()))
+    df_filtered = df_filtered[df_filtered["Pays"].isin(pays)]
 if secteurs:
-    df = df[df["Secteur"].isin(secteurs)]
-
-# Industrie
-industries = st.sidebar.multiselect("💼 Industries", options=sorted(df["Industrie"].dropna().unique()))
+    df_filtered = df_filtered[df_filtered["Sector"].isin(secteurs)]
 if industries:
-    df = df[df["Industrie"].isin(industries)]
+    df_filtered = df_filtered[df_filtered["Industry"].isin(industries)]
 
-# Critères numériques
-per_min, per_max = st.sidebar.slider("PER", 0.0, 30.0, (0.0, 12.0))
-roe_min = st.sidebar.slider("ROE (%) minimum", 0.0, 50.0, 10.0)
-growth_min = st.sidebar.slider("Croissance du CA (%) minimum", -50.0, 100.0, 0.0)
+df_filtered = df_filtered[
+    (df_filtered["PER"] >= per_min) & (df_filtered["PER"] <= per_max) &
+    (df_filtered["ROE (%)"] >= roe_min) &
+    (df_filtered["Revenue Growth (%)"] >= growth_min)
+]
 
-# Statut Higgons
-statut = st.sidebar.selectbox("🧪 Statut Higgons", ["Tous", "✅ Validé", "❌ Rejeté"])
+if valid_only:
+    df_filtered = df_filtered[df_filtered["Higgons Valid"] == True]
 
-# Application des filtres
-filtres = (
-    (df["PER"] >= per_min) & (df["PER"] <= per_max) &
-    (df["ROE (%)"] >= roe_min) &
-    (df["Revenue Growth (%)"] >= growth_min)
-)
-if statut != "Tous":
-    filtres &= df["🧠 Statut"] == statut
+# Suppression de la colonne booléenne
+df_display = df_filtered.drop(columns=["Higgons Valid"])
 
-df_filtered = df[filtres].copy()
+# === 🖥️ Affichage tableau final ===
+st.dataframe(df_display, use_container_width=True)
 
-# Affichage tableau
-st.dataframe(
-    df_filtered[
-        ["Ticker", "Prix", "EPS", "PER", "ROE (%)", "Revenue Growth (%)", "🧠 Statut", "Pays", "Secteur", "Industrie"]
-    ].sort_values(by="PER"),
-    use_container_width=True,
-)
-
-# Export CSV
-st.download_button("📂 Exporter les résultats filtrés", data=df_filtered.to_csv(index=False).encode("utf-8"), file_name="higgons_filtered.csv", mime="text/csv")
-
-# Dernier update
+# === 📆 Date de mise à jour ===
 st.markdown("---")
 try:
     with open("data/last_update.txt", "r") as f:
-        st.info(f"🕒 Données mises à jour le `{f.read().strip()}`")
+        last_update = f.read().strip()
+    st.info(f"🕒 Dernière mise à jour automatique des données : `{last_update}`")
 except FileNotFoundError:
-    st.warning("❌ Aucune mise à jour enregistrée.")
+    st.warning("❌ Aucune mise à jour automatique enregistrée.")
