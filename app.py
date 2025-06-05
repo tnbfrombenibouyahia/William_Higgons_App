@@ -75,6 +75,7 @@ df = load_data()
 
 # === 🎯 Score Higgons
 def compute_higgons_score(row):
+
     if not row["Higgons Valid"]:
         return None
 
@@ -102,6 +103,56 @@ def compute_higgons_score(row):
         score += 10
 
     return score
+
+def genere_bilan_qualitatif(row):
+    per = row["PER"]
+    roe = row["ROE (%)"]
+    growth = row["Revenue Growth (%)"]
+    sector = row.get("Sector", "")
+
+    # Scores individuels
+    per_score = 3 if per < 8 else 2 if per < 10 else 1 if per < 15 else 0
+    roe_score = 3 if roe > 20 else 2 if roe > 15 else 1 if roe > 10 else 0
+    growth_score = 3 if growth > 10 else 2 if growth > 5 else 1 if growth > 0 else 0
+
+    total_score = per_score + roe_score + growth_score
+
+    # Détection secteur défensif
+    defensif = any(x in str(sector) for x in ["Healthcare", "Consumer Defensive"])
+
+    # Classification
+    if total_score >= 8:
+        scenario = "Excellent"
+        texte = (
+            f"✅ Cette entreprise présente un **PER de {per:.1f}**, ce qui suggère une **forte décote**.\n"
+            f"Son **ROE atteint {roe:.1f}%**, preuve d'une **rentabilité exceptionnelle**.\n"
+            f"Le chiffre d'affaires progresse de **{growth:.1f}%**, signe d'une **forte dynamique**.\n"
+        )
+    elif total_score >= 6:
+        scenario = "Très bon"
+        texte = (
+            f"👍 Avec un **PER de {per:.1f}**, une rentabilité (**ROE**) de {roe:.1f}% et "
+            f"une croissance de **{growth:.1f}%**, cette entreprise coche de **nombreux critères positifs**.\n"
+        )
+    elif total_score >= 4:
+        scenario = "Moyen"
+        texte = (
+            f"⚠️ Le **PER de {per:.1f}**, le **ROE de {roe:.1f}%** et la croissance de **{growth:.1f}%** sont "
+            f"mitigés. Cette société **n'est pas mauvaise**, mais **pas remarquable** selon les critères Higgons.\n"
+        )
+    else:
+        scenario = "À fuir"
+        texte = (
+            f"❌ Un **PER de {per:.1f}**, un **ROE faible ({roe:.1f}%)** et une croissance de **{growth:.1f}%** "
+            f"ne répondent **à aucun des critères de qualité attendus**.\n"
+        )
+
+    if defensif:
+        texte += "🛡️ L'appartenance à un **secteur défensif** renforce néanmoins sa stabilité."
+    
+    return f"### 🧾 Diagnostic : {scenario}\n\n{texte}"
+
+
 
 df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 df["🎯 Score Higgons Texte"] = df["🎯 Score Higgons"].apply(lambda x: "— Rejeté" if pd.isna(x) else int(x))
@@ -186,6 +237,12 @@ if not df_display.empty:
                 template="plotly_dark", height=500
             )
             st.plotly_chart(fig, use_container_width=True)
+
+                # Analyse qualitative
+            ligne = df_filtered[df_filtered["Ticker"] == selected_ticker]
+            if not ligne.empty:
+                bilan = genere_bilan_qualitatif(ligne.iloc[0])
+                st.markdown(bilan)
 
 # === Dernière mise à jour
 st.markdown("---")
