@@ -215,47 +215,47 @@ def genere_bilan_qualitatif(row):
     roe = row["ROE (%)"]
     growth = row["Revenue Growth (%)"]
     sector = row.get("Sector", "")
+    ticker = row["Ticker"]
 
     per_score = 3 if per < 8 else 2 if per < 10 else 1 if per < 15 else 0
     roe_score = 3 if roe > 20 else 2 if roe > 15 else 1 if roe > 10 else 0
     growth_score = 3 if growth > 10 else 2 if growth > 5 else 1 if growth > 0 else 0
 
     total_score = per_score + roe_score + growth_score
-
     defensif = any(x in str(sector) for x in ["Healthcare", "Consumer Defensive"])
 
     if total_score >= 8:
         scenario = "🟢 Excellent"
         texte = (
-            f"✅ L'entreprise affiche un **PER de {per:.1f}**, indiquant qu'elle est **très faiblement valorisée par rapport à ses bénéfices**.\n"
+            f"✅ L'entreprise **{ticker}** affiche un **PER de {per:.1f}**, indiquant qu'elle est **très faiblement valorisée par rapport à ses bénéfices**.\n"
             f"✅ Son **ROE atteint {roe:.1f}%**, ce qui traduit une **très forte rentabilité** des capitaux investis.\n"
             f"✅ Elle enregistre une **croissance du chiffre d'affaires de {growth:.1f}%**, preuve d'une **expansion soutenue**.\n"
-            f"👉 Ces trois critères réunis indiquent une **excellente opportunité d’investissement** selon les standards Higgons."
+            f"👉 {ticker} présente ainsi une **excellente opportunité d’investissement** selon les standards Higgons."
         )
     elif total_score >= 6:
         scenario = "🟢 Très bon"
         texte = (
-            f"👍 Avec un **PER de {per:.1f}**, une rentabilité (**ROE**) de {roe:.1f}% et une croissance de {growth:.1f}%,\n"
-            f"cette entreprise coche la majorité des critères fondamentaux. Elle présente une **solide base financière**\n"
-            f"et une **valorisation raisonnable**, idéale pour un portefeuille de rendement à long terme."
+            f"👍 **{ticker}** affiche un **PER de {per:.1f}**, une rentabilité (**ROE**) de {roe:.1f}% et une croissance de {growth:.1f}%.\n"
+            f"Elle coche la majorité des critères fondamentaux. Cette entreprise présente une **base financière solide**\n"
+            f"et une **valorisation raisonnable**, ce qui en fait un bon candidat pour un portefeuille long terme."
         )
     elif total_score >= 4:
         scenario = "🟠 Moyen"
         texte = (
-            f"⚠️ Le **PER de {per:.1f}**, le **ROE de {roe:.1f}%** et une croissance de {growth:.1f}% sont corrects mais pas exceptionnels.\n"
-            f"L’entreprise semble **stable mais sans catalyseur fort**, ce qui pourrait limiter la performance future.\n"
-            f"Ce type de profil peut convenir à une stratégie de diversification, **sans être une conviction forte**."
+            f"⚠️ Le profil financier de **{ticker}** est mitigé : **PER de {per:.1f}**, **ROE de {roe:.1f}%**, et une croissance de {growth:.1f}%.\n"
+            f"Bien qu'elle reste stable, **l’absence de catalyseur fort** pourrait limiter sa performance.\n"
+            f"{ticker} peut convenir à une stratégie de diversification, **sans être une conviction forte**."
         )
     else:
         scenario = "🔴 À fuir"
         texte = (
-            f"❌ **PER de {per:.1f}** élevé ou peu pertinent, **ROE de seulement {roe:.1f}%**,\n"
-            f"et croissance quasi inexistante ({growth:.1f}%) indiquent une **structure peu attractive**.\n"
-            f"🔻 Selon les critères de William Higgons, cette entreprise **ne mérite pas d’entrer en portefeuille**."
+            f"❌ L’analyse de **{ticker}** montre un **PER de {per:.1f}** élevé ou peu pertinent, un **ROE faible ({roe:.1f}%)**,\n"
+            f"et une **croissance quasi inexistante ({growth:.1f}%)**.\n"
+            f"🔻 Selon les critères de William Higgons, **{ticker} ne présente pas un profil d’investissement attractif**."
         )
 
     if defensif:
-        texte += "\n\n🛡️ L’entreprise appartient à un **secteur défensif**, ce qui peut offrir une certaine stabilité en période de volatilité."
+        texte += f"\n\n🛡️ À noter : **{ticker}** appartient à un **secteur défensif**, ce qui peut offrir une meilleure résilience en période de marché incertain."
 
     return f"### 🧾 Diagnostic automatique : {scenario}\n\n{texte}"
 
