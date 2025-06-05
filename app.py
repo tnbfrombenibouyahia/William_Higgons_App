@@ -97,6 +97,8 @@ with f2_col3:
 # Ligne 3 : Recherche seule, pleine largeur
 search_ticker = st.text_input("🔎 Rechercher un ticker", "")
 
+only_higgons = st.checkbox("✅ Seulement les sociétés validées")
+
 # === Application des filtres ===
 df_filtered = df.copy()
 
