@@ -8,12 +8,35 @@ import numpy as np
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
 
-# 🎥 Vidéo de présentation
-st.markdown("### 🎥 William Higgons explique sa stratégie")
-st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
+with st.expander("📖 Comprendre la stratégie William Higgons", expanded=False):
+    st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
+    
+    st.markdown("""
+    **🔍 Objectif de l'app**  
+    Cet outil permet d’identifier les entreprises européennes cotées qui répondent aux **critères stricts de sélection de William Higgons**, célèbre investisseur value.  
+    L’objectif est de bâtir un portefeuille diversifié de **33 sociétés à 3% chacune**, avec un suivi rigoureux.
 
-st.markdown("### 🧾 Aperçu du screening")
-st.write("Les entreprises en **vert** passent le filtre William Higgons.")
+    **📋 Critères de sélection ("Screening")**
+    Pour qu’une entreprise soit considérée comme **validée** :
+    - 🔻 **PER < 12** → L’action n’est pas surévaluée (ratio Prix / Bénéfice faible).
+    - 💸 **ROE > 10%** → L’entreprise est rentable (Rentabilité des Fonds Propres).
+    - 📈 **Chiffre d’affaires en croissance** → Le CA doit être supérieur à l’année précédente.
+
+    **⚖️ Règle de sortie du portefeuille**
+    - ❌ Si le **PER dépasse 20**, on **vend toute la position**.
+    - 📉 À partir de **15 de PER**, on vend **20% de la position par point de PER**.
+    - 🔴 Si une **position est en perte depuis 6 mois**, elle est coupée.
+
+    **📊 Score Higgons (/100)**
+    Pour affiner la sélection, un score est calculé selon :
+    - Le niveau de PER (plus bas = mieux),
+    - Le ROE (plus élevé = mieux),
+    - La croissance du chiffre d'affaires,
+    - La nature défensive du secteur.
+
+    ---
+    👉 Utilise les filtres ci-dessous pour explorer les sociétés. Celles qui passent les critères apparaissent en **vert**.
+    """)
 
 # === Chargement des données ===
 @st.cache_data
