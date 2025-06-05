@@ -99,7 +99,7 @@ def load_data():
 
 df = load_data()
 
-# === 🎯 Calcul du Score Higgons ===
+# === 🎯 Score Higgons : uniquement pour les sociétés validées
 def compute_higgons_score(row):
     if not row["Higgons Valid"]:
         return "— Rejeté"
@@ -109,6 +109,8 @@ def compute_higgons_score(row):
     if row["ROE (%)"] > 10: score += 33
     if row["Revenue Growth (%)"] > 0: score += 33
     return score
+
+df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
 # === Barre latérale de filtre ===
 st.sidebar.header("🧰 Filtres")
