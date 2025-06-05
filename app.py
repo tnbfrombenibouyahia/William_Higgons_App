@@ -157,6 +157,8 @@ colonnes_ordre = [
 df_display = df_display[[col for col in colonnes_ordre if col in df_display.columns]]
 
 # === Affichage principal
+# Convertir les types en string pour éviter ArrowTypeError
+df_display["🎯 Score William Higgons (/100)"] = df_display["🎯 Score William Higgons (/100)"].astype(str)
 st.dataframe(df_display, use_container_width=True)
 
 # === Analyse individuelle
