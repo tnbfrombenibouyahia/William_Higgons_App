@@ -187,6 +187,8 @@ df_filtered = df_filtered[
 if only_higgons:
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
+df_filtered["🎯 Score Higgons"] = df_filtered.apply(compute_higgons_score, axis=1)
+
 # Suppression colonne bool
 df_display = df_filtered.drop(columns=["Higgons Valid"])
 
