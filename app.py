@@ -3,10 +3,6 @@ import pandas as pd
 import os
 import yfinance as yf
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
-from st_aggrid import AgGrid, GridOptionsBuilder
 import numpy as np
 
 # === Configuration de la page ===
