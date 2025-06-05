@@ -73,34 +73,32 @@ def load_data():
 
 df = load_data()
 
-# === Filtres organisés en lignes ===
 st.markdown("## 🧰 Filtres")
 
-# Ligne 1 : Sélections
-f1_col1, f1_col2, f1_col3 = st.columns(3)
-with f1_col1:
+# Ligne 1 : Pays / Secteur / Industrie
+col1, col2, col3 = st.columns(3)
+with col1:
     pays_filter = st.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
-with f1_col2:
+with col2:
     sector_filter = st.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
-with f1_col3:
+with col3:
     industry_filter = st.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
 
-# Ligne 2 : Sliders
-f2_col1, f2_col2, f2_col3 = st.columns(3)
-with f2_col1:
+# Ligne 2 : PER / ROE / Croissance
+col4, col5, col6 = st.columns(3)
+with col4:
     per_min, per_max = st.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
-with f2_col2:
+with col5:
     roe_min = st.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
-with f2_col3:
+with col6:
     growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
 
-# Ligne 3 : Recherche seule, pleine largeur
-search_ticker = st.text_input("🔎 Rechercher un ticker", "")
-
-filtrage_mode = st.selectbox(
-    "🔍 Sélection des entreprises à afficher",
-    options=["🇪🇺 Toutes les entreprises", "🤴 Les entreprises qui passent le screening"]
-)
+# Ligne 3 : Ticker + Filtrage mode
+col7, col8 = st.columns([3, 1])
+with col7:
+    search_ticker = st.text_input("🔎 Rechercher un ticker", "")
+with col8:
+    filtrage_mode = st.selectbox("🎯 Affichage", ["🇪🇺 Toutes les entreprises", "🤴 Screening uniquement"])
 
 # === Application des filtres ===
 df_filtered = df.copy()
