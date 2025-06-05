@@ -181,20 +181,31 @@ df_filtered["🎯 Score Higgons Texte"] = df_filtered["🎯 Score Higgons"].appl
     lambda x: "— Rejeté" if pd.isna(x) else int(x)
 )
 
-# === Tableau final ===
-df_display = df_filtered.drop(columns=["Higgons Valid", "🎯 Score Higgons"])
-df_display = df_display.rename(columns={
+# Renommage des colonnes
+df_display = df_filtered.drop(columns=["Higgons Valid", "🎯 Score Higgons"]).rename(columns={
+    "Ticker": "🔖 Ticker",
+    "Pays": "🌍 Pays",
+    "Sector": "🏷️ Secteur",
+    "Industry": "🏭 Industrie",
+    "🧠 Statut": "✅ Filtre William Higgons",
+    "🎯 Score Higgons Texte": "🎯 Score Higgons (sur 100)",
     "Price": "💰 Cours de l'action (€)",
     "EPS": "📊 Bénéfice par action (EPS)",
     "PER": "📉 Price Earning Ratio (PER)",
     "ROE (%)": "🏦 Rentabilité des fonds propres (%)",
-    "Revenue Growth (%)": "📈 Croissance du chiffre d'affaires (%)",
-    "Sector": "🏷️ Secteur",
-    "Industry": "🏭 Industrie",
-    "Pays": "🌍 Pays",
-    "🧠 Statut": "✅ Filtre William Higgons",
-    "🎯 Score Higgons Texte": "🎯 Score Higgons (sur 100)"
+    "Revenue Growth (%)": "📈 Croissance du chiffre d'affaires (%)"
 })
+
+# Réorganisation des colonnes
+column_order = [
+    "🔖 Ticker", "🌍 Pays", "🏷️ Secteur", "🏭 Industrie",
+    "✅ Filtre William Higgons", "🎯 Score Higgons (sur 100)",
+    "💰 Cours de l'action (€)", "📊 Bénéfice par action (EPS)",
+    "📉 Price Earning Ratio (PER)", "🏦 Rentabilité des fonds propres (%)",
+    "📈 Croissance du chiffre d'affaires (%)"
+]
+
+df_display = df_display[column_order]
 
 st.dataframe(df_display, use_container_width=True)
 
