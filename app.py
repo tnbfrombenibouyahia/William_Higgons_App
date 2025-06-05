@@ -6,6 +6,33 @@ import plotly.graph_objects as go
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
+with st.expander("ℹ️ À propos de cette application", expanded=True):
+    st.markdown("""
+    Cette application est un **screener d'actions européennes** inspiré de la méthode de sélection de William Higgons, gérant de portefeuille chez Indépendance & Expansion.
+
+    ### 🎯 Objectif
+    Identifier des entreprises sous-évaluées avec :
+    - **PER < 12** : valorisation attractive.
+    - **ROE > 10%** : rentabilité élevée des fonds propres.
+    - **Croissance du chiffre d’affaires > 0%** : dynamique de croissance.
+
+    ### 🧠 Filtrage
+    Les entreprises qui remplissent ces trois critères sont marquées comme **"✅ Validé"** dans le filtre William Higgons.
+
+    ### 📊 Score Higgons (/100)
+    Pour affiner la sélection, un **score pondéré** est attribué à chaque société validée :
+    - Jusqu’à **35 pts pour un PER très faible**.
+    - Jusqu’à **35 pts pour un ROE élevé**.
+    - Jusqu’à **20 pts pour une croissance forte**.
+    - **+10 pts** de bonus si la société appartient à un **secteur défensif** (*Healthcare, Consumer Defensive*).
+
+    ### 📈 Analyse individuelle
+    En bas de page, tu peux consulter l’évolution historique du cours d’une entreprise sélectionnée.
+
+    ---
+    > Données récupérées depuis **Yahoo Finance** via `yfinance`.  
+    > Mises à jour régulières automatiquement 📅
+    """)
 
 # 🎥 Vidéo de présentation
 st.markdown("### 🎥 William Higgons explique sa stratégie")
