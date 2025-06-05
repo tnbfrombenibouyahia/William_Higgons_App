@@ -105,12 +105,46 @@ def compute_higgons_score(row):
         return "— Rejeté"
     
     score = 0
-    if row["PER"] < 12: score += 33
-    if row["ROE (%)"] > 10: score += 33
-    if row["Revenue Growth (%)"] > 0: score += 33
-    return score
 
-df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
+    # 📉 PER
+    per = row["PER"]
+    if per < 8:
+        score += 35
+    elif per < 10:
+        score += 25
+    elif per < 12:
+        score += 15
+    elif per < 15:
+        score += 5
+
+    # 🏦 ROE
+    roe = row["ROE (%)"]
+    if roe > 20:
+        score += 35
+    elif roe > 15:
+        score += 25
+    elif roe > 10:
+        score += 15
+    elif roe > 5:
+        score += 5
+
+    # 📈 Revenue Growth
+    growth = row["Revenue Growth (%)"]
+    if growth > 15:
+        score += 20
+    elif growth > 10:
+        score += 15
+    elif growth > 5:
+        score += 10
+    elif growth > 0:
+        score += 5
+
+    # 🛡️ Bonus pour secteur défensif
+    defensives = ["Healthcare", "Consumer Defensive"]
+    if any(sec in row["Sector"] for sec in defensives):
+        score += 10
+
+    return score
 
 # === Barre latérale de filtre ===
 st.sidebar.header("🧰 Filtres")
