@@ -100,12 +100,21 @@ def load_data():
 df = load_data()
 
 # === 🎯 Calcul du Score Higgons ===
+# === 🎯 Calcul du Score Higgons amélioré ===
 def compute_higgons_score(row):
     score = 0
-    if row["PER"] < 12: score += 33
-    if row["ROE (%)"] > 10: score += 33
-    if row["Revenue Growth (%)"] > 0: score += 33
-    return score
+
+    # PER : plus c’est bas, mieux c’est (max 30 pts)
+    if row["PER"] < 12:
+        score += max(0, 30 * (1 - (row["PER"] / 12)))
+
+    # ROE (%) : plus c’est haut, mieux c’est (max 35 pts)
+    score += min(35, max(0, row["ROE (%)"] - 10))
+
+    # Revenue Growth (%) : plus c’est haut, mieux c’est (max 25 pts)
+    score += min(25, max(0, row["Revenue Growth (%)"]))
+
+    return round(score)
 
 df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
