@@ -10,7 +10,6 @@ import numpy as np
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
 
-st.markdown("---")
 
 with st.expander("📖 Comprendre la stratégie William Higgons", expanded=False):
     st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
@@ -41,8 +40,6 @@ with st.expander("📖 Comprendre la stratégie William Higgons", expanded=False
     ---
     👉 Utilise les filtres ci-dessous pour explorer les sociétés. Celles qui passent les critères apparaissent en **vert**.
     """)
-
-st.markdown("---")
 
 # === Chargement des données ===
 @st.cache_data
