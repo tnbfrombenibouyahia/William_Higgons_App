@@ -73,17 +73,20 @@ def load_data():
 
 df = load_data()
 
-# === Filtres ===
-st.header("🧰 Filtres")
+st.markdown("## 🧰 Filtres")
+col1, col2 = st.columns(2)
 
-search_ticker = st.text_input("🔎 Rechercher un ticker", "")
-pays_filter = st.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
-sector_filter = st.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
-industry_filter = st.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
-per_min, per_max = st.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
-roe_min = st.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
-growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
-only_higgons = st.checkbox("✅ Seulement les sociétés validées")
+with col1:
+    search_ticker = st.text_input("🔎 Rechercher un ticker", "")
+    pays_filter = st.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
+    sector_filter = st.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
+    industry_filter = st.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
+
+with col2:
+    per_min, per_max = st.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
+    roe_min = st.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
+    growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
+    only_higgons = st.checkbox("✅ Seulement les sociétés validées")
 
 # === Application des filtres ===
 df_filtered = df.copy()
