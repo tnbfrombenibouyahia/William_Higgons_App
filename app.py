@@ -3,6 +3,11 @@ import pandas as pd
 import os
 import yfinance as yf
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+from st_aggrid import AgGrid, GridOptionsBuilder
+import numpy as np
 
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
@@ -14,7 +19,6 @@ st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
 
 st.markdown("### 🧾 Aperçu du screening")
 st.write("Les entreprises en **vert** passent le filtre William Higgons.")
-
 
 # === Chargement des données ===
 @st.cache_data
@@ -99,14 +103,43 @@ def load_data():
 
 df = load_data()
 
+# === Barre latérale de filtre ===
+st.sidebar.header("🧰 Filtres")
+
+search_ticker = st.sidebar.text_input("🔎 Rechercher un ticker", "")
+pays_filter = st.sidebar.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
+sector_filter = st.sidebar.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
+industry_filter = st.sidebar.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
+per_min, per_max = st.sidebar.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
+roe_min = st.sidebar.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
+growth_min = st.sidebar.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
+only_higgons = st.sidebar.checkbox("✅ Seulement les sociétés validées")
+
+# === Application des filtres ===
+df_filtered = df.copy()
+
+if search_ticker:
+    df_filtered = df_filtered[df_filtered["Ticker"].str.contains(search_ticker.upper())]
+if pays_filter:
+    df_filtered = df_filtered[df_filtered["Pays"] == pays_filter]
+if sector_filter:
+    df_filtered = df_filtered[df_filtered["Sector"] == sector_filter]
+if industry_filter:
+    df_filtered = df_filtered[df_filtered["Industry"] == industry_filter]
+
+df_filtered = df_filtered[
+    (df_filtered["PER"] >= per_min) & (df_filtered["PER"] <= per_max) &
+    (df_filtered["ROE (%)"] >= roe_min) &
+    (df_filtered["Revenue Growth (%)"] >= growth_min)
+]
+if only_higgons:
+    df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
+
 # === 🎯 Score Higgons : uniquement pour les sociétés validées
 def compute_higgons_score(row):
     if not row["Higgons Valid"]:
-        return "— Rejeté"
-    
+        return np.nan
     score = 0
-
-    # 📉 PER
     per = row["PER"]
     if per < 8:
         score += 35
@@ -117,7 +150,6 @@ def compute_higgons_score(row):
     elif per < 15:
         score += 5
 
-    # 🏦 ROE
     roe = row["ROE (%)"]
     if roe > 20:
         score += 35
@@ -128,7 +160,6 @@ def compute_higgons_score(row):
     elif roe > 5:
         score += 5
 
-    # 📈 Revenue Growth
     growth = row["Revenue Growth (%)"]
     if growth > 15:
         score += 20
@@ -139,59 +170,37 @@ def compute_higgons_score(row):
     elif growth > 0:
         score += 5
 
-    # 🛡️ Bonus pour secteur défensif
     defensives = ["Healthcare", "Consumer Defensive"]
     if any(sec in row["Sector"] for sec in defensives):
         score += 10
-
     return score
 
-# === Barre latérale de filtre ===
-st.sidebar.header("🧰 Filtres")
-
-# Recherche par Ticker
-search_ticker = st.sidebar.text_input("🔎 Rechercher un ticker", "")
-
-# Filtres dynamiques
-pays_filter = st.sidebar.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
-sector_filter = st.sidebar.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
-industry_filter = st.sidebar.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
-
-per_min, per_max = st.sidebar.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
-roe_min = st.sidebar.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
-growth_min = st.sidebar.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
-
-only_higgons = st.sidebar.checkbox("✅ Seulement les sociétés validées")
-
-# === Application des filtres ===
-df_filtered = df.copy()
-
-if search_ticker:
-    df_filtered = df_filtered[df_filtered["Ticker"].str.contains(search_ticker.upper())]
-
-if pays_filter:
-    df_filtered = df_filtered[df_filtered["Pays"] == pays_filter]
-
-if sector_filter:
-    df_filtered = df_filtered[df_filtered["Sector"] == sector_filter]
-
-if industry_filter:
-    df_filtered = df_filtered[df_filtered["Industry"] == industry_filter]
-
-df_filtered = df_filtered[
-    (df_filtered["PER"] >= per_min) & (df_filtered["PER"] <= per_max) &
-    (df_filtered["ROE (%)"] >= roe_min) &
-    (df_filtered["Revenue Growth (%)"] >= growth_min)
-]
-
-if only_higgons:
-    df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
-
 df_filtered["🎯 Score Higgons"] = df_filtered.apply(compute_higgons_score, axis=1)
+df_filtered["🎯 Score Higgons Texte"] = df_filtered["🎯 Score Higgons"].apply(
+    lambda x: "— Rejeté" if pd.isna(x) else int(x)
+)
 
-# Suppression colonne bool
-df_display = df_filtered.drop(columns=["Higgons Valid"])
+# === Suppression colonne bool
+from io import BytesIO
+import matplotlib.pyplot as plt
+import base64
 
+def get_sparkline(ticker):
+    try:
+        data = yf.download(ticker, period="3mo", progress=False)
+        if data.empty:
+            return ""
+        fig, ax = plt.subplots(figsize=(2, 0.5))
+        ax.plot(data["Close"], linewidth=1)
+        ax.axis("off")
+        buf = BytesIO()
+        plt.savefig(buf, format="png", bbox_inches="tight", pad_inches=0)
+        plt.close(fig)
+        return f'<img src="data:image/png;base64,{base64.b64encode(buf.getvalue()).decode()}" width="100">'
+    except:
+        return ""
+
+df_display = df_filtered.drop(columns=["Higgons Valid", "🎯 Score Higgons"])
 df_display = df_display.rename(columns={
     "Price": "💰 Cours de l'action (€)",
     "EPS": "📊 Bénéfice par action (EPS)",
@@ -202,29 +211,28 @@ df_display = df_display.rename(columns={
     "Industry": "🏭 Industrie",
     "Pays": "🌍 Pays",
     "🧠 Statut": "✅ Filtre William Higgons",
-    "🎯 Score Higgons": "🎯 Score Higgons (sur 100)"
+    "🎯 Score Higgons Texte": "🎯 Score Higgons (sur 100)"
 })
 
-# === Affichage final
-st.dataframe(df_display, use_container_width=True)
+df_display["📈 Sparkline"] = df_display["Ticker"].apply(get_sparkline)
+
+gb = GridOptionsBuilder.from_dataframe(df_display)
+gb.configure_column("📈 Sparkline", cellRenderer="agRichTextCellRenderer", autoHeight=True)
+gridOptions = gb.build()
+AgGrid(df_display, gridOptions=gridOptions, allow_unsafe_jscode=True, height=600, fit_columns_on_grid_load=True)
 
 # === 🔎 Zoom sur une société ===
 st.markdown("---")
 st.subheader("📊 Analyse individuelle")
-
 if not df_display.empty:
     selected_ticker = st.text_input(
-    "🔍 Entrer un ticker pour afficher son graphique :", 
-    value=df_display["Ticker"].iloc[0] if not df_display.empty else ""
-)
-
+        "🔍 Entrer un ticker pour afficher son graphique :",
+        value=df_display["Ticker"].iloc[0] if not df_display.empty else ""
+    )
     if selected_ticker:
         stock = yf.Ticker(selected_ticker)
-
         with st.spinner("Chargement des données..."):
-            # 📈 Données historiques
             hist = stock.history(period="max")
-
         if hist.empty:
             st.warning("Données historiques indisponibles pour ce ticker.")
         else:
@@ -239,8 +247,7 @@ if not df_display.empty:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-
-# === 📅 Date de dernière mise à jour (juste après l'analyse)
+# === 📅 Date de dernière mise à jour ===
 st.markdown("---")
 try:
     with open("data/last_update.txt", "r") as f:
