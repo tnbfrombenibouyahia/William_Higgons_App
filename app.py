@@ -118,7 +118,7 @@ df_filtered = df_filtered[
     (df_filtered["Revenue Growth (%)"] >= growth_min)
 ]
 
-if filtrage_mode == "🤴 Les entreprises qui passent le screening":
+if filtrage_mode == "🤴 Screening uniquement":
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
 # === Score Higgons ===
