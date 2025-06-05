@@ -73,7 +73,7 @@ def load_data():
 
 df = load_data()
 
-# === Bloc filtres organisé en lignes horizontales ===
+# === Filtres organisés en lignes ===
 st.markdown("## 🧰 Filtres")
 
 # Ligne 1 : Sélections
@@ -94,12 +94,8 @@ with f2_col2:
 with f2_col3:
     growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
 
-# Ligne 3 : Ticker + Checkbox
-f3_col1, f3_col2 = st.columns([3, 1])
-with f3_col1:
-    search_ticker = st.text_input("🔎 Rechercher un ticker", "")
-with f3_col2:
-    only_higgons = st.checkbox("✅ Seulement les sociétés validées")
+# Ligne 3 : Recherche seule, pleine largeur
+search_ticker = st.text_input("🔎 Rechercher un ticker", "")
 
 # === Application des filtres ===
 df_filtered = df.copy()
