@@ -209,6 +209,58 @@ df_display = df_display[column_order]
 
 st.dataframe(df_display, use_container_width=True)
 
+# === Diagnostic automatique détaillé ===
+def genere_bilan_qualitatif(row):
+    per = row["PER"]
+    roe = row["ROE (%)"]
+    growth = row["Revenue Growth (%)"]
+    sector = row.get("Sector", "")
+
+    per_score = 3 if per < 8 else 2 if per < 10 else 1 if per < 15 else 0
+    roe_score = 3 if roe > 20 else 2 if roe > 15 else 1 if roe > 10 else 0
+    growth_score = 3 if growth > 10 else 2 if growth > 5 else 1 if growth > 0 else 0
+
+    total_score = per_score + roe_score + growth_score
+
+    defensif = any(x in str(sector) for x in ["Healthcare", "Consumer Defensive"])
+
+    if total_score >= 8:
+        scenario = "🟢 Excellent"
+        texte = (
+            f"✅ L'entreprise affiche un **PER de {per:.1f}**, indiquant qu'elle est **très faiblement valorisée par rapport à ses bénéfices**.\n"
+            f"✅ Son **ROE atteint {roe:.1f}%**, ce qui traduit une **très forte rentabilité** des capitaux investis.\n"
+            f"✅ Elle enregistre une **croissance du chiffre d'affaires de {growth:.1f}%**, preuve d'une **expansion soutenue**.\n"
+            f"👉 Ces trois critères réunis indiquent une **excellente opportunité d’investissement** selon les standards Higgons."
+        )
+    elif total_score >= 6:
+        scenario = "🟢 Très bon"
+        texte = (
+            f"👍 Avec un **PER de {per:.1f}**, une rentabilité (**ROE**) de {roe:.1f}% et une croissance de {growth:.1f}%,\n"
+            f"cette entreprise coche la majorité des critères fondamentaux. Elle présente une **solide base financière**\n"
+            f"et une **valorisation raisonnable**, idéale pour un portefeuille de rendement à long terme."
+        )
+    elif total_score >= 4:
+        scenario = "🟠 Moyen"
+        texte = (
+            f"⚠️ Le **PER de {per:.1f}**, le **ROE de {roe:.1f}%** et une croissance de {growth:.1f}% sont corrects mais pas exceptionnels.\n"
+            f"L’entreprise semble **stable mais sans catalyseur fort**, ce qui pourrait limiter la performance future.\n"
+            f"Ce type de profil peut convenir à une stratégie de diversification, **sans être une conviction forte**."
+        )
+    else:
+        scenario = "🔴 À fuir"
+        texte = (
+            f"❌ **PER de {per:.1f}** élevé ou peu pertinent, **ROE de seulement {roe:.1f}%**,\n"
+            f"et croissance quasi inexistante ({growth:.1f}%) indiquent une **structure peu attractive**.\n"
+            f"🔻 Selon les critères de William Higgons, cette entreprise **ne mérite pas d’entrer en portefeuille**."
+        )
+
+    if defensif:
+        texte += "\n\n🛡️ L’entreprise appartient à un **secteur défensif**, ce qui peut offrir une certaine stabilité en période de volatilité."
+
+    return f"### 🧾 Diagnostic automatique : {scenario}\n\n{texte}"
+
+# Ce bloc doit être appelé après l'affichage du graphique dans l'analyse individuelle
+
 # === Analyse individuelle ===
 st.markdown("---")
 st.subheader("📊 Analyse individuelle")
@@ -236,6 +288,14 @@ if not df_display.empty:
                 height=500
             )
             st.plotly_chart(fig, use_container_width=True)
+
+            
+            # juste après st.plotly_chart(...)
+            ligne = df_filtered[df_filtered["Ticker"] == selected_ticker]
+            if not ligne.empty:
+                bilan = genere_bilan_qualitatif(ligne.iloc[0])
+                st.markdown(bilan)
+
 
 # === Date de mise à jour ===
 st.markdown("---")
