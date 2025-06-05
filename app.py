@@ -94,6 +94,7 @@ with col6:
     growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
 
 # Ligne 3 : Ticker + Filtrage mode
+# Ligne 3 : Ticker + Filtrage mode
 col7, col8 = st.columns([3, 1])
 with col7:
     search_ticker = st.text_input("🔎 Rechercher un ticker", "")
@@ -118,13 +119,7 @@ df_filtered = df_filtered[
     (df_filtered["Revenue Growth (%)"] >= growth_min)
 ]
 
-options = {
-    "Toutes": "🇪🇺 Toutes les entreprises",
-    "Screening": "🤴 Screening uniquement"
-}
-filtrage_mode = st.selectbox("🎯 Affichage", options.values())
-
-if filtrage_mode == options["Screening"]:
+if filtrage_mode == "🤴 Screening uniquement":
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
 # === Score Higgons ===
