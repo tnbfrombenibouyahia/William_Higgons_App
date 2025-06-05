@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import yfinance as yf
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
