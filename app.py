@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 # === Configuration de la page ===
 st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
+
+# === Intro avec explications et vidéo
 with st.expander("ℹ️ À propos de cette application", expanded=True):
     st.markdown("""
     Cette application est un **screener d'actions européennes** inspiré de la méthode de sélection de William Higgons, gérant chez Indépendance & Expansion.
@@ -39,7 +41,7 @@ with st.expander("ℹ️ À propos de cette application", expanded=True):
     > Mises à jour régulières automatiquement 📅
     """)
 
-# === Chargement des données ===
+# === Chargement des données
 @st.cache_data
 def load_data():
     df = pd.read_csv("data/all_results_yfinance_clean.csv")
@@ -65,14 +67,13 @@ def load_data():
         return "❓ Inconnu"
 
     df["Pays"] = df["Ticker"].apply(detect_country)
-
     df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
 
     return df
 
 df = load_data()
 
-# === 🎯 Score Higgons (pondéré)
+# === 🎯 Score Higgons
 def compute_higgons_score(row):
     if not row["Higgons Valid"]:
         return None
@@ -96,7 +97,6 @@ def compute_higgons_score(row):
     elif growth > 5: score += 10
     elif growth > 0: score += 5
 
-    # Bonus secteur défensif
     defensives = ["Healthcare", "Consumer Defensive"]
     if any(d in str(row["Sector"]) for d in defensives):
         score += 10
@@ -106,7 +106,7 @@ def compute_higgons_score(row):
 df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 df["🎯 Score Higgons Texte"] = df["🎯 Score Higgons"].apply(lambda x: "— Rejeté" if pd.isna(x) else int(x))
 
-# === Barre latérale de filtres ===
+# === Filtres
 st.sidebar.header("🧰 Filtres")
 
 search_ticker = st.sidebar.text_input("🔎 Rechercher un ticker", "")
@@ -116,7 +116,7 @@ roe_min = st.sidebar.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
 growth_min = st.sidebar.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
 only_higgons = st.sidebar.checkbox("✅ Seulement les sociétés validées")
 
-# === Application des filtres ===
+# === Application des filtres
 df_filtered = df.copy()
 if search_ticker:
     df_filtered = df_filtered[df_filtered["Ticker"].str.contains(search_ticker.upper())]
@@ -132,27 +132,32 @@ df_filtered = df_filtered[
 if only_higgons:
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
-# === Renommage des colonnes
+# === Renommage colonnes + affichage dans un ordre logique
 df_display = df_filtered.rename(columns={
     "Price": "💶 Cours (€)",
     "EPS": "📊 Bénéfice par action",
     "PER": "📉 PER (Cours / Bénéfices)",
     "ROE (%)": "🏦 Rendement des fonds propres (%)",
     "Revenue Growth (%)": "📈 Croissance du chiffre d'affaires (%)",
+    "Sector": "🏷️ Secteur",
+    "Industry": "🏭 Industrie",
     "Pays": "🌍 Pays",
     "🧠 Statut": "✅ Filtre William Higgons",
     "🎯 Score Higgons Texte": "🎯 Score William Higgons (/100)"
 })
 
+# Réorganisation des colonnes pour affichage clair
+colonnes_ordre = [
+    "Ticker", "🌍 Pays", "🏭 Industrie", "🏷️ Secteur",  # Identification
+    "✅ Filtre William Higgons", "🎯 Score William Higgons (/100)",  # Évaluation
+    "💶 Cours (€)", "📊 Bénéfice par action", "📉 PER (Cours / Bénéfices)",
+    "🏦 Rendement des fonds propres (%)", "📈 Croissance du chiffre d'affaires (%)"
+]
+
+df_display = df_display[[col for col in colonnes_ordre if col in df_display.columns]]
+
 # === Affichage principal
-st.dataframe(
-    df_display[[
-        "Ticker", "💶 Cours (€)", "📊 Bénéfice par action", "📉 PER (Cours / Bénéfices)",
-        "🏦 Rendement des fonds propres (%)", "📈 Croissance du chiffre d'affaires (%)",
-        "🌍 Pays", "✅ Filtre William Higgons", "🎯 Score William Higgons (/100)"
-    ]],
-    use_container_width=True
-)
+st.dataframe(df_display, use_container_width=True)
 
 # === Analyse individuelle
 st.markdown("---")
