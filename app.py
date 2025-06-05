@@ -8,8 +8,13 @@ st.set_page_config(page_title="William Higgons Screener", layout="wide")
 st.title("📊 Screener William Higgons")
 with st.expander("ℹ️ À propos de cette application", expanded=True):
     st.markdown("""
-    Cette application est un **screener d'actions européennes** inspiré de la méthode de sélection de William Higgons, gérant de portefeuille chez Indépendance & Expansion.
+    Cette application est un **screener d'actions européennes** inspiré de la méthode de sélection de William Higgons, gérant chez Indépendance & Expansion.
 
+    ### 🎥 Interview de William Higgons
+    """)
+    st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
+    st.markdown("""
+    ---
     ### 🎯 Objectif
     Identifier des entreprises sous-évaluées avec :
     - **PER < 12** : valorisation attractive.
@@ -33,13 +38,6 @@ with st.expander("ℹ️ À propos de cette application", expanded=True):
     > Données récupérées depuis **Yahoo Finance** via `yfinance`.  
     > Mises à jour régulières automatiquement 📅
     """)
-
-# 🎥 Vidéo de présentation
-st.markdown("### 🎥 William Higgons explique sa stratégie")
-st.video("https://www.youtube.com/watch?v=Ct3ZDvUjCFI")
-
-st.markdown("### 🧾 Aperçu du screening")
-st.write("Les entreprises en **vert** passent le filtre William Higgons.")
 
 # === Chargement des données ===
 @st.cache_data
