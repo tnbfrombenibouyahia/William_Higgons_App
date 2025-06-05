@@ -73,19 +73,32 @@ def load_data():
 
 df = load_data()
 
+# === Bloc filtres organisé en lignes horizontales ===
 st.markdown("## 🧰 Filtres")
-col1, col2 = st.columns(2)
 
-with col1:
-    search_ticker = st.text_input("🔎 Rechercher un ticker", "")
+# Ligne 1 : Sélections
+f1_col1, f1_col2, f1_col3 = st.columns(3)
+with f1_col1:
     pays_filter = st.selectbox("🌍 Pays", options=[""] + sorted(df["Pays"].unique()))
+with f1_col2:
     sector_filter = st.selectbox("🏷️ Secteur", options=[""] + sorted(df["Sector"].unique()))
+with f1_col3:
     industry_filter = st.selectbox("🏭 Industrie", options=[""] + sorted(df["Industry"].unique()))
 
-with col2:
+# Ligne 2 : Sliders
+f2_col1, f2_col2, f2_col3 = st.columns(3)
+with f2_col1:
     per_min, per_max = st.slider("💰 PER", 0.0, 100.0, (0.0, 100.0))
+with f2_col2:
     roe_min = st.slider("📈 ROE (%) minimum", 0.0, 100.0, 0.0)
+with f2_col3:
     growth_min = st.slider("📊 Croissance min. (%)", -50.0, 100.0, 0.0)
+
+# Ligne 3 : Ticker + Checkbox
+f3_col1, f3_col2 = st.columns([3, 1])
+with f3_col1:
+    search_ticker = st.text_input("🔎 Rechercher un ticker", "")
+with f3_col2:
     only_higgons = st.checkbox("✅ Seulement les sociétés validées")
 
 # === Application des filtres ===
