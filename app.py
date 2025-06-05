@@ -118,7 +118,13 @@ df_filtered = df_filtered[
     (df_filtered["Revenue Growth (%)"] >= growth_min)
 ]
 
-if filtrage_mode == "🤴 Screening uniquement":
+options = {
+    "Toutes": "🇪🇺 Toutes les entreprises",
+    "Screening": "🤴 Screening uniquement"
+}
+filtrage_mode = st.selectbox("🎯 Affichage", options.values())
+
+if filtrage_mode == options["Screening"]:
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
 # === Score Higgons ===
