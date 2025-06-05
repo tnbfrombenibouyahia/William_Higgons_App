@@ -96,7 +96,18 @@ def load_data():
     df["🧠 Statut"] = df["Higgons Valid"].apply(lambda x: "✅ Validé" if x else "❌ Rejeté")
     return df
 
+
 df = load_data()
+
+# === 🎯 Calcul du Score Higgons ===
+def compute_higgons_score(row):
+    score = 0
+    if row["PER"] < 12: score += 33
+    if row["ROE (%)"] > 10: score += 33
+    if row["Revenue Growth (%)"] > 0: score += 33
+    return score
+
+df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
 # === Barre latérale de filtre ===
 st.sidebar.header("🧰 Filtres")
@@ -151,7 +162,8 @@ df_display = df_display.rename(columns={
     "Sector": "🏷️ Secteur",
     "Industry": "🏭 Industrie",
     "Pays": "🌍 Pays",
-    "🧠 Statut": "✅ Filtre William Higgons"
+    "🧠 Statut": "✅ Filtre William Higgons",
+    "🎯 Score Higgons": "🎯 Score Higgons (sur 100)"
 })
 
 # === Affichage final
