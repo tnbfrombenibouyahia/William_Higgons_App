@@ -107,11 +107,24 @@ df_filtered = df_filtered[
 if only_higgons:
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
+# === Renommage des colonnes
+df_display = df_filtered.rename(columns={
+    "Price": "💶 Cours (€)",
+    "EPS": "📊 Bénéfice par action",
+    "PER": "📉 PER (Cours / Bénéfices)",
+    "ROE (%)": "🏦 Rendement des fonds propres (%)",
+    "Revenue Growth (%)": "📈 Croissance du chiffre d'affaires (%)",
+    "Pays": "🌍 Pays",
+    "🧠 Statut": "✅ Filtre William Higgons",
+    "🎯 Score Higgons Texte": "🎯 Score William Higgons (/100)"
+})
+
 # === Affichage principal
 st.dataframe(
-    df_filtered[[
-        "Ticker", "Price", "EPS", "PER", "ROE (%)", "Revenue Growth (%)",
-        "Pays", "🧠 Statut", "🎯 Score Higgons Texte"
+    df_display[[
+        "Ticker", "💶 Cours (€)", "📊 Bénéfice par action", "📉 PER (Cours / Bénéfices)",
+        "🏦 Rendement des fonds propres (%)", "📈 Croissance du chiffre d'affaires (%)",
+        "🌍 Pays", "✅ Filtre William Higgons", "🎯 Score William Higgons (/100)"
     ]],
     use_container_width=True
 )
@@ -120,10 +133,10 @@ st.dataframe(
 st.markdown("---")
 st.subheader("📊 Analyse individuelle")
 
-if not df_filtered.empty:
+if not df_display.empty:
     selected_ticker = st.text_input(
         "🔍 Entrer un ticker pour afficher son graphique :",
-        value=df_filtered["Ticker"].iloc[0]
+        value=df_display["Ticker"].iloc[0]
     )
 
     if selected_ticker:
