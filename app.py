@@ -97,7 +97,10 @@ with f2_col3:
 # Ligne 3 : Recherche seule, pleine largeur
 search_ticker = st.text_input("🔎 Rechercher un ticker", "")
 
-only_higgons = st.checkbox("✅ Seulement les sociétés validées")
+filtrage_mode = st.selectbox(
+    "🔍 Sélection des entreprises à afficher",
+    options=["🇪🇺 Toutes les entreprises", "🤴 Les entreprises qui passent le screening"]
+)
 
 # === Application des filtres ===
 df_filtered = df.copy()
@@ -117,7 +120,7 @@ df_filtered = df_filtered[
     (df_filtered["Revenue Growth (%)"] >= growth_min)
 ]
 
-if only_higgons:
+if filtrage_mode == "🤴 Les entreprises qui passent le screening":
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
 # === Score Higgons ===
