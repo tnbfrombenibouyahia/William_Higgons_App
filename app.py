@@ -239,7 +239,7 @@ if not df_display.empty:
             st.plotly_chart(fig, use_container_width=True)
 
                 # Analyse qualitative
-            ligne = df_filtered[df_filtered["Ticker"] == selected_ticker]
+            ligne = df[df["Ticker"] == selected_ticker]
             if not ligne.empty:
                 bilan = genere_bilan_qualitatif(ligne.iloc[0])
                 st.markdown(bilan)
