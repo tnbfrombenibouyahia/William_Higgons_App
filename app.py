@@ -325,9 +325,6 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
-        # Recalcul de la colonne si jamais elle a été renommée ou supprimée
-        if "Score_Higgons_Numerique" not in df.columns:
-            df["Score_Higgons_Numerique"] = df.apply(compute_higgons_score, axis=1)
 
         # Sélection des 33 meilleures entreprises validées
         top_33_tickers = df[df["Higgons Valid"] == True] \
