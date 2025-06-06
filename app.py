@@ -335,8 +335,15 @@ if st.button("🚀 Lancer le backtest"):
                             .head(33)["Ticker"].tolist()
 
         st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
-        prices = yf.download(top_33_tickers + [benchmark_symbol],
-                             start=start_date, end=end_date)["Adj Close"]
+        prices = yf.download(top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)
+
+        # Vérifie qu'Adj Close est bien disponible, sinon fallback sur 'Close'
+        if "Adj Close" in prices.columns:
+            prices = prices["Adj Close"]
+        elif "Close" in prices.columns:
+            prices = prices["Close"]
+        else:
+            raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
 
         # Nettoyage des colonnes avec données manquantes
         prices = prices.dropna(axis=1)
