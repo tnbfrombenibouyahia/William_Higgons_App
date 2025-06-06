@@ -308,59 +308,66 @@ except FileNotFoundError:
 
 ## -------- TESTING TESTING ---------
 
+# === Backtest dynamique de la stratégie William Higgons ===
 st.markdown("---")
 st.subheader("📆 Backtest dynamique de la stratégie William Higgons")
 
-# === Paramètres utilisateur ===
 col_start, col_end, col_index = st.columns(3)
 with col_start:
-    start_date = st.date_input("📅 Date de début", pd.to_datetime("2018-01-01"))
+    start_date = st.date_input("📅 Date de début", pd.to_datetime("2020-01-01"))
 with col_end:
-    end_date = st.date_input("📅 Date de fin", pd.to_datetime("2021-01-01"))
+    end_date = st.date_input("📅 Date de fin", pd.to_datetime("2025-01-01"))
 with col_index:
     benchmark_symbol = st.selectbox("📊 Indice de comparaison", ["^STOXX50E", "^FCHI", "^GSPC", "^IXIC", "^GDAXI"])
 
-# === Bouton pour lancer le backtest
 if st.button("🚀 Lancer le backtest"):
     try:
-        # Sélection des 33 meilleures sociétés validées
-        top_33_tickers = (
-            df[df["🧠 Statut"] == "✅ Validé"]
-            .sort_values("🎯 Score Higgons", ascending=False)
-            .head(33)["Ticker"]
-            .tolist()
+        # Recalcul du score sur df au cas où il manque
+        if "🎯 Score Higgons" not in df.columns:
+            df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
+
+        # Sélection des 33 meilleures entreprises validées
+        top_33_tickers = df[df["🧠 Statut"] == "✅ Validé"] \
+                            .sort_values("🎯 Score Higgons", ascending=False) \
+                            .head(33)["Ticker"].tolist()
+
+        st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
+        prices = yf.download(top_33_tickers + [benchmark_symbol],
+                             start=start_date, end=end_date)["Adj Close"]
+
+        # Nettoyage : suppression des colonnes avec NaN
+        prices = prices.dropna(axis=1)
+
+        # Séparation portefeuille / benchmark
+        portfolio_prices = prices.drop(columns=[benchmark_symbol])
+        benchmark_prices = prices[benchmark_symbol]
+
+        # Pondération égale : 3.03% chacun
+        weights = np.full(len(portfolio_prices.columns), 1 / len(portfolio_prices.columns))
+        portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
+        benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
+
+        # === Visualisation
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
+                                 name="Portefeuille William Higgons (Top 33)", line=dict(width=3)))
+        fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
+                                 name=f"Indice ({benchmark_symbol})", line=dict(width=2, dash='dash')))
+        fig.update_layout(
+            title="📈 Performance du portefeuille vs indice de référence",
+            xaxis_title="Date",
+            yaxis_title="Performance (base 100)",
+            template="plotly_dark"
         )
+        st.plotly_chart(fig, use_container_width=True)
 
-        # Récupération des données de prix
-        with st.spinner("📡 Téléchargement des données Yahoo Finance..."):
-            data = yf.download(tickers=top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)["Adj Close"]
+        # Affichage des performances
+        port_return = round((portfolio_perf[-1] - 1) * 100, 2)
+        bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
 
-        data = data.dropna(axis=1, how="any")  # Nettoyage
-
-        if benchmark_symbol not in data.columns:
-            st.error(f"❌ L'indice {benchmark_symbol} n'a pas pu être récupéré.")
-        elif data.shape[1] < 2:
-            st.error("❌ Pas assez de tickers valides pour effectuer le backtest.")
-        else:
-            top_33 = data.drop(columns=[benchmark_symbol])
-            benchmark = data[benchmark_symbol]
-
-            weights = np.full(len(top_33.columns), 1 / len(top_33.columns))  # 3% chaque ligne
-            portfolio = (top_33 / top_33.iloc[0]) @ weights
-            benchmark_perf = benchmark / benchmark.iloc[0]
-
-            # Affichage graphique
-            fig = go.Figure()
-            fig.add_trace(go.Scatter(x=portfolio.index, y=portfolio, name="📈 William Higgons Top 33"))
-            fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf, name=f"📊 {benchmark_symbol}"))
-
-            fig.update_layout(
-                title="📈 Évolution portefeuille vs indice de référence",
-                xaxis_title="Date",
-                yaxis_title="Performance normalisée (base 100)",
-                template="plotly_dark"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+        col1, col2 = st.columns(2)
+        col1.metric("📈 Performance du portefeuille", f"{port_return}%")
+        col2.metric("📉 Performance de l'indice", f"{bench_return}%")
 
     except Exception as e:
         st.error(f"⚠️ Erreur durant le backtest : {e}")
