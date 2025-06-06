@@ -372,6 +372,14 @@ if st.button("🚀 Lancer le backtest"):
             st.error("❌ Aucun des tickers n’a pu être chargé. Vérifie leur validité sur Yahoo Finance.")
             st.stop()
 
+        # Ne garder que les tickers valides après download
+        if not tickers_loaded:
+            st.error("❌ Aucun des tickers n’a pu être chargé. Vérifie leur validité sur Yahoo Finance.")
+            st.stop()
+
+        # Afficher la liste des tickers valides chargés
+        st.success(f"✅ Tickers chargés : {', '.join(tickers_loaded)}")
+        
         portfolio_prices = prices[tickers_loaded]
 
         if benchmark_symbol in prices.columns:
