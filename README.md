@@ -1,59 +1,75 @@
 # 🕵️ William Higgons Screener – Stock Selection App
 
-This project is a Streamlit-based web app designed to screen undervalued European stocks using the value investing criteria of William Higgons.
+This app was built to mimic the rigorous approach of William Higgons (fund manager at Indépendance & Expansion) for selecting undervalued yet financially robust European stocks.
 
-## 📈 Investment Criteria
+It is intended to serve as a real-world portfolio simulator and personal stock screener for active value investing.
 
-An equity is considered **eligible** if it meets all the following:
-- Price Earnings Ratio (PER) < 12
-- Return on Equity (ROE) > 10%
-- Revenue growth > 0% over last fiscal year
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://william-higgons-stock-screener.streamlit.app/)
+Link of the website : https://william-higgons-stock-screener.streamlit.app/
 
-⚠️ Exit rules:
-- PER > 20 → exit full position
-- PER > 15 → partial exits (20% per point)
-- Stop loss if in loss after 6 months
+## ❓ Why this project?
+
+As a value investing and data enthusiast, I wanted to build a production-ready app that combines:
+
+- 🔍 **Financial filtering engine** using `pandas` to screen ~1,500 Euronext stocks (PEA eligible) from custom-cleaned `yfinance` data
+- 🧠 **Business logic encoding** of William Higgons’ investment criteria (PER < 12, ROE > 10%, revenue growth > 0%), applied row-wise via scoring functions
+- 📊 **Interactive dashboards** built with `Streamlit` and `Plotly`, including emoji-enriched tables, sparklines, and yfinance-powered stock charts
+- ⚙️ **Automated data pipeline** using GitHub Actions to refresh financial data daily and trigger automatic app redeployments (CI/CD)
+
+## 📈 Investment Criteria (William Higgons)
+
+A stock is considered **eligible** if it meets *all* of the following:
+
+- ✅ PER (Price Earnings Ratio) < 12
+- ✅ ROE (Return on Equity) > 10%
+- ✅ Revenue growth > 0% (YoY)
+
+**Exit rules:**
+- PER > 15 → partial exit (20% per PER point)
+- PER > 20 → full exit
+- 6-month stop loss if unrealized loss
 
 ---
 
 ## 🧠 Higgons Score (/100)
 
-Each company gets a score based on:
-- PER level (lower is better)
-- ROE level (higher is better)
-- Revenue growth
-- Defensive sector bonus
+Each stock receives a score based on:
+- PER (lower = better)
+- ROE (higher = better)
+- Revenue growth rate
+- Defensive sector bonus (Healthcare / Consumer Defensive)
 
 ---
 
 ## 🚀 Features
 
-- Dynamic filtering by sector, country, growth, ROE, PER
-- Interactive tables with emoji-enriched sectors and industries
-- Automatic stock graphs (via yfinance)
-- Fundamental diagnostics (custom written)
-- Backtest module vs European index (WIP)
-- Auto-refresh & update tracking
+- 🔎 Interactive filtering by country, sector, PER, ROE, growth
+- 📋 Emoji-enriched stock table with Higgons score
+- 📈 Auto-generated price charts using `yfinance`
+- 🧾 Custom written business diagnostics
+- 🧪 Backtesting module vs European indices (WIP)
+- 🔁 GitHub Actions auto-refresh (daily update)
 
 ---
 
-## 📊 Stack
+## 🧰 Tech Stack
 
 - Python 3.10+
 - Streamlit
-- Pandas / NumPy
+- pandas / numpy
 - yfinance
-- Plotly
-- GitHub Actions (for automated updates)
+- plotly
+- GitHub Actions (CI/CD)
 
 ---
 
-## 📂 Project Structure
+## 📂 Folder Structure
 
-├── app.py              # Main Streamlit app
-├── data/               # Cleaned CSVs
-├── utils/              # Scoring & diagnostic logic
-├── .github/workflows   # Auto-refresh workflow
+```shell
+├── app.py               # Main Streamlit app
+├── data/                # Cleaned CSVs (PEA eligible stocks)
+├── utils/               # Scoring & diagnostic logic
+├── .github/workflows/   # GitHub Actions auto-update
 ├── requirements.txt
 └── README.md
 
