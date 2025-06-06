@@ -309,6 +309,9 @@ try:
 except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
 
+
+
+
 ## -------- TESTING TESTING ---------
 # === Backtest dynamique de la stratégie William Higgons ===
 st.markdown("---")
@@ -324,6 +327,7 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
+        # Assure que la colonne score existe
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
@@ -332,11 +336,13 @@ if st.button("🚀 Lancer le backtest"):
                     .head(33)["Ticker"].tolist()
 
         if not top_33:
-            st.warning("⚠️ Aucun ticker valide. Impossible de lancer le backtest.")
+            st.warning("⚠️ Aucun ticker valide pour le backtest.")
             st.stop()
 
-        st.markdown(f"🔖 **Tickers sélectionnés :** `{top_33}`")
+        st.markdown(f"📌 **Tickers sélectionnés :** `{top_33}`")
         st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + `{benchmark_symbol}`...")
+
+        # Téléchargement des données
         raw_data = yf.download(top_33 + [benchmark_symbol], start=start_date, end=end_date)
 
         # Extraction des prix
@@ -347,20 +353,26 @@ if st.button("🚀 Lancer le backtest"):
 
         prices = prices.dropna(axis=1)
 
-        # Vérification des tickers chargés
+        # Tickers effectivement chargés
         tickers_loaded = [t for t in top_33 if t in prices.columns]
         missing = set(top_33 + [benchmark_symbol]) - set(prices.columns)
 
         if missing:
             st.warning(f"⚠️ Tickers non chargés ou incomplets : {', '.join(missing)}")
+
         if not tickers_loaded:
             st.error("❌ Aucun des tickers sélectionnés n’a pu être téléchargé correctement.")
             st.stop()
 
         st.success(f"✅ Tickers chargés : {', '.join(tickers_loaded)}")
 
+        # Création du portefeuille
         portfolio_prices = prices[tickers_loaded]
         benchmark_prices = prices[benchmark_symbol] if benchmark_symbol in prices.columns else None
+
+        if portfolio_prices.empty:
+            st.error("❌ Aucune donnée de prix disponible pour le portefeuille.")
+            st.stop()
 
         weights = np.full(len(tickers_loaded), 1 / len(tickers_loaded))
         portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
@@ -374,7 +386,7 @@ if st.button("🚀 Lancer le backtest"):
             fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
                                      name=f"Indice ({benchmark_symbol})", line=dict(width=2, dash='dash')))
         else:
-            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` est manquant ou vide. Affichage sans benchmark.")
+            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` est indisponible. Affichage sans benchmark.")
 
         fig.update_layout(
             title="📈 Performance du portefeuille vs indice de référence",
@@ -387,6 +399,7 @@ if st.button("🚀 Lancer le backtest"):
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
         col1, col2 = st.columns(2)
         col1.metric("📈 Performance du portefeuille", f"{port_return}%")
+
         if benchmark_prices is not None:
             bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
             col2.metric("📉 Performance de l'indice", f"{bench_return}%")
