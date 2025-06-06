@@ -334,16 +334,25 @@ if st.button("🚀 Lancer le backtest"):
                             .sort_values("🎯 Score Higgons", ascending=False) \
                             .head(33)["Ticker"].tolist()
 
-        st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
-        prices = yf.download(top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)
+        # Téléchargement brut
+        raw_data = yf.download(top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)
 
-        # Vérifie qu'Adj Close est bien disponible, sinon fallback sur 'Close'
-        if "Adj Close" in prices.columns:
-            prices = prices["Adj Close"]
-        elif "Close" in prices.columns:
-            prices = prices["Close"]
+        # Vérification du format (MultiIndex ou non)
+        if isinstance(raw_data.columns, pd.MultiIndex):
+            if "Adj Close" in raw_data.columns.levels[0]:
+                prices = raw_data["Adj Close"]
+            elif "Close" in raw_data.columns.levels[0]:
+                prices = raw_data["Close"]
+            else:
+                raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
         else:
-            raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
+            # Cas où il s'agit d'une seule colonne (rare mais possible si un seul ticker)
+            if "Adj Close" in raw_data.columns:
+                prices = raw_data[["Adj Close"]]
+            elif "Close" in raw_data.columns:
+                prices = raw_data[["Close"]]
+            else:
+                raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
 
         # Nettoyage des colonnes avec données manquantes
         prices = prices.dropna(axis=1)
