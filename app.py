@@ -310,59 +310,100 @@ except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
 
 ## -------- TESTING TESTING ---------
-# === Backtest simple William Higgons ===
+# === Backtest dynamique de la stratégie William Higgons ===
 st.markdown("---")
-st.subheader("📈 Performance du portefeuille William Higgons vs Indice")
+st.subheader("📆 Backtest dynamique de la stratégie William Higgons")
 
-col1, col2, col3 = st.columns(3)
-with col1:
+col_start, col_end, col_index = st.columns(3)
+with col_start:
     start_date = st.date_input("📅 Date de début", pd.to_datetime("2020-01-01"))
-with col2:
+with col_end:
     end_date = st.date_input("📅 Date de fin", pd.to_datetime("2025-01-01"))
-with col3:
+with col_index:
     benchmark_symbol = st.selectbox("📊 Indice de comparaison", ["^STOXX50E", "^FCHI", "^GSPC", "^IXIC", "^GDAXI"])
 
 if st.button("🚀 Lancer le backtest"):
     try:
+        # Vérifie que la colonne score existe
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
-        tickers = df[df["Higgons Valid"]].sort_values("🎯 Score Higgons", ascending=False).head(33)["Ticker"].tolist()
-        data = yf.download(tickers + [benchmark_symbol], start=start_date, end=end_date)
+        # Sélection des meilleurs tickers
+        top_tickers = df[df["Higgons Valid"] == True] \
+            .sort_values("🎯 Score Higgons", ascending=False) \
+            .head(33)["Ticker"].tolist()
 
-        # Extraction simplifiée des prix
+        if not top_tickers:
+            st.error("❌ Aucun ticker valide trouvé dans la sélection Higgons.")
+            st.stop()
+
+        st.info(f"📥 Téléchargement des données pour : {len(top_tickers)} tickers + {benchmark_symbol}")
+        data = yf.download(top_tickers + [benchmark_symbol], start=start_date, end=end_date)
+
+        # Extraction des prix
         if isinstance(data.columns, pd.MultiIndex):
-            prices = data["Adj Close"] if "Adj Close" in data.columns.levels[0] else data["Close"]
+            if "Adj Close" in data.columns.levels[0]:
+                prices = data["Adj Close"]
+            elif "Close" in data.columns.levels[0]:
+                prices = data["Close"]
+            else:
+                raise ValueError("❌ Aucune colonne 'Adj Close' ou 'Close' trouvée.")
         else:
-            prices = data[["Adj Close"]] if "Adj Close" in data.columns else data[["Close"]]
+            if "Adj Close" in data.columns:
+                prices = data[["Adj Close"]]
+            elif "Close" in data.columns:
+                prices = data[["Close"]]
+            else:
+                raise ValueError("❌ Données téléchargées invalides.")
 
         # Nettoyage
         prices = prices.dropna(axis=1)
-        tickers_clean = [t for t in tickers if t in prices.columns]
+        tickers_clean = [t for t in top_tickers if t in prices.columns]
 
         if not tickers_clean:
-            st.error("❌ Aucun des tickers n'a pu être chargé.")
+            st.error("❌ Aucun des tickers sélectionnés n'a pu être téléchargé correctement.")
             st.stop()
 
-        # Construction des courbes
-        portfolio = prices[tickers_clean]
-        weights = np.full(len(tickers_clean), 1 / len(tickers_clean))
-        perf_portfolio = (portfolio / portfolio.iloc[0]) @ weights
+        portfolio_prices = prices[tickers_clean]
 
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=perf_portfolio.index, y=perf_portfolio, name="📊 Portefeuille Higgons", line=dict(width=3)))
-
+        # Benchmark si dispo
         if benchmark_symbol in prices.columns:
-            benchmark = prices[benchmark_symbol] / prices[benchmark_symbol].iloc[0]
-            fig.add_trace(go.Scatter(x=benchmark.index, y=benchmark, name=f"📉 {benchmark_symbol}", line=dict(dash="dash", width=2)))
+            benchmark_prices = prices[benchmark_symbol]
+            benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
+        else:
+            benchmark_prices = None
+            benchmark_perf = None
+            st.warning(f"⚠️ Benchmark `{benchmark_symbol}` non disponible.")
+
+        # Calcul performance portefeuille
+        weights = np.full(len(tickers_clean), 1 / len(tickers_clean))
+        portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
+
+        # === Graphique
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
+                                 name="📊 Portefeuille Higgons", line=dict(width=3)))
+
+        if benchmark_perf is not None:
+            fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
+                                     name=f"📉 {benchmark_symbol}", line=dict(dash='dash', width=2)))
 
         fig.update_layout(
-            title="💼 Portefeuille William Higgons vs Indice de Référence",
+            title="📈 Évolution du portefeuille William Higgons vs Benchmark",
             xaxis_title="Date",
             yaxis_title="Performance (base 100)",
             template="plotly_dark"
         )
         st.plotly_chart(fig, use_container_width=True)
 
+        # === Résumé des performances
+        port_return = round((portfolio_perf[-1] - 1) * 100, 2)
+        col1, col2 = st.columns(2)
+        col1.metric("📈 Perf Portefeuille", f"{port_return}%")
+
+        if benchmark_perf is not None:
+            bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
+            col2.metric("📉 Perf Benchmark", f"{bench_return}%")
+
     except Exception as e:
-        st.error(f"Erreur durant le backtest : {e}")
+        st.error(f"⚠️ Erreur durant le backtest : {e}")
