@@ -334,7 +334,7 @@ if st.button("🚀 Lancer le backtest"):
                             .sort_values("🎯 Score Higgons", ascending=False) \
                             .head(33)["Ticker"].tolist()
 
-        # Téléchargement brut
+        st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
         raw_data = yf.download(top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)
 
         # Vérification du format (MultiIndex ou non)
@@ -346,7 +346,6 @@ if st.button("🚀 Lancer le backtest"):
             else:
                 raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
         else:
-            # Cas où il s'agit d'une seule colonne (rare mais possible si un seul ticker)
             if "Adj Close" in raw_data.columns:
                 prices = raw_data[["Adj Close"]]
             elif "Close" in raw_data.columns:
@@ -354,24 +353,31 @@ if st.button("🚀 Lancer le backtest"):
             else:
                 raise ValueError("Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données téléchargées.")
 
-        # Nettoyage des colonnes avec données manquantes
+        # Nettoyage des colonnes avec NaN
         prices = prices.dropna(axis=1)
 
-        # Séparation portefeuille / benchmark
-        portfolio_prices = prices.drop(columns=[benchmark_symbol])
-        benchmark_prices = prices[benchmark_symbol]
+        # Vérifie si le benchmark est présent
+        if benchmark_symbol in prices.columns:
+            portfolio_prices = prices.drop(columns=[benchmark_symbol])
+            benchmark_prices = prices[benchmark_symbol]
+        else:
+            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` n'a pas été trouvé dans les colonnes téléchargées.")
+            portfolio_prices = prices
+            benchmark_prices = None
 
-        # Pondération égale
+        # Calcul des performances
         weights = np.full(len(portfolio_prices.columns), 1 / len(portfolio_prices.columns))
         portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
-        benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
 
-        # Graphique comparatif
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
                                  name="Portefeuille William Higgons (Top 33)", line=dict(width=3)))
-        fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
-                                 name=f"Indice ({benchmark_symbol})", line=dict(width=2, dash='dash')))
+
+        if benchmark_prices is not None:
+            benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
+            fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
+                                     name=f"Indice ({benchmark_symbol})", line=dict(width=2, dash='dash')))
+
         fig.update_layout(
             title="📈 Performance du portefeuille vs indice de référence",
             xaxis_title="Date",
@@ -382,11 +388,12 @@ if st.button("🚀 Lancer le backtest"):
 
         # Résumé chiffré
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
-        bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
-
         col1, col2 = st.columns(2)
         col1.metric("📈 Performance du portefeuille", f"{port_return}%")
-        col2.metric("📉 Performance de l'indice", f"{bench_return}%")
+
+        if benchmark_prices is not None:
+            bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
+            col2.metric("📉 Performance de l'indice", f"{bench_return}%")
 
     except Exception as e:
         st.error(f"⚠️ Erreur durant le backtest : {e}")
