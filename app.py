@@ -4,10 +4,13 @@ import yfinance as yf
 import plotly.graph_objects as go
 import numpy as np
 
-
-
 # === Configuration de la page ===
-st.set_page_config(page_title="William Higgons Screener", layout="wide")
+st.set_page_config(
+    page_title="Screener William Higgons",
+    page_icon="🕵️",
+    layout="wide"
+)
+
 st.title("📊 Screener William Higgons")
 
 
