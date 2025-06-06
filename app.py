@@ -99,6 +99,8 @@ def load_data():
 
 df = load_data()
 
+df["Score_Higgons_Numerique"] = df.apply(compute_higgons_score, axis=1)
+
 st.markdown("## 🧰 Filtres")
 
 # Ligne 1 : Pays / Secteur / Industrie
@@ -182,7 +184,7 @@ df_filtered["🎯 Score Higgons Texte"] = df_filtered["🎯 Score Higgons"].appl
 )
 
 # Renommage des colonnes
-df_display = df_filtered.drop(columns=["Higgons Valid", "🎯 Score Higgons"]).rename(columns={
+df_display = df_filtered.drop(columns=["Higgons Valid"]).rename(columns={
     "Ticker": "🔖 Ticker",
     "Pays": "🌍 Pays",
     "Sector": "🏷️ Secteur",
@@ -322,32 +324,32 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
-        # Recalcul du score sur df au cas où il manque
-        if "🎯 Score Higgons" not in df.columns:
-            df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
+        # Recalcul de la colonne si jamais elle a été renommée ou supprimée
+        if "Score_Higgons_Numerique" not in df.columns:
+            df["Score_Higgons_Numerique"] = df.apply(compute_higgons_score, axis=1)
 
         # Sélection des 33 meilleures entreprises validées
-        top_33_tickers = df[df["🧠 Statut"] == "✅ Validé"] \
-                            .sort_values("🎯 Score Higgons", ascending=False) \
+        top_33_tickers = df[df["Higgons Valid"] == True] \
+                            .sort_values("Score_Higgons_Numerique", ascending=False) \
                             .head(33)["Ticker"].tolist()
 
         st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
         prices = yf.download(top_33_tickers + [benchmark_symbol],
                              start=start_date, end=end_date)["Adj Close"]
 
-        # Nettoyage : suppression des colonnes avec NaN
+        # Nettoyage des colonnes avec données manquantes
         prices = prices.dropna(axis=1)
 
         # Séparation portefeuille / benchmark
         portfolio_prices = prices.drop(columns=[benchmark_symbol])
         benchmark_prices = prices[benchmark_symbol]
 
-        # Pondération égale : 3.03% chacun
+        # Pondération égale
         weights = np.full(len(portfolio_prices.columns), 1 / len(portfolio_prices.columns))
         portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
         benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
 
-        # === Visualisation
+        # Graphique comparatif
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
                                  name="Portefeuille William Higgons (Top 33)", line=dict(width=3)))
@@ -361,7 +363,7 @@ if st.button("🚀 Lancer le backtest"):
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # Affichage des performances
+        # Résumé chiffré
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
         bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
 
