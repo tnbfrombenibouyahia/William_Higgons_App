@@ -305,3 +305,39 @@ try:
     st.info(f"🕒 Dernière mise à jour automatique des données : `{last_update}`")
 except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
+
+
+# === Données financières détaillées des 33 sociétés validées ===
+st.markdown("---")
+st.subheader("📂 Données financières détaillées du Top 33")
+
+if st.button("📥 Charger les données des 33 entreprises validées"):
+    top_33 = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"].sort_values("🎯 Score Higgons (sur 100)", ascending=False).head(33)
+    tickers_top33 = top_33["🔖 Ticker"].tolist()
+
+    infos = []
+    with st.spinner("📡 Téléchargement des données financières Yahoo Finance..."):
+        for t in tickers_top33:
+            try:
+                s = yf.Ticker(t)
+                i = s.info
+                infos.append({
+                    "Ticker": t,
+                    "Nom": i.get("longName", "—"),
+                    "Pays": i.get("country", "—"),
+                    "Secteur": i.get("sector", "—"),
+                    "Industrie": i.get("industry", "—"),
+                    "PER (Trailing)": i.get("trailingPE", None),
+                    "ROE": round(i.get("returnOnEquity", 0) * 100, 2) if i.get("returnOnEquity") else None,
+                    "EPS": i.get("trailingEps", None),
+                    "Chiffre d'affaires": i.get("totalRevenue", None),
+                    "Bénéfice net": i.get("netIncomeToCommon", None),
+                    "Dividende (%)": round(i.get("dividendYield", 0) * 100, 2) if i.get("dividendYield") else None
+                })
+            except Exception as e:
+                st.warning(f"Erreur sur {t}: {e}")
+
+    df_infos = pd.DataFrame(infos)
+    st.dataframe(df_infos, use_container_width=True)
+    csv = df_infos.to_csv(index=False).encode("utf-8")
+    st.download_button("💾 Télécharger en CSV", data=csv, file_name="top33_finances.csv", mime="text/csv")
