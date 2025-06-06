@@ -310,7 +310,6 @@ except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
 
 ## -------- TESTING TESTING ---------
-
 ## -------- TESTING TESTING ---------
 
 # === Backtest dynamique de la stratégie William Higgons ===
@@ -327,6 +326,10 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
+        # Exclusion manuelle de suffixes problématiques
+        suffixes_exclus = [".OL", ".ST", ".VI", ".IR"]
+        df = df[~df["Ticker"].apply(lambda t: any(s in t for s in suffixes_exclus))]
+
         # Assure la présence du score
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
@@ -372,14 +375,18 @@ if st.button("🚀 Lancer le backtest"):
             st.error("❌ Aucun des tickers n’a pu être chargé. Vérifie leur validité sur Yahoo Finance.")
             st.stop()
 
-        # Ne garder que les tickers valides après download
-        if not tickers_loaded:
-            st.error("❌ Aucun des tickers n’a pu être chargé. Vérifie leur validité sur Yahoo Finance.")
-            st.stop()
-
         # Afficher la liste des tickers valides chargés
         st.success(f"✅ Tickers chargés : {', '.join(tickers_loaded)}")
-        
+
+        # Sauvegarde dans un fichier CSV local
+        try:
+            pd.DataFrame(tickers_loaded, columns=["Valid Tickers"])\
+              .to_csv("data/valid_tickers.csv", index=False)
+            st.success("💾 Tickers valides sauvegardés dans `data/valid_tickers.csv`")
+        except Exception as e:
+            st.warning(f"⚠️ Impossible de sauvegarder les tickers valides : {e}")
+
+        # === Construction des courbes
         portfolio_prices = prices[tickers_loaded]
 
         if benchmark_symbol in prices.columns:
@@ -421,6 +428,12 @@ if st.button("🚀 Lancer le backtest"):
         if benchmark_prices is not None:
             bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
             col2.metric("📉 Performance de l'indice", f"{bench_return}%")
+
+        # === Bonus : performance individuelle
+        perf_indiv = (portfolio_prices / portfolio_prices.iloc[0]) - 1
+        final_perf = perf_indiv.iloc[-1].sort_values(ascending=False)
+        st.markdown("### 📊 Performance individuelle des actions (Top 33)")
+        st.dataframe(final_perf.map(lambda x: f"{x*100:.2f}%"), use_container_width=True)
 
     except Exception as e:
         st.error(f"⚠️ Erreur durant le backtest : {e}")
