@@ -99,6 +99,34 @@ def load_data():
 
 df = load_data()
 
+# === Score Higgons ===
+def compute_higgons_score(row):
+    if not row["Higgons Valid"]:
+        return np.nan
+    score = 0
+    per = row["PER"]
+    if per < 8: score += 35
+    elif per < 10: score += 25
+    elif per < 12: score += 15
+    elif per < 15: score += 5
+
+    roe = row["ROE (%)"]
+    if roe > 20: score += 35
+    elif roe > 15: score += 25
+    elif roe > 10: score += 15
+    elif roe > 5: score += 5
+
+    growth = row["Revenue Growth (%)"]
+    if growth > 15: score += 20
+    elif growth > 10: score += 15
+    elif growth > 5: score += 10
+    elif growth > 0: score += 5
+
+    defensives = ["Healthcare", "Consumer Defensive"]
+    if any(sec in row["Sector"] for sec in defensives):
+        score += 10
+    return score
+
 df["Score_Higgons_Numerique"] = df.apply(compute_higgons_score, axis=1)
 
 st.markdown("## 🧰 Filtres")
@@ -150,33 +178,6 @@ df_filtered = df_filtered[
 if filtrage_mode == "🤴 Screening uniquement":
     df_filtered = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"]
 
-# === Score Higgons ===
-def compute_higgons_score(row):
-    if not row["Higgons Valid"]:
-        return np.nan
-    score = 0
-    per = row["PER"]
-    if per < 8: score += 35
-    elif per < 10: score += 25
-    elif per < 12: score += 15
-    elif per < 15: score += 5
-
-    roe = row["ROE (%)"]
-    if roe > 20: score += 35
-    elif roe > 15: score += 25
-    elif roe > 10: score += 15
-    elif roe > 5: score += 5
-
-    growth = row["Revenue Growth (%)"]
-    if growth > 15: score += 20
-    elif growth > 10: score += 15
-    elif growth > 5: score += 10
-    elif growth > 0: score += 5
-
-    defensives = ["Healthcare", "Consumer Defensive"]
-    if any(sec in row["Sector"] for sec in defensives):
-        score += 10
-    return score
 
 df_filtered["🎯 Score Higgons"] = df_filtered.apply(compute_higgons_score, axis=1)
 df_filtered["🎯 Score Higgons Texte"] = df_filtered["🎯 Score Higgons"].apply(
