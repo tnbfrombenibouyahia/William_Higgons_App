@@ -325,7 +325,6 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
-        # Ajoute score si manquant
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
@@ -334,29 +333,34 @@ if st.button("🚀 Lancer le backtest"):
                             .head(33)["Ticker"].tolist()
 
         if not top_33_tickers:
-            st.warning("⚠️ Aucun ticker valide selon les critères Higgons. Impossible de lancer le backtest.")
+            st.warning("⚠️ Aucun ticker valide. Impossible de lancer le backtest.")
             st.stop()
 
         st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
         raw_data = yf.download(top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)
 
-        # Extraction prix (MultiIndex ou simple)
+        # Extraction prix
         if isinstance(raw_data.columns, pd.MultiIndex):
             if "Adj Close" in raw_data.columns.levels[0]:
                 prices = raw_data["Adj Close"]
             elif "Close" in raw_data.columns.levels[0]:
                 prices = raw_data["Close"]
             else:
-                raise ValueError("❌ Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données.")
+                raise ValueError("❌ Pas de colonne 'Adj Close' ou 'Close' trouvée.")
         else:
             if "Adj Close" in raw_data.columns:
                 prices = raw_data[["Adj Close"]]
             elif "Close" in raw_data.columns:
                 prices = raw_data[["Close"]]
             else:
-                raise ValueError("❌ Aucune colonne 'Adj Close' ou 'Close' trouvée dans les données.")
+                raise ValueError("❌ Données mal formatées : pas de prix trouvés.")
 
         prices = prices.dropna(axis=1)
+
+        # Vérifie si des tickers ont été perdus au nettoyage
+        missing = set(top_33_tickers + [benchmark_symbol]) - set(prices.columns)
+        if missing:
+            st.warning(f"⚠️ Tickers non chargés ou incomplets : {', '.join(missing)}")
 
         if prices.empty:
             st.error("❌ Toutes les colonnes de prix sont vides après nettoyage.")
@@ -367,12 +371,12 @@ if st.button("🚀 Lancer le backtest"):
             benchmark_prices = prices[benchmark_symbol]
             portfolio_prices = prices.drop(columns=[benchmark_symbol])
         else:
-            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` n’a pas été trouvé dans les données.")
+            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` est manquant. Le graphique sera affiché sans lui.")
             benchmark_prices = None
             portfolio_prices = prices
 
         if portfolio_prices.empty:
-            st.error("❌ Aucune donnée de prix pour le portefeuille après exclusion du benchmark.")
+            st.error("❌ Aucun prix disponible pour le portefeuille après retrait du benchmark.")
             st.stop()
 
         weights = np.full(len(portfolio_prices.columns), 1 / len(portfolio_prices.columns))
@@ -395,7 +399,6 @@ if st.button("🚀 Lancer le backtest"):
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # Résumé
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
         col1, col2 = st.columns(2)
         col1.metric("📈 Performance du portefeuille", f"{port_return}%")
