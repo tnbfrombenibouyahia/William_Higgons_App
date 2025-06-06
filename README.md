@@ -63,6 +63,11 @@ Each stock receives a score based on:
 
 ---
 
+## ✍️ Author
+Built by [Théo Naïm Bouyahia](https://www.linkedin.com/in/th%C3%A9o-na%C3%AFm-benhellal-56bb6218a/)  
+
+---
+
 ## 📂 Folder Structure
 
 ```shell
@@ -74,5 +79,4 @@ Each stock receives a score based on:
 └── README.md
 
 ## ✍️ Author
-
 Built by [Théo Naïm Bouyahia](https://www.linkedin.com/in/th%C3%A9o-na%C3%AFm-benhellal-56bb6218a/)  
