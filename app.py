@@ -326,7 +326,7 @@ if st.button("🚀 Lancer le backtest"):
         # Sélection des 33 meilleures sociétés validées
         top_33_tickers = (
             df[df["🧠 Statut"] == "✅ Validé"]
-            .sort_values("🎯 Score Higgons (sur 100)", ascending=False)
+            .sort_values("🎯 Score Higgons", ascending=False)
             .head(33)["Ticker"]
             .tolist()
         )
