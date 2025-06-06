@@ -178,7 +178,7 @@ def compute_higgons_score(row):
 
 df_filtered["🎯 Score Higgons"] = df_filtered.apply(compute_higgons_score, axis=1)
 df_filtered["🎯 Score Higgons Texte"] = df_filtered["🎯 Score Higgons"].apply(
-    lambda x: "— Rejeté" if pd.isna(x) else int(x)
+    lambda x: "— Rejeté" if pd.isna(x) else f"{int(x)}/100"
 )
 
 # Renommage des colonnes
