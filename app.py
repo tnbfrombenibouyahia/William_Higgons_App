@@ -326,11 +326,11 @@ with col3:
 
 if st.button("🚀 Lancer le backtest"):
     try:
-        # Vérifie que la colonne score existe
+        # Ajoute le score si manquant
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
-        # Sélection des tickers valides
+        # Sélection des meilleurs tickers
         top_33 = df[df["Higgons Valid"] == True] \
                     .sort_values("🎯 Score Higgons", ascending=False) \
                     .head(33)["Ticker"].tolist()
@@ -358,7 +358,6 @@ if st.button("🚀 Lancer le backtest"):
             except:
                 pass
 
-        # Vérifie après téléchargement
         if not tickers_loaded:
             st.error("❌ Aucun des tickers sélectionnés n'a pu être téléchargé correctement.")
             st.stop()
@@ -375,9 +374,10 @@ if st.button("🚀 Lancer le backtest"):
             portfolio_prices = prices
 
         if portfolio_prices.empty:
-            st.error("❌ Aucune donnée de prix pour les tickers du portefeuille.")
+            st.error("❌ Aucune donnée de prix pour le portefeuille.")
             st.stop()
 
+        # Pondération équitable
         weights = np.full(len(portfolio_prices.columns), 1 / len(portfolio_prices.columns))
         portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
 
@@ -385,6 +385,7 @@ if st.button("🚀 Lancer le backtest"):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
                                  name="Portefeuille William Higgons", line=dict(width=3)))
+
         if benchmark_prices is not None:
             benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
             fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
@@ -398,10 +399,11 @@ if st.button("🚀 Lancer le backtest"):
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # Résumé
+        # === Résumé
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
         col1, col2 = st.columns(2)
         col1.metric("📈 Performance du portefeuille", f"{port_return}%")
+
         if benchmark_prices is not None:
             bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
             col2.metric("📉 Performance de l'indice", f"{bench_return}%")
