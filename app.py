@@ -306,38 +306,61 @@ try:
 except FileNotFoundError:
     st.warning("⚠️ Aucune mise à jour automatique détectée.")
 
+## -------- TESTING TESTING ---------
 
-# === Données financières détaillées des 33 sociétés validées ===
 st.markdown("---")
-st.subheader("📂 Données financières détaillées du Top 33")
+st.subheader("📆 Backtest dynamique de la stratégie William Higgons")
 
-if st.button("📥 Charger les données des 33 entreprises validées"):
-    top_33 = df_filtered[df_filtered["🧠 Statut"] == "✅ Validé"].sort_values("🎯 Score Higgons (sur 100)", ascending=False).head(33)
-    tickers_top33 = top_33["🔖 Ticker"].tolist()
+# === Paramètres utilisateur ===
+col_start, col_end, col_index = st.columns(3)
+with col_start:
+    start_date = st.date_input("📅 Date de début", pd.to_datetime("2018-01-01"))
+with col_end:
+    end_date = st.date_input("📅 Date de fin", pd.to_datetime("2021-01-01"))
+with col_index:
+    benchmark_symbol = st.selectbox("📊 Indice de comparaison", ["^STOXX50E", "^FCHI", "^GSPC", "^IXIC", "^GDAXI"])
 
-    infos = []
-    with st.spinner("📡 Téléchargement des données financières Yahoo Finance..."):
-        for t in tickers_top33:
-            try:
-                s = yf.Ticker(t)
-                i = s.info
-                infos.append({
-                    "Ticker": t,
-                    "Nom": i.get("longName", "—"),
-                    "Pays": i.get("country", "—"),
-                    "Secteur": i.get("sector", "—"),
-                    "Industrie": i.get("industry", "—"),
-                    "PER (Trailing)": i.get("trailingPE", None),
-                    "ROE": round(i.get("returnOnEquity", 0) * 100, 2) if i.get("returnOnEquity") else None,
-                    "EPS": i.get("trailingEps", None),
-                    "Chiffre d'affaires": i.get("totalRevenue", None),
-                    "Bénéfice net": i.get("netIncomeToCommon", None),
-                    "Dividende (%)": round(i.get("dividendYield", 0) * 100, 2) if i.get("dividendYield") else None
-                })
-            except Exception as e:
-                st.warning(f"Erreur sur {t}: {e}")
+# === Bouton pour lancer le backtest
+if st.button("🚀 Lancer le backtest"):
+    try:
+        # Sélection des 33 meilleures sociétés validées
+        top_33_tickers = (
+            df[df["🧠 Statut"] == "✅ Validé"]
+            .sort_values("🎯 Score Higgons (sur 100)", ascending=False)
+            .head(33)["Ticker"]
+            .tolist()
+        )
 
-    df_infos = pd.DataFrame(infos)
-    st.dataframe(df_infos, use_container_width=True)
-    csv = df_infos.to_csv(index=False).encode("utf-8")
-    st.download_button("💾 Télécharger en CSV", data=csv, file_name="top33_finances.csv", mime="text/csv")
+        # Récupération des données de prix
+        with st.spinner("📡 Téléchargement des données Yahoo Finance..."):
+            data = yf.download(tickers=top_33_tickers + [benchmark_symbol], start=start_date, end=end_date)["Adj Close"]
+
+        data = data.dropna(axis=1, how="any")  # Nettoyage
+
+        if benchmark_symbol not in data.columns:
+            st.error(f"❌ L'indice {benchmark_symbol} n'a pas pu être récupéré.")
+        elif data.shape[1] < 2:
+            st.error("❌ Pas assez de tickers valides pour effectuer le backtest.")
+        else:
+            top_33 = data.drop(columns=[benchmark_symbol])
+            benchmark = data[benchmark_symbol]
+
+            weights = np.full(len(top_33.columns), 1 / len(top_33.columns))  # 3% chaque ligne
+            portfolio = (top_33 / top_33.iloc[0]) @ weights
+            benchmark_perf = benchmark / benchmark.iloc[0]
+
+            # Affichage graphique
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=portfolio.index, y=portfolio, name="📈 William Higgons Top 33"))
+            fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf, name=f"📊 {benchmark_symbol}"))
+
+            fig.update_layout(
+                title="📈 Évolution portefeuille vs indice de référence",
+                xaxis_title="Date",
+                yaxis_title="Performance normalisée (base 100)",
+                template="plotly_dark"
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+    except Exception as e:
+        st.error(f"⚠️ Erreur durant le backtest : {e}")
