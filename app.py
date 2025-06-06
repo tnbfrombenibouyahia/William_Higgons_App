@@ -325,10 +325,13 @@ with col_index:
 
 if st.button("🚀 Lancer le backtest"):
     try:
+        # Vérifie et ajoute la colonne Score Higgons si elle n'existe pas dans df
+        if "🎯 Score Higgons" not in df.columns:
+            df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
-        # Sélection des 33 meilleures entreprises validées
+        # Sélection des 33 meilleures entreprises validées selon Score Higgons
         top_33_tickers = df[df["Higgons Valid"] == True] \
-                            .sort_values("Score_Higgons_Numerique", ascending=False) \
+                            .sort_values("🎯 Score Higgons", ascending=False) \
                             .head(33)["Ticker"].tolist()
 
         st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
