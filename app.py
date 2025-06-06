@@ -311,27 +311,56 @@ except FileNotFoundError:
 
 ## -------- TESTING TESTING ---------
 
+## -------- TESTING TESTING ---------
+
+# === Backtest dynamique de la stratégie William Higgons ===
+st.markdown("---")
+st.subheader("📆 Backtest dynamique de la stratégie William Higgons")
+
+col_start, col_end, col_index = st.columns(3)
+with col_start:
+    start_date = st.date_input("📅 Date de début", pd.to_datetime("2020-01-01"))
+with col_end:
+    end_date = st.date_input("📅 Date de fin", pd.to_datetime("2025-01-01"))
+with col_index:
+    benchmark_symbol = st.selectbox("📊 Indice de comparaison", ["^STOXX50E", "^FCHI", "^GSPC", "^IXIC", "^GDAXI"])
+
 if st.button("🚀 Lancer le backtest"):
     try:
+        # Assure la présence du score
         if "🎯 Score Higgons" not in df.columns:
             df["🎯 Score Higgons"] = df.apply(compute_higgons_score, axis=1)
 
+        # Sélection des tickers
         top_33_raw = df[df["Higgons Valid"] == True] \
                         .sort_values("🎯 Score Higgons", ascending=False) \
                         .head(33)["Ticker"].tolist()
 
-        st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + {benchmark_symbol}...")
+        if not top_33_raw:
+            st.warning("⚠️ Aucun ticker valide. Impossible de lancer le backtest.")
+            st.stop()
+
+        st.info(f"📥 Téléchargement des données pour les 33 tickers sélectionnés + `{benchmark_symbol}`...")
         raw_data = yf.download(top_33_raw + [benchmark_symbol], start=start_date, end=end_date)
 
-        # Extraction des prix
+        # === Extraction des prix ===
         if isinstance(raw_data.columns, pd.MultiIndex):
-            prices = raw_data["Adj Close"] if "Adj Close" in raw_data.columns.levels[0] else raw_data["Close"]
+            if "Adj Close" in raw_data.columns.levels[0]:
+                prices = raw_data["Adj Close"]
+            elif "Close" in raw_data.columns.levels[0]:
+                prices = raw_data["Close"]
+            else:
+                raise ValueError("❌ Aucun 'Adj Close' ou 'Close' trouvé dans les données MultiIndex.")
         else:
-            prices = raw_data[["Adj Close"]] if "Adj Close" in raw_data.columns else raw_data[["Close"]]
+            if "Adj Close" in raw_data.columns:
+                prices = raw_data[["Adj Close"]]
+            elif "Close" in raw_data.columns:
+                prices = raw_data[["Close"]]
+            else:
+                raise ValueError("❌ Aucun 'Adj Close' ou 'Close' trouvé dans les données.")
 
-        # Nettoyage
+        # === Nettoyage
         prices = prices.dropna(axis=1)
-
         tickers_final = prices.columns.tolist()
         tickers_loaded = [t for t in top_33_raw if t in tickers_final]
 
@@ -344,15 +373,27 @@ if st.button("🚀 Lancer le backtest"):
             st.stop()
 
         portfolio_prices = prices[tickers_loaded]
+
+        if benchmark_symbol in prices.columns:
+            benchmark_prices = prices[benchmark_symbol]
+        else:
+            st.warning(f"⚠️ Le benchmark `{benchmark_symbol}` n'a pas été trouvé dans les colonnes téléchargées.")
+            benchmark_prices = None
+
+        if portfolio_prices.empty:
+            st.error("❌ Toutes les colonnes de prix sont vides après nettoyage.")
+            st.stop()
+
         weights = np.full(len(tickers_loaded), 1 / len(tickers_loaded))
         portfolio_perf = (portfolio_prices / portfolio_prices.iloc[0]) @ weights
 
+        # === Graphique
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=portfolio_perf.index, y=portfolio_perf,
-                                 name="Portefeuille William Higgons", line=dict(width=3)))
+                                 name="Portefeuille William Higgons (Top 33)", line=dict(width=3)))
 
-        if benchmark_symbol in prices.columns:
-            benchmark_perf = prices[benchmark_symbol] / prices[benchmark_symbol].iloc[0]
+        if benchmark_prices is not None:
+            benchmark_perf = benchmark_prices / benchmark_prices.iloc[0]
             fig.add_trace(go.Scatter(x=benchmark_perf.index, y=benchmark_perf,
                                      name=f"Indice ({benchmark_symbol})", line=dict(width=2, dash='dash')))
 
@@ -364,10 +405,12 @@ if st.button("🚀 Lancer le backtest"):
         )
         st.plotly_chart(fig, use_container_width=True)
 
+        # === Résumé
         port_return = round((portfolio_perf[-1] - 1) * 100, 2)
         col1, col2 = st.columns(2)
         col1.metric("📈 Performance du portefeuille", f"{port_return}%")
-        if benchmark_symbol in prices.columns:
+
+        if benchmark_prices is not None:
             bench_return = round((benchmark_perf[-1] - 1) * 100, 2)
             col2.metric("📉 Performance de l'indice", f"{bench_return}%")
 
